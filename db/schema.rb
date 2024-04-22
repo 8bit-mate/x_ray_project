@@ -10,11 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_134801) do
-  create_table "records", force: :cascade do |t|
-    t.text "tech_info"
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_145232) do
+  create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_en"
+    t.string "short_description_en"
+    t.text "description_en"
+    t.string "slug"
+    t.index ["description_en"], name: "index_categories_on_description_en"
+    t.index ["name_en"], name: "index_categories_on_name_en"
+    t.index ["short_description_en"], name: "index_categories_on_short_description_en"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.text "tech_info"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_records_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,4 +45,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_134801) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "records", "categories"
 end

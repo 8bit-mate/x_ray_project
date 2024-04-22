@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope :music do
     resources :records, only: %i[index show]
+    resources :categories, only: %i[index show]
   end
 
   devise_for :users
