@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  get 'music/index'
   scope :music do
     resources :records, only: %i[index show]
     resources :categories, only: %i[index show]
   end
 
+  namespace :admin do
+    resources :records
+    resources :categories
+  end
+
   resources :admin
+  resources :music
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

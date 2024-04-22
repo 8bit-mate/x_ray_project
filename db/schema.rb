@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_145232) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_162059) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -18,9 +18,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_145232) do
     t.string "short_description_en"
     t.text "description_en"
     t.string "slug"
+    t.string "name_ru"
+    t.string "short_description_ru"
+    t.text "description_ru"
     t.index ["description_en"], name: "index_categories_on_description_en"
+    t.index ["description_ru"], name: "index_categories_on_description_ru"
     t.index ["name_en"], name: "index_categories_on_name_en"
+    t.index ["name_ru"], name: "index_categories_on_name_ru"
     t.index ["short_description_en"], name: "index_categories_on_short_description_en"
+    t.index ["short_description_ru"], name: "index_categories_on_short_description_ru"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
