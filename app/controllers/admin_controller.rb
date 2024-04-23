@@ -1,6 +1,5 @@
 class AdminController < ApplicationController
-  include Administrable
+  include AdministrableController
 
-  def index
-  end
+  def index; end
 end

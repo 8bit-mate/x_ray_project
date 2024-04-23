@@ -1,0 +1,31 @@
+<%= form_with(model: [:admin, record]) do |form| %>
+  <% if record.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+      <ul>
+        <% record.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <p><strong>Select category:</strong></p>
+    <% Category.all.each do |tag| %>
+      <% checked = @record.category ? @record.category.id == tag.id : false %>
+      <%= radio_button_tag "tags[category_id]", tag.id, checked, id: dom_id(tag) %>
+      <%= label_tag dom_id(tag), tag.name_en %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :tech_info, style: "display: block" %>
+    <%= form.text_area :tech_info %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

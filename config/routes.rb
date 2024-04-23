@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'music/index'
   scope :music do
     resources :records, only: %i[index show]
     resources :categories, only: %i[index show]

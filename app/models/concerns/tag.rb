@@ -1,5 +1,5 @@
 # Concern for any model that can act as a 'tag'.
-module Taggable
+module Tag
   extend ActiveSupport::Concern
 
   included do

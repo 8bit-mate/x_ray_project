@@ -2,7 +2,7 @@ class Category < ApplicationRecord
   extend Mobility
   extend FriendlyId
 
-  include Taggable
+  include Tag
 
   has_many :records, dependent: :destroy
 end

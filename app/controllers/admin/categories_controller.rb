@@ -1,5 +1,6 @@
 class Admin::CategoriesController < ApplicationController
-  include Administrable
+  include AdministrableController
+  include TagController
 
   before_action :set_category, only: %i[show edit update destroy]
 
@@ -21,7 +22,7 @@ class Admin::CategoriesController < ApplicationController
 
   # POST /categories or /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = Category.new(tag_params)
 
     respond_to do |format|
       if @category.save
@@ -37,7 +38,7 @@ class Admin::CategoriesController < ApplicationController
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
     respond_to do |format|
-      if @category.update(category_params)
+      if @category.update(tag_params)
         format.html { redirect_to admin_category_url(@category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
@@ -62,17 +63,5 @@ class Admin::CategoriesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.friendly.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def category_params
-    params.require(:category).permit(
-      :name_en,
-      :name_ru,
-      :short_description_en,
-      :short_description_ru,
-      :description_en,
-      :description_ru
-    )
   end
 end
