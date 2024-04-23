@@ -2,13 +2,15 @@
 
 <h1>Format tags</h1>
 
+<%= link_to "<<", admin_index_path %> |
+<%= link_to "New format tag", new_admin_format_tag_path %>
+
 <div id="format_tags">
   <% @format_tags.each do |format_tag| %>
     <%= render format_tag %>
     <p>
-      <%= link_to "Show this format tag", admin_format_tag_path(format_tag) %>
+      <%= link_to "Show this format tag", admin_format_tag_path(format_tag) %> |
+      <%= link_to "Edit this format tag", edit_admin_format_tag_path(format_tag) %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New format tag", new_admin_format_tag_path %>

@@ -2,13 +2,15 @@
 
 <h1>Records</h1>
 
+<%= link_to "<<", admin_index_path %> |
+<%= link_to "New record", new_admin_record_path %>
+
 <div id="records">
   <% @records.each do |record| %>
     <%= render record %>
     <p>
-      <%= link_to "Show this record", admin_record_path(record) %>
+      <%= link_to "Show this record", admin_record_path(record) %> |
+      <%= link_to "Edit this record", edit_admin_record_path(record) %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New record", new_admin_record_path %>

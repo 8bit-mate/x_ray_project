@@ -5,4 +5,8 @@ class Category < ApplicationRecord
   include Tag
 
   has_many :records, dependent: :destroy
+
+  def frequency
+    records.length
+  end
 end
