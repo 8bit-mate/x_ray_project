@@ -3,8 +3,8 @@ module TagController
 
   private
 
-  def tag_params
-    params.require(:category).permit(
+  def tag_params(tag_name)
+    params.require(tag_name).permit(
       :name_en,
       :name_ru,
       :short_description_en,

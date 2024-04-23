@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @format_tag %>
+
+<div>
+  <%= link_to "Edit this format tag", edit_admin_format_tag_path(@format_tag) %> |
+  <%= link_to "Back to format tags", admin_format_tags_path %>
+
+  <%= button_to "Destroy this format tag", [:admin, @format_tag], method: :delete %>
+</div>

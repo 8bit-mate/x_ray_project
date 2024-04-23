@@ -1,0 +1,2 @@
+module Admin::FormatTagsHelper
+end

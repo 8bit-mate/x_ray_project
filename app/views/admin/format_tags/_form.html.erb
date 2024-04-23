@@ -1,0 +1,19 @@
+<%= form_with(model: [:admin, format_tag]) do |form| %>
+  <% if format_tag.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(format_tag.errors.count, "error") %> prohibited this format_tag from being saved:</h2>
+
+      <ul>
+        <% format_tag.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render partial: "shared/tag_form", locals: { form: form } %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

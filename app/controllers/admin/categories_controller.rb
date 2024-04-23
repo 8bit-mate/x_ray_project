@@ -22,7 +22,7 @@ class Admin::CategoriesController < ApplicationController
 
   # POST /categories or /categories.json
   def create
-    @category = Category.new(tag_params)
+    @category = Category.new(tag_params(:category))
 
     respond_to do |format|
       if @category.save
@@ -38,7 +38,7 @@ class Admin::CategoriesController < ApplicationController
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
     respond_to do |format|
-      if @category.update(tag_params)
+      if @category.update(tag_params(:category))
         format.html { redirect_to admin_category_url(@category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else

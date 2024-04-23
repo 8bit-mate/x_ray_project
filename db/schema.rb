@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_162059) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_23_101005) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,6 +28,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_162059) do
     t.index ["short_description_en"], name: "index_categories_on_short_description_en"
     t.index ["short_description_ru"], name: "index_categories_on_short_description_ru"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "format_tag_records", force: :cascade do |t|
+    t.integer "format_tag_id", null: false
+    t.integer "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["format_tag_id"], name: "index_format_tag_records_on_format_tag_id"
+    t.index ["record_id"], name: "index_format_tag_records_on_record_id"
+  end
+
+  create_table "format_tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name_en"
+    t.string "name_ru"
+    t.string "short_description_en"
+    t.string "short_description_ru"
+    t.text "description_en"
+    t.text "description_ru"
+    t.string "slug"
+    t.index ["description_en"], name: "index_format_tags_on_description_en"
+    t.index ["description_ru"], name: "index_format_tags_on_description_ru"
+    t.index ["name_en"], name: "index_format_tags_on_name_en"
+    t.index ["name_ru"], name: "index_format_tags_on_name_ru"
+    t.index ["short_description_en"], name: "index_format_tags_on_short_description_en"
+    t.index ["short_description_ru"], name: "index_format_tags_on_short_description_ru"
+    t.index ["slug"], name: "index_format_tags_on_slug", unique: true
   end
 
   create_table "records", force: :cascade do |t|
@@ -51,5 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_162059) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "format_tag_records", "format_tags"
+  add_foreign_key "format_tag_records", "records"
   add_foreign_key "records", "categories"
 end

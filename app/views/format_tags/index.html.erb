@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Format tags</h1>
+
+<div id="format_tags">
+  <% @format_tags.each do |format_tag| %>
+    <%= render format_tag %>
+    <p>
+      <%= link_to "Show this format tag", format_tag %>
+    </p>
+  <% end %>
+</div>
