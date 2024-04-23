@@ -7,6 +7,13 @@
   <p>
     <strong>Category:</strong>
     <% tag = record.category%>
-    <%= render partial: "shared/tag_display", locals: { tag: tag } %>
+    <%= render "shared/tag_display", tag: tag %>
   </p>
+
+  <p>
+    <strong>Format:</strong>
+    <% tags = record.format_tags %>
+    <%= render "shared/tag_array_display", tags: tags %>
+  </p>
+
 </div>

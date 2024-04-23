@@ -6,13 +6,24 @@ class Record < ApplicationRecord
 
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])
+    create_or_delete_format_tags(tags_params[:format_tags_ids])
   end
 
   private
 
-  def create_or_update_category(category_id)
-    return if category_id.nil?
+  def create_or_delete_format_tags(format_tags_ids)
+    self.format_tag_records.destroy_all
 
-    self.category = Category.find_by(id: category_id)
+    return unless format_tags_ids
+
+    format_tags_ids.each do |id|
+      self.format_tags << FormatTag.find_by(id:)
+    end
+  end
+
+  def create_or_update_category(id)
+    return if id.nil?
+
+    self.category = Category.find_by(id:)
   end
 end
