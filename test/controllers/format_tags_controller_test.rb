@@ -17,7 +17,7 @@ class FormatTagsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create format_tag" do
     assert_difference("FormatTag.count") do
-      post format_tags_url, params: { format_tag: {  } }
+      post format_tags_url, params: { format_tag: {} }
     end
 
     assert_redirected_to format_tag_url(FormatTag.last)
@@ -34,7 +34,7 @@ class FormatTagsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update format_tag" do
-    patch format_tag_url(@format_tag), params: { format_tag: {  } }
+    patch format_tag_url(@format_tag), params: { format_tag: {} }
     assert_redirected_to format_tag_url(@format_tag)
   end
 

@@ -7,4 +7,6 @@
 <div>
   <%= link_to "Show this format tag", @format_tag %> |
   <%= link_to "Back to format tags", admin_format_tags_path %>
+
+  <%= button_to "Destroy this format tag", [:admin, @format_tag], method: :delete %>
 </div>

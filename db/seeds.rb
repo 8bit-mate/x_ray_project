@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Category.find_or_create_by!(
+  id: 1,
+  name_en: "Uncategorized",
+  name_ru: "Несортированное",
+  short_description_en: "Uncategorized",
+  short_description_ru: "Несортированное",
+  description_en: "",
+  description_ru: ""
+)

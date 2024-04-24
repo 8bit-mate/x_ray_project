@@ -12,12 +12,12 @@ class Record < ApplicationRecord
   private
 
   def create_or_delete_format_tags(format_tags_ids)
-    self.format_tag_records.destroy_all
+    format_tag_records.destroy_all
 
     return unless format_tags_ids
 
     format_tags_ids.each do |id|
-      self.format_tags << FormatTag.find_by(id:)
+      format_tags << FormatTag.find_by(id:)
     end
   end
 
