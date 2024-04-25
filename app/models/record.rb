@@ -1,8 +1,12 @@
 class Record < ApplicationRecord
+  validates :category, presence: true
+
   belongs_to :category
 
   has_many :format_tag_records, dependent: :destroy
   has_many :format_tags, through: :format_tag_records
+
+  scope :without_category, -> { where(category_id: nil) }
 
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])
