@@ -3,12 +3,14 @@ Rails.application.routes.draw do
     resources :records, only: %i[index show]
     resources :categories, only: %i[index show]
     resources :format_tags, only: %i[index show]
+    resources :songs, only: %i[index show]
   end
 
   namespace :admin do
     resources :records
     resources :categories
     resources :format_tags
+    resources :songs
   end
 
   resources :admin

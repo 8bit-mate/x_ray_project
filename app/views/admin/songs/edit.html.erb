@@ -1,0 +1,12 @@
+<h1>Editing song</h1>
+
+<%= render "form", song: @song %>
+
+<br>
+
+<div>
+  <%= link_to "Show this song", @song %> |
+  <%= link_to "Back to songs", admin_songs_path %>
+
+  <%= button_to "Destroy this song", [:admin, @song], method: :delete %>
+</div>
