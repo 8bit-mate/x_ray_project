@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Artists</h1>
+
+<%= link_to "<<", admin_index_path %> |
+<%= link_to "New artist", new_admin_artist_path %>
+
+<div id="artists">
+  <% @artists.each do |artist| %>
+    <%= render artist %>
+    <p>
+      <%= link_to "Show this artist", admin_artist_path(artist) %> |
+      <%= link_to "Edit this artist", edit_admin_artist_path(artist) %>
+    </p>
+  <% end %>
+</div>

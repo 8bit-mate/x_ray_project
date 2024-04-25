@@ -1,0 +1,12 @@
+<h1>Editing artist</h1>
+
+<%= render "shared/tag_form", tag: @artist %>
+
+<br>
+
+<div>
+  <%= link_to "Show this artist", @artist %> |
+  <%= link_to "Back to artists", admin_artists_path %>
+
+  <%= button_to "Destroy this artist", [:admin, @artist], method: :delete %>
+</div>

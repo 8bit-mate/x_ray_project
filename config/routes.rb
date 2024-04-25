@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index show]
     resources :format_tags, only: %i[index show]
     resources :songs, only: %i[index show]
+    resources :artists, only: %i[index show]
   end
 
   namespace :admin do
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :format_tags
     resources :songs
+    resources :artists
   end
 
   resources :admin
