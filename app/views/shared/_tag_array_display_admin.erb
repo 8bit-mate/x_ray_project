@@ -1,5 +1,0 @@
-<% tags.each do |tag| %>
-  <%= link_to [:admin, tag], style:"text-decoration:none" do %>
-    <span class=<%= "tag_#{tag.visiability}" %> title="<%= tag.short_description %>"><%= tag.name %></span>
-  <% end %>
-<% end %>

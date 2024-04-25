@@ -7,12 +7,12 @@
   <p>
     <strong>Category:</strong>
     <% tag = record.category %>
-    <%= render "shared/tag_display", tag: tag if tag.visible %>
+    <%= render "shared/tag_display", tag: tag, url_scope: nil if tag.visible %>
   </p>
 
   <p>
     <strong>Format:</strong>
     <% tags = record.format_tags.visible %>
-    <%= render "shared/tag_array_display", tags: tags %>
+    <%= render "shared/tag_array_display", tags: tags, url_scope: nil %>
   </p>
 </div>
