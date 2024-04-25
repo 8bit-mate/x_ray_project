@@ -10,7 +10,7 @@ module TagDefaultController
       :short_description_en,
       :short_description_ru,
       :description_en,
-      :description_ru,
+      :description_ru
     )
   end
 end
