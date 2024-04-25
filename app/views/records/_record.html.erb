@@ -6,13 +6,13 @@
 
   <p>
     <strong>Category:</strong>
-    <% tag = record.category%>
-    <%= render "shared/tag_display", tag: tag %>
+    <% tag = record.category %>
+    <%= render "shared/tag_display", tag: tag if tag.visible %>
   </p>
 
   <p>
     <strong>Format:</strong>
-    <% tags = record.format_tags %>
+    <% tags = record.format_tags.visible %>
     <%= render "shared/tag_array_display", tags: tags %>
   </p>
 </div>

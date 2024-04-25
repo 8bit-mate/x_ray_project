@@ -10,7 +10,8 @@ module TagController
       :short_description_en,
       :short_description_ru,
       :description_en,
-      :description_ru
+      :description_ru,
+      :visible
     )
   end
 end

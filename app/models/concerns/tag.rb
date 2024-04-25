@@ -8,9 +8,15 @@ module Tag
     translates :description
 
     friendly_id :name_en, use: :slugged
+
+    scope :visible, -> { where(visible: true) }
   end
 
   def should_generate_new_friendly_id?
     name_en_changed? || slug.blank?
+  end
+
+  def visiability
+    visible ? "visible" : "invisible"
   end
 end

@@ -15,5 +15,13 @@ Category.find_or_create_by!(
   short_description_en: "Uncategorized",
   short_description_ru: "Несортированное",
   description_en: "",
-  description_ru: ""
+  description_ru: "",
+  visible: false
 )
+
+user = User.new
+user.email = "admin@admin.su"
+user.password = "admin@admin.su"
+user.password_confirmation = "admin@admin.su"
+user.role = "admin"
+user.save!
