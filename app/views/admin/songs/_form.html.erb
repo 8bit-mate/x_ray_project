@@ -17,6 +17,14 @@
   </div>
 
   <div>
+    <p><strong>Select artists:</strong></p>
+    <% Artist.all.order(:name_en).each do |tag| %>
+      <%= check_box_tag "tags[artists_ids][]", tag.id, @song.artists.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
+      <%= label_tag dom_id(tag), tag.name %><br>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

@@ -22,6 +22,7 @@ class Admin::SongsController < ApplicationController
   # POST /songs or /songs.json
   def create
     @song = Song.new(song_params)
+    @song.create_or_update_tags(tags_params)
 
     respond_to do |format|
       if @song.save
@@ -36,6 +37,8 @@ class Admin::SongsController < ApplicationController
 
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
+    @song.create_or_update_tags(tags_params)
+
     respond_to do |format|
       if @song.update(song_params)
         format.html { redirect_to admin_song_url(@song), notice: "Song was successfully updated." }
@@ -70,6 +73,12 @@ class Admin::SongsController < ApplicationController
       :year_released,
       :notes_en,
       :notes_ru
+    )
+  end
+
+  def tags_params
+    params.require(:tags).permit(
+      artists_ids: []
     )
   end
 end

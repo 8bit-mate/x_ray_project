@@ -1,7 +1,16 @@
 <div id="<%= dom_id song %>">
   <p>
+    <strong>Artists:</strong>
+    <% tags = song.artists %>
+    <% tags.each do |tag| %>
+      <%= link_to [:admin, tag], style:"text-decoration:none" do %>
+        <span class=<%= "tag" %> title="<%= tag.short_description %>"><%= tag.name %></span>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
     <strong>Year released:</strong>
     <%= song.year_released %>
   </p>
-
 </div>
