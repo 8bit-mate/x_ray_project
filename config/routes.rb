@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :format_tags, only: %i[index show]
     resources :songs, only: %i[index show]
     resources :artists, only: %i[index show]
+    resources :song_titles, only: %i[index show]
   end
 
   namespace :admin do

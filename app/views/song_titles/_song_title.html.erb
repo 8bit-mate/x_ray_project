@@ -1,0 +1,14 @@
+<div id="<%= dom_id song_title %>">
+  <p>
+    <strong>Title:</strong>
+    <%= song_title.title %>
+  </p>
+
+  <p>
+    <strong>Songs with this title:</strong>
+
+    <% song_title.songs.order(:full_title).each do |song| %>
+      <div><%= link_to song.human_full_title, song %></div>
+    <% end %>
+  </p>
+</div>

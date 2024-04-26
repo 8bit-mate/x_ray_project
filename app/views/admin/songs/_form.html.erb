@@ -12,8 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :year_released, style: "display: block" %>
-    <%= form.number_field :year_released %>
+    <%= form.label :year_of_release, style: "display: block" %>
+    <%= form.number_field :year_of_release %>
   </div>
 
   <div>
@@ -22,6 +22,25 @@
       <%= check_box_tag "tags[artists_ids][]", tag.id, @song.artists.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.name %><br>
     <% end %>
+  </div>
+
+  <div>
+    <p><strong>Select song title:</strong></p>
+    <% SongTitle.all.each do |tag| %>
+      <% checked = @song.song_title ? @song.song_title.id == tag.id : false %>
+      <%= radio_button_tag "tags[song_title_id]", tag.id, checked, id: dom_id(tag) %>
+      <%= label_tag dom_id(tag), tag.title %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :notes_en, style: "display: block" %>
+    <%= form.text_area :notes_en %>
+  </div>
+
+  <div>
+    <%= form.label :notes_ru, style: "display: block" %>
+    <%= form.text_area :notes_ru %>
   </div>
 
   <div>

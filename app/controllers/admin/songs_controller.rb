@@ -64,13 +64,13 @@ class Admin::SongsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_song
-    @song = Song.find(params[:id])
+    @song = Song.friendly.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def song_params
     params.require(:song).permit(
-      :year_released,
+      :year_of_release,
       :notes_en,
       :notes_ru
     )
@@ -78,6 +78,7 @@ class Admin::SongsController < ApplicationController
 
   def tags_params
     params.require(:tags).permit(
+      :song_title_id,
       artists_ids: []
     )
   end

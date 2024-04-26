@@ -6,6 +6,6 @@ class SongsController < ApplicationController
 
   # GET /songs/1 or /songs/1.json
   def show
-    @song = Song.find(params[:id])
+    @song = Song.friendly.find(params[:id])
   end
 end

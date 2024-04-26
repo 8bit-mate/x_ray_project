@@ -9,7 +9,6 @@
 #   end
 
 Category.find_or_create_by!(
-  id: 1,
   name_en: "Uncategorized",
   name_ru: "Несортированное",
   short_description_en: "Uncategorized",
@@ -17,6 +16,16 @@ Category.find_or_create_by!(
   description_en: "",
   description_ru: "",
   visible: false
+)
+
+SongTitle.find_or_create_by!(
+  title_en: "Unknown Title",
+  title_ru: "Неизвестное название"
+)
+
+Artist.find_or_create_by!(
+  name_en: "Unknown Artist",
+  name_ru: "Неизвестный исполнитель"
 )
 
 user = User.new

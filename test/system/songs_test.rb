@@ -14,7 +14,7 @@ class SongsTest < ApplicationSystemTestCase
     visit songs_url
     click_on "New song"
 
-    fill_in "Year released", with: @song.year_released
+    fill_in "Year of release", with: @song.year_of_release
     click_on "Create Song"
 
     assert_text "Song was successfully created"
@@ -25,7 +25,7 @@ class SongsTest < ApplicationSystemTestCase
     visit song_url(@song)
     click_on "Edit this song", match: :first
 
-    fill_in "Year released", with: @song.year_released
+    fill_in "Year of release", with: @song.year_of_release
     click_on "Update Song"
 
     assert_text "Song was successfully updated"

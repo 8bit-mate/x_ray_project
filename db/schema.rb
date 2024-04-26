@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_164719) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
@@ -96,14 +96,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_164719) do
     t.index ["category_id"], name: "index_records_on_category_id"
   end
 
+  create_table "song_titles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title_en"
+    t.string "title_ru"
+    t.index ["title_en"], name: "index_song_titles_on_title_en"
+    t.index ["title_ru"], name: "index_song_titles_on_title_ru"
+  end
+
   create_table "songs", force: :cascade do |t|
-    t.integer "year_released"
+    t.integer "year_of_release"
+    t.string "full_title"
+    t.integer "song_title_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "notes_en"
     t.text "notes_ru"
+    t.string "slug"
     t.index ["notes_en"], name: "index_songs_on_notes_en"
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"
+    t.index ["slug"], name: "index_songs_on_slug", unique: true
+    t.index ["song_title_id"], name: "index_songs_on_song_title_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,4 +138,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_164719) do
   add_foreign_key "format_tag_records", "format_tags"
   add_foreign_key "format_tag_records", "records"
   add_foreign_key "records", "categories"
+  add_foreign_key "songs", "song_titles"
 end
