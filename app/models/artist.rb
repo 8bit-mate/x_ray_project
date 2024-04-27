@@ -2,14 +2,27 @@ class Artist < ApplicationRecord
   extend Mobility
   extend FriendlyId
 
-  include Tag
+  translates :first_name
+  translates :last_name
+  translates :short_description
+  translates :description
+
+  friendly_id :full_name, use: :slugged
 
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
 
   after_update :update_associated_songs_full_titles
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
+
+  def should_generate_new_friendly_id?
+    first_name_en_changed? || last_name_en_changed? || slug.blank?
+  end
 
   def update_associated_songs_full_titles
     songs.each(&:update_full_title)

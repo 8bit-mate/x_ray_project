@@ -66,8 +66,10 @@ class Admin::ArtistsController < ApplicationController
 
   def artist_params
     params.require(:artist).permit(
-      :name_en,
-      :name_ru,
+      :first_name_en,
+      :first_name_ru,
+      :last_name_en,
+      :last_name_ru,
       :short_description_en,
       :short_description_ru,
       :description_en,

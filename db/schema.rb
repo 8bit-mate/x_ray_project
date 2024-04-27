@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
+    t.integer "order", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_artist_songs_on_artist_id"
@@ -23,8 +24,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
   create_table "artists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name_en"
-    t.string "name_ru"
+    t.string "first_name_en"
+    t.string "first_name_ru"
+    t.string "last_name_en"
+    t.string "last_name_ru"
     t.string "short_description_en"
     t.string "short_description_ru"
     t.text "description_en"
@@ -32,8 +35,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
     t.string "slug"
     t.index ["description_en"], name: "index_artists_on_description_en"
     t.index ["description_ru"], name: "index_artists_on_description_ru"
-    t.index ["name_en"], name: "index_artists_on_name_en"
-    t.index ["name_ru"], name: "index_artists_on_name_ru"
+    t.index ["first_name_en"], name: "index_artists_on_first_name_en"
+    t.index ["first_name_ru"], name: "index_artists_on_first_name_ru"
+    t.index ["last_name_en"], name: "index_artists_on_last_name_en"
+    t.index ["last_name_ru"], name: "index_artists_on_last_name_ru"
     t.index ["short_description_en"], name: "index_artists_on_short_description_en"
     t.index ["short_description_ru"], name: "index_artists_on_short_description_ru"
     t.index ["slug"], name: "index_artists_on_slug", unique: true

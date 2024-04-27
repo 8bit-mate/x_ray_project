@@ -1,0 +1,62 @@
+<%= form_with(model: [:admin, tag]) do |form| %>
+  <% if tag.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+        <% tag.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :first_name_en, style: "display: block" %>
+    <%= form.text_field :first_name_en %>
+  </div>
+
+  <div>
+    <%= form.label :first_name_ru, style: "display: block" %>
+    <%= form.text_field :first_name_ru %>
+  </div>
+
+  <div>
+    <%= form.label :last_name_en, style: "display: block" %>
+    <%= form.text_field :last_name_en %>
+  </div>
+
+  <div>
+    <%= form.label :last_name_ru, style: "display: block" %>
+    <%= form.text_field :last_name_ru %>
+  </div>
+
+  <div>
+    <%= form.label :short_description_en, style: "display: block" %>
+    <%= form.text_field :short_description_en %>
+  </div>
+
+  <div>
+    <%= form.label :short_description_ru, style: "display: block" %>
+    <%= form.text_field :short_description_ru %>
+  </div>
+
+  <div>
+    <%= form.label :description_en, style: "display: block" %>
+    <%= form.text_field :description_en %>
+  </div>
+
+  <div>
+    <%= form.label :description_ru, style: "display: block" %>
+    <%= form.text_field :description_ru %>
+  </div>
+
+  <div>
+    <%= form.label :visible, style: "display: block" %>
+    <%= form.check_box :visible %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

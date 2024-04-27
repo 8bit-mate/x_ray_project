@@ -1,3 +1,51 @@
 <div id="<%= dom_id artist %>">
-  <%= render "shared/tag_admin", tag: artist %>
+  <p>
+    <strong>First name en:</strong>
+    <%= artist.first_name_en %>
+  </p>
+
+  <p>
+    <strong>First name ru:</strong>
+    <%= artist.first_name_ru %>
+  </p>
+
+  <p>
+    <strong>Last name en:</strong>
+    <%= artist.last_name_en %>
+  </p>
+
+  <p>
+    <strong>Last name ru:</strong>
+    <%= artist.last_name_ru %>
+  </p>
+
+  <p>
+    <strong>Short description en:</strong>
+    <%= artist.short_description_en %>
+  </p>
+
+  <p>
+    <strong>Short description ru:</strong>
+    <%= artist.short_description_ru %>
+  </p>
+
+  <p>
+    <strong>Description en:</strong>
+    <%= artist.description_en %>
+  </p>
+
+  <p>
+    <strong>Description ru:</strong>
+    <%= artist.description_ru %>
+  </p>
+
+  <p>
+    <strong>Slug:</strong>
+    <%= artist.slug %>
+  </p>
+
+  <p>
+    <strong>Visible:</strong>
+    <!%= artist.visible %>
+  </p>
 </div>

@@ -24,8 +24,8 @@ SongTitle.find_or_create_by!(
 )
 
 Artist.find_or_create_by!(
-  name_en: "Unknown Artist",
-  name_ru: "Неизвестный исполнитель"
+  first_name_en: "Unknown Artist",
+  first_name_ru: "Неизвестный исполнитель"
 )
 
 user = User.new

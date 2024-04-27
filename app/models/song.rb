@@ -21,7 +21,7 @@ class Song < ApplicationRecord
     self.full_title = compose_full_title
   end
 
-  def list_artists = artists.order(:name_en).map(&:name).join("; ")
+  def list_artists = artists.order(:last_name_en).map(&:full_name).join("; ")
 
   def human_full_title
     "#{list_artists} - #{song_title.title}"
@@ -44,7 +44,7 @@ class Song < ApplicationRecord
   end
 
   def compose_full_title
-    names = artists.map(&:name_en).join(" ")
+    names = artists.map(&:full_name).join(" ")
     title = song_title.title_en
     "#{names}-#{title}"
   end
@@ -61,7 +61,7 @@ class Song < ApplicationRecord
     return unless artists_ids
 
     artists_ids.each do |id|
-      artists << Artist.find_by(id:)
+      artist_songs << ArtistSong.new(artist_id: id, order: 123)
     end
   end
 end
