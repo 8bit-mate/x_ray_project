@@ -27,6 +27,15 @@ class Song < ApplicationRecord
     "#{list_artists} - #{song_title.title}"
   end
 
+  def should_generate_new_friendly_id?
+    full_title_changed? || slug.blank?
+  end
+
+  def update_full_title
+    self.full_title = compose_full_title
+    save
+  end
+
   private
 
   def compose_slug_title
@@ -37,7 +46,7 @@ class Song < ApplicationRecord
   def compose_full_title
     names = artists.map(&:name_en).join(" ")
     title = song_title.title_en
-    self.full_title = "#{names}-#{title}"
+    "#{names}-#{title}"
   end
 
   def create_or_delete_song_title(id)

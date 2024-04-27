@@ -1,0 +1,12 @@
+<h1>Editing song title</h1>
+
+<%= render "form", song_title: @song_title %>
+
+<br>
+
+<div>
+  <%= link_to "Show this song title", @song_title %> |
+  <%= link_to "Back to song titles", admin_song_titles_path %>
+
+  <%= button_to "Destroy this song title", [:admin, @song_title], method: :delete %>
+</div>

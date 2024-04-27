@@ -1,0 +1,2 @@
+module Admin::SongTitlesHelper
+end

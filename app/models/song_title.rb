@@ -4,16 +4,22 @@ class SongTitle < ApplicationRecord
   translates :title
 
   has_many :songs, dependent: :nullify
-  after_destroy :handle_songs_after_destroy
+
+  after_destroy :update_songs_after_destroy
+  after_update :update_songs_after_update
 
   private
 
-  def handle_songs_after_destroy
+  def update_songs_after_update
+    songs.each(&:update_full_title)
+  end
+
+  def update_songs_after_destroy
     default_title = SongTitle.find_or_create_by(title_en: "Unknown Title")
 
     Song.without_title.each do |song|
       song.song_title = default_title
-      song.save
+      song.update_full_title
     end
   end
 end

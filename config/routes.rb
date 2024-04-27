@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :format_tags
     resources :songs
     resources :artists
+    resources :song_titles
   end
 
   resources :admin

@@ -1,0 +1,27 @@
+<%= form_with(model: [:admin, song_title]) do |form| %>
+  <% if song_title.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(song_title.errors.count, "error") %> prohibited this song_title from being saved:</h2>
+
+      <ul>
+        <% song_title.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title_en, style: "display: block" %>
+    <%= form.text_field :title_en %>
+  </div>
+
+  <div>
+    <%= form.label :title_ru, style: "display: block" %>
+    <%= form.text_field :title_ru %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
