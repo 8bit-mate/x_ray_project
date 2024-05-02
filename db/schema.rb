@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_114732) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
@@ -124,6 +124,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
     t.index ["song_title_id"], name: "index_songs_on_song_title_id"
   end
 
+  create_table "tracks", force: :cascade do |t|
+    t.string "number"
+    t.integer "song_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_tracks_on_song_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -143,4 +151,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
   add_foreign_key "format_tag_records", "records"
   add_foreign_key "records", "categories"
   add_foreign_key "songs", "song_titles"
+  add_foreign_key "tracks", "songs"
 end

@@ -20,10 +20,11 @@ Rails.application.routes.draw do
     resources :format_tags
     resources :songs
     resources :song_titles
+    resources :tracks
   end
 
   resources :admin
-  resources :music
+  resources :music, only: %i[index]
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

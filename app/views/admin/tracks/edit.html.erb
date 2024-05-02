@@ -1,0 +1,12 @@
+<h1>Editing track</h1>
+
+<%= render "form", track: @track %>
+
+<br>
+
+<div>
+  <%= link_to "Show this track", edit_admin_track_path(@track) %> |
+  <%= link_to "Back to tracks", admin_tracks_path %>
+
+  <%= button_to "Destroy this track", [:admin, @track], method: :delete %>
+</div>

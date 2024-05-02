@@ -1,6 +1,6 @@
 <h1>Admin panel</h1>
 
-<h3>Songs:</h3>
+<h3>Songs titles:</h3>
 <div>
   <%= link_to "List song titles", admin_song_titles_path %>
 </div>
@@ -24,6 +24,14 @@
   <%= link_to "New artist", new_admin_artist_path %>
 </div>
 
+<h3>Tracks:</h3>
+<div>
+  <%= link_to "List tracks", admin_tracks_path %>
+</div>
+<div>
+  <%= link_to "New track", new_admin_track_path %>
+</div>
+
 <h3>Records</h3>
 <div>
   <%= link_to "List records", admin_records_path %>
@@ -32,18 +40,18 @@
   <%= link_to "New record", new_admin_record_path %>
 </div>
 
-<h3>Records/categories</h3>
-<div>
-  <%= link_to "List categories", admin_categories_path %>
-</div>
-<div>
-  <%= link_to "New category", new_admin_category_path %>
-</div>
-
 <h3>Records/format tags</h3>
 <div>
   <%= link_to "List format tags", admin_format_tags_path %>
 </div>
 <div>
   <%= link_to "New format tag", new_admin_format_tag_path %>
+</div>
+
+<h3>Records/categories</h3>
+<div>
+  <%= link_to "List categories", admin_categories_path %>
+</div>
+<div>
+  <%= link_to "New category", new_admin_category_path %>
 </div>
