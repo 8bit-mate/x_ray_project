@@ -21,6 +21,8 @@
     <%= form.collection_select :song_id, Song.order(:full_title), :id, :full_title, include_blank: false %>
   </div>
 
+  <%= form.file_field :web_audio %>
+
   <div>
     <%= form.submit %>
   </div>
