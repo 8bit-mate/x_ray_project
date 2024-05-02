@@ -14,7 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_093018) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
-    t.integer "order", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_artist_songs_on_artist_id"

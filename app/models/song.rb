@@ -15,7 +15,7 @@ class Song < ApplicationRecord
   belongs_to :song_title
 
   def create_or_update_tags(tags_params)
-    create_or_delete_artists(tags_params[:artists_ids])
+    create_or_delete_artists(tags_params[:artists_slugs])
     create_or_delete_song_title(tags_params[:song_title_id])
 
     self.full_title = compose_full_title
@@ -55,13 +55,14 @@ class Song < ApplicationRecord
     self.song_title = SongTitle.find_by(id:)
   end
 
-  def create_or_delete_artists(artists_ids)
+  def create_or_delete_artists(slugs)
     artist_songs.destroy_all
 
-    return unless artists_ids
+    return unless slugs
 
-    artists_ids.each do |id|
-      artist_songs << ArtistSong.new(artist_id: id, order: 123)
+    slugs.each do |s|
+      artist = Artist.find_by(slug: s)
+      artists << artist if artist
     end
   end
 end

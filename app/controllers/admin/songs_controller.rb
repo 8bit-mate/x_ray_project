@@ -79,7 +79,7 @@ class Admin::SongsController < ApplicationController
   def tags_params
     params.require(:tags).permit(
       :song_title_id,
-      artists_ids: []
+      artists_slugs: []
     )
   end
 end

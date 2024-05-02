@@ -9,11 +9,16 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :artists do
+      collection do
+        get "fetch"
+      end
+    end
+
     resources :records
     resources :categories
     resources :format_tags
     resources :songs
-    resources :artists
     resources :song_titles
   end
 

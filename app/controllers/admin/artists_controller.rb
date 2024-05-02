@@ -57,6 +57,17 @@ class Admin::ArtistsController < ApplicationController
     end
   end
 
+  def fetch
+    search_first_name = params[:first_name]
+    # @data = Artist.where("first_name_en LIKE ?", "#{letter}%")
+
+    data = Artist.i18n do
+      first_name.matches("%#{search_first_name}%")
+    end
+
+    render json: { data: }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
