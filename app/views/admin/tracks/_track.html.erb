@@ -17,4 +17,15 @@
   <% else %>
     <p> Track has no audio!</p>
   <% end %>
+
+  <p>
+    <strong>Record assigned:</strong>
+    <% tag = track.record %>
+    <% url_scope = :admin %>
+    <% if tag %>
+      <%= link_to [url_scope, tag], style:"text-decoration:none" do %>
+        <span class=""><%= tag.id %></span>
+      <% end %>
+    <% end %>
+  </p>
 </div>

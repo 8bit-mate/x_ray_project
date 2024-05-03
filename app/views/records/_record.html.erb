@@ -15,4 +15,9 @@
     <% tags = record.format_tags.visible %>
     <%= render "shared/tag_array_display", tags: tags, url_scope: nil %>
   </p>
+
+  <p>
+    <%= render "shared/tracklist", tracks: record.tracks.order(:number), url_scope: nil %>
+  </p>
+
 </div>

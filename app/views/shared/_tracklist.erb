@@ -1,0 +1,58 @@
+<style type="text/css">
+    .Table
+    {
+        display: table;
+        width: 90%;
+        margin: auto;
+    }
+    .Title
+    {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+    }
+    .Row
+    {
+        display: table-row;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: solid;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+
+<div class="Table">
+    <div class="Title">
+        <p>Tracklist:</p>
+    </div>
+
+    <% tracks.each do |track| %>
+      <div class="Row">
+          <div class="Cell">
+              <p><%= track.number %></p>
+          </div>
+          <div class="Cell">
+              <p><%= track.song.human_full_title %></p>
+          </div>
+          <div class="Cell">
+            <% if track.web_audio.attached? %>
+              <audio controls>
+                <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+            <% end %>
+          </div>
+      </div>
+    <% end %>
+</div>

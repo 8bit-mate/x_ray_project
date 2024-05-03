@@ -24,6 +24,14 @@
   <%= form.file_field :web_audio %>
 
   <div>
+    <p><strong>Assign a record:</strong></p>
+
+
+    <%= select_tag "associations[record_id]", options_for_select(Record.all.collect{ |u| [u.id, u.id] }) %>
+
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

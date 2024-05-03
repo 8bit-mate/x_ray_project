@@ -15,4 +15,12 @@
     <% tags = record.format_tags %>
     <%= render "shared/tag_array_display", tags: tags, url_scope: :admin %>
   </p>
+
+  <% record.tracks.each do |track| %>
+    <ul>
+      <%= link_to [:admin, track], style:"text-decoration:none" do %>
+        <span class=""><%= track.title %></span>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

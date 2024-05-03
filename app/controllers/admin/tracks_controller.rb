@@ -22,6 +22,7 @@ class Admin::TracksController < ApplicationController
   # POST /tracks or /tracks.json
   def create
     @track = Track.new(track_params)
+    @track.assign_record(associations_params[:record_id])
 
     respond_to do |format|
       if @track.save
@@ -36,6 +37,8 @@ class Admin::TracksController < ApplicationController
 
   # PATCH/PUT /tracks/1 or /tracks/1.json
   def update
+    @track.assign_record(associations_params[:record_id])
+
     respond_to do |format|
       if @track.update(track_params)
         format.html { redirect_to admin_track_url(@track), notice: "Track was successfully updated." }
@@ -67,5 +70,9 @@ class Admin::TracksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def track_params
     params.require(:track).permit(:number, :song_id, :web_audio)
+  end
+
+  def associations_params
+    params.fetch(:associations, { record_id: nil }).permit(:record_id)
   end
 end
