@@ -60,9 +60,9 @@ class Song < ApplicationRecord
 
     return unless slugs
 
-    slugs.each do |s|
-      artist = Artist.find_by(slug: s)
-      artists << artist if artist
+    slugs.reject(&:empty?).each do |slug|
+      artist = Artist.find_by(slug:)
+      artists << artist
     end
   end
 end
