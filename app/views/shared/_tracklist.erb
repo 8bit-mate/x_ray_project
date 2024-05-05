@@ -1,51 +1,58 @@
 <style type="text/css">
-    .Table
+    .track-list
     {
         display: table;
-        width: 90%;
+        width: 60%;
         margin: auto;
     }
-    .Title
+    .track-list-title
     {
         display: table-caption;
         text-align: center;
         font-weight: bold;
         font-size: larger;
     }
-    .Heading
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-    }
-    .Row
+    .row
     {
         display: table-row;
     }
-    .Cell
+    .cell
     {
         display: table-cell;
-        border: solid;
+        border: none;
         border-width: thin;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+    }
+    .track-number
+    {
+        display: table-cell;
+        font-weight: bold;
+        border: none;
+        border-width: thin;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
     }
 </style>
 
-<div class="Table">
-    <div class="Title">
+<div class="track-list">
+    <div class="track-list-title">
         <p>Tracklist:</p>
     </div>
 
     <% tracks.each do |track| %>
-      <div class="Row">
-          <div class="Cell">
+      <div class="row">
+          <div class="track-number">
               <p><%= track.number %></p>
           </div>
-          <div class="Cell">
-              <p><%= track.song.human_full_title %></p>
+          <div class="cell">
+              <% track.song.artists.each do |artist| %>
+                <%= link_to [artist], style:"text-decoration:none" do %>
+                    <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.full_name %></span>
+                <% end %>
+              <% end %>
           </div>
-          <div class="Cell">
+          <div class="cell">
             <% if track.web_audio.attached? %>
               <audio controls>
                 <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">

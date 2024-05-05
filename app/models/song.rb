@@ -12,6 +12,8 @@ class Song < ApplicationRecord
   has_many :artist_songs, dependent: :destroy
   has_many :artists, through: :artist_songs
 
+  has_many :tracks, dependent: :destroy
+
   belongs_to :song_title
 
   def create_or_update_tags(tags_params)
@@ -21,10 +23,12 @@ class Song < ApplicationRecord
     self.full_title = compose_full_title
   end
 
-  def list_artists = artists.order(:last_name_en).map(&:full_name).join("; ")
+  def join_artists = list_artists.join("; ")
+
+  def list_artists = artists.map(&:full_name)
 
   def human_full_title
-    "#{list_artists} - #{song_title.title}"
+    "#{join_artists} - #{song_title.title}"
   end
 
   def should_generate_new_friendly_id?

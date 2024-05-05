@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= form.file_field :web_images, multiple: true %>
+
   <div>
     <p><strong>Select category:</strong></p>
     <% Category.all.each do |tag| %>

@@ -32,4 +32,17 @@
     <strong>Notes ru:</strong>
     <%= song.notes_ru %>
   </p>
+
+  <p>
+    <strong>Records featured this song:</strong>
+    <% song.tracks.each do |track| %>
+      <% url_scope = :admin %>
+      <% record = track.record %>
+      <% if record %>
+        <%= link_to [url_scope, record], style:"text-decoration:none" do %>
+          <span class=""><%= record.id %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </p>
 </div>

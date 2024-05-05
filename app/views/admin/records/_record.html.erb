@@ -1,4 +1,9 @@
 <div id="<%= dom_id record %>">
+
+  <% record.web_images.each do |image| %>
+    <%= image_tag(image) %>
+  <% end %>
+
   <p>
     <strong>Tech info:</strong>
     <%= record.tech_info %>

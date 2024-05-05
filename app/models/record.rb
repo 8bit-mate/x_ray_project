@@ -1,6 +1,8 @@
 class Record < ApplicationRecord
   validates :category, presence: true
 
+  has_many_attached :web_images
+
   belongs_to :category
 
   has_many :format_tag_records, dependent: :destroy

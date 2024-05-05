@@ -20,11 +20,11 @@
 
   <p>
     <strong>Record assigned:</strong>
-    <% tag = track.record %>
+    <% record = track.record %>
     <% url_scope = :admin %>
-    <% if tag %>
-      <%= link_to [url_scope, tag], style:"text-decoration:none" do %>
-        <span class=""><%= tag.id %></span>
+    <% if record %>
+      <%= link_to [url_scope, record], style:"text-decoration:none" do %>
+        <span class=""><%= record.id %></span>
       <% end %>
     <% end %>
   </p>
