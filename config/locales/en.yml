@@ -32,3 +32,7 @@ en:
     default: "hello"
     downcase: "hello"
     capitalize: "Hello"
+
+  songs_index_intro: "This page lists all songs currently registered in the database."
+
+  format_tags_index_intro: "Format tags describe medium's special physical qualities such as rotational speed (33⅓ rpm, 78 rpm, etc.), number of sides (single sided, double sided), and other possible features of a record ."

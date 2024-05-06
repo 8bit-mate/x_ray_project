@@ -2,6 +2,10 @@
 
 <h1>Songs</h1>
 
+<div class="page-intro">
+  <p><%= t(:songs_index_intro) %></p>
+</div>
+
 <div id="songs">
   <% @songs.each do |song| %>
     <%= render song %>
