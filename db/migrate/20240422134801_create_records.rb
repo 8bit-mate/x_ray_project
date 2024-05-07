@@ -1,6 +1,7 @@
 class CreateRecords < ActiveRecord::Migration[7.1]
   def change
     create_table :records do |t|
+      t.integer :number, default: 0, null: false
       t.text :tech_info
       t.belongs_to :category, index: true, foreign_key: true
 

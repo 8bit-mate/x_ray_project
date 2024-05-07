@@ -21,10 +21,18 @@ Rails.application.routes.draw do
     resources :songs
     resources :song_titles
     resources :tracks
+
+    resources :attachments do
+      member do
+        delete "purge"
+      end
+    end
   end
 
   resources :admin
   resources :music, only: %i[index]
+
+  # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

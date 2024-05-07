@@ -1,7 +1,9 @@
 class Record < ApplicationRecord
+  include AppendToHasManyAttached["web_images"]
+
   validates :category, presence: true
 
-  has_many_attached :web_images
+  has_many_attached :web_images, dependent: :purge_later
 
   belongs_to :category
 

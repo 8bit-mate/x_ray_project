@@ -1,23 +1,29 @@
 <div id="<%= dom_id record %>">
-  <p>
-    <strong>Tech info:</strong>
-    <%= record.tech_info %>
-  </p>
 
-  <p>
-    <strong>Category:</strong>
-    <% tag = record.category %>
-    <%= render "shared/tag_display", tag: tag, url_scope: nil if tag.visible %>
-  </p>
+  <div class="record-images">
+    <% record.web_images.each do |image| %>
+      <%= image_tag(image) %>
+    <% end %>
+  </div>
 
-  <p>
-    <strong>Format:</strong>
-    <% tags = record.format_tags.visible %>
-    <%= render "shared/tag_array_display", tags: tags, url_scope: nil %>
-  </p>
+  <div class="record-main-info">
+    <p>
+      <strong>Category:</strong>
+      <% tag = record.category %>
+      <%= render "shared/tag_display", tag: tag, url_scope: nil if tag.visible %>
+    </p>
 
-  <p>
-    <%= render "shared/tracklist", tracks: record.tracks.order(:number), url_scope: nil %>
-  </p>
+    <p>
+      <strong>Format:</strong>
+      <% tags = record.format_tags.visible %>
+      <%= render "shared/tag_array_display", tags: tags, url_scope: nil %>
+    </p>
 
+    <p>
+      <strong>Tech info:</strong>
+      <%= record.tech_info %>
+    </p>
+  </div>
+
+  <%= render "shared/tracklist", tracks: record.tracks.order(:number), url_scope: nil %>
 </div>

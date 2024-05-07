@@ -18,6 +18,8 @@ module XRayProject
 
     config.i18n.available_locales = %i[en ru]
 
+    config.active_storage.multiple_file_field_include_hidden = false
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

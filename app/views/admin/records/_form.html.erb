@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <div class="attachment-controls">
+    <% @record.web_images.each do |web_image|%>
+      <%= link_to "Delete #{web_image.blob.filename}", purge_admin_attachment_path(web_image), data: { turbo_method: :delete } %>
+    <% end %>
+  </div>
+
   <%= form.file_field :web_images, multiple: true %>
 
   <div>

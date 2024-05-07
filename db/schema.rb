@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
   end
 
   create_table "records", force: :cascade do |t|
+    t.integer "number", default: 0, null: false
     t.text "tech_info"
     t.integer "category_id"
     t.datetime "created_at", null: false

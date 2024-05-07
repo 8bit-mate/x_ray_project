@@ -1,7 +1,7 @@
 class Track < ApplicationRecord
   belongs_to :song
 
-  has_one_attached :web_audio, dependent: :destroy
+  has_one_attached :web_audio, dependent: :purge_later
 
   has_one :record_track, dependent: :destroy
   has_one :record, through: :record_track
