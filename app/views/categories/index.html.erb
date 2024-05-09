@@ -10,7 +10,7 @@
 <% tags.each do |tag| %>
   <div class="col">
     <div class="card h-100" style="width: 25rem;">
-      <img src="..." class="card-img-top" alt="...">
+      <%= link_to image_tag(tag.image, class: "card-img-top"), tag if tag.image.attached? %>
       <div class="card-body">
         <h5 class="card-title"><%= tag.name %></h5>
         <p class="card-text"><%= tag.description %></p>

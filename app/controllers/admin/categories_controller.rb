@@ -1,6 +1,6 @@
 class Admin::CategoriesController < ApplicationController
   include AdministrableController
-  include TagController
+  include TagWithImageController
 
   before_action :set_category, only: %i[show edit update destroy]
 
