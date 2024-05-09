@@ -6,11 +6,33 @@
   <p><%= t(:songs_index_intro) %></p>
 </div>
 
-<div id="songs">
-  <% @songs.each do |song| %>
-    <%= render song %>
-    <p>
-      <%= link_to "Show this song", song %>
-    </p>
-  <% end %>
-</div>
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Performed by</th>
+      <th scope="col">Year of release</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each_with_index do |song, index| %>
+      <tr>
+        <th scope="row">
+          <%= index + 1 %>
+        </th>
+        <td>
+          <%= link_to song.song_title.title, song %>
+        </td>
+        <td>
+          <% song.artists.each do |artist| %>
+            <%= link_to artist.full_name, artist %>
+          <% end %>
+        </td>
+        <td>
+          <%= song.year_of_release %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

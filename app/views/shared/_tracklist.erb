@@ -1,65 +1,33 @@
-<style type="text/css">
-    .tracklist
-    {
-        display: table;
-        width: 60%;
-        margin: auto;
-    }
-    .tracklist-title
-    {
-        display: table-caption;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-    .row
-    {
-        display: table-row;
-    }
-    .cell
-    {
-        display: table-cell;
-        border: none;
-        border-width: thin;
-        padding-left: 0.25em;
-        padding-right: 0.25em;
-    }
-    .track-number
-    {
-        display: table-cell;
-        font-weight: bold;
-        border: none;
-        border-width: thin;
-        padding-left: 0.25em;
-        padding-right: 0.25em;
-    }
-</style>
-
 <div class="tracklist">
-    <div class="tracklist-title">
-        <p>Tracklist:</p>
-    </div>
+  <table class="table">
+    <tbody>
+      <% tracks.each do |track| %>
 
-    <% tracks.each do |track| %>
-      <div class="row">
-          <div class="track-number">
-              <p><%= track.number %></p>
-          </div>
-          <div class="cell">
-              <% track.song.artists.each do |artist| %>
-                <%= link_to [artist], style:"text-decoration:none" do %>
-                    <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.full_name %></span>
-                <% end %>
-              <% end %>
-          </div>
-          <div class="cell">
-            <% if track.web_audio.attached? %>
-              <audio controls>
-                <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
+      <tr>
+        <th scope="row">
+          <%= track.number %>
+        </th>
+        <td>
+          <% track.song.artists.each do |artist| %>
+            <%= link_to [url_scope, artist], style:"text-decoration:none" do %>
+              <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.full_name %></span>
             <% end %>
-          </div>
-      </div>
-    <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= track.song.song_title.title %>
+        </td>
+        <td>
+          <% if track.web_audio.attached? %>
+            <audio controls>
+              <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          <% end %>
+        </td>
+      </tr>
+
+      <% end %>
+    </tbody>
+  </table>
 </div>

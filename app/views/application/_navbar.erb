@@ -11,23 +11,20 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Collection
+            Record collection
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href=<%= records_path %>>Records</a></li>
-            <li><a class="dropdown-item" href="music/songs">Songs</a></li>
+            <li><a class="dropdown-item" href=<%= records_path %>>Overview</a></li>
+            <li><a class="dropdown-item" href=<%= categories_path %>>Categories</a></li>
+            <li><a class="dropdown-item" href=<%= format_tags_path %>>Formats</a></li>
+            <li><a class="dropdown-item" href=<%= artists_path %>>Artists</a></li>
+            <li><a class="dropdown-item" href=<%= songs_path %>>Songs</a></li>
+            <li><a class="dropdown-item" href=<%= songs_path %>>Genres</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Advanced search</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

@@ -1,0 +1,8 @@
+<ul class="tracklist-preview">
+  <% tracks.each do |track| %>
+    <li>
+      <b><%= track.number %></b>: 
+      <%= render "shared/artist_tag", track: track, url_scope: nil %> - <%= track.song.song_title.title %>
+    </li>
+  <% end %>
+</ul>

@@ -7,7 +7,7 @@ class Category < ApplicationRecord
   has_many :records, dependent: :nullify
   after_destroy :handle_records_after_destroy
 
-  def frequency
+  def n_records_tagged
     records.length
   end
 

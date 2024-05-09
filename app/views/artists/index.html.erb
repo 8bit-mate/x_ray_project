@@ -2,11 +2,31 @@
 
 <h1>Artists</h1>
 
-<div id="artists">
-  <% @artists.each do |artist| %>
-    <%= render artist %>
-    <p>
-      <%= link_to "Show this artist", artist %>
-    </p>
-  <% end %>
-</div>
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Songs found</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @artists.each_with_index do |artist, index| %>
+      <tr>
+        <th scope="row">
+          <%= index + 1 %>
+        </th>
+        <td>
+          <%= artist.first_name %>
+        </td>
+        <td>
+          <%= artist.last_name %>
+        </td>
+        <td>
+          <%= artist.songs.length %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

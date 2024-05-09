@@ -2,11 +2,4 @@
 
 <h1>Records</h1>
 
-<div id="records">
-  <% @records.each do |record| %>
-    <%= render record %>
-    <p>
-      <%= link_to "Show this record", record %>
-    </p>
-  <% end %>
-</div>
+<%= render "shared/records_table", records: @records %>

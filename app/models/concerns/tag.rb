@@ -19,4 +19,8 @@ module Tag
   def visiability
     visible ? "visible" : "invisible"
   end
+
+  def span_class_name
+    visible ? "badge text-bg-primary" : "badge text-bg-warning"
+  end
 end

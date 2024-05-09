@@ -1,3 +1,17 @@
 <div id="<%= dom_id artist %>">
-  <%= render "shared/tag", tag: artist %>
+  <h1>
+    <%= artist.last_name %>, <%= artist.first_name %>
+  </h1>
+  <p>
+    <%= artist.short_description %>
+  </p>
+  <p>
+    <%= artist.description %>
+  </p>
+
+  <div class="artists-songs">
+    <% artist.songs.each do |song| %>
+      <%= song.song_title.title %>
+    <% end %>
+  </div>
 </div>
