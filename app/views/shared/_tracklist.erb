@@ -1,5 +1,5 @@
 <div class="tracklist">
-  <table class="table">
+  <table class="table table-responsive">
     <tbody>
       <% tracks.each do |track| %>
 
@@ -16,6 +16,9 @@
         </td>
         <td>
           <%= track.song.song_title.title %>
+        </td>
+        <td>
+          <%= track.duration %>
         </td>
         <td>
           <% if track.web_audio.attached? %>

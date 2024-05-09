@@ -1,8 +1,5 @@
 <div id="<%= dom_id category %>">
   <%= render "shared/tag", tag: category %>
 
-  <% category.records.each do |record| %>
-    <%= link_to record.id, record %>
-    <hr />
-  <% end %>
+  <%= render "shared/records_table", records: category.records %>
 </div>

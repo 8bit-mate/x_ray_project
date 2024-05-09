@@ -16,6 +16,8 @@ class Song < ApplicationRecord
 
   belongs_to :song_title
 
+  delegate :title, to: :song_title
+
   def create_or_update_tags(tags_params)
     create_or_delete_artists(tags_params[:artists_slugs])
     create_or_delete_song_title(tags_params[:song_title_id])
@@ -23,13 +25,15 @@ class Song < ApplicationRecord
     self.full_title = compose_full_title
   end
 
+  def other_versions = song_title.songs.reject { |e| e == self }
+
   def join_artists = list_artists.join("; ")
 
   def list_artists = artists.map(&:full_name)
 
-  def human_full_title
-    "#{join_artists} - #{song_title.title}"
-  end
+  def human_full_title = "#{join_artists} - #{song_title.title}"
+
+  def records = tracks.flat_map(&:record).uniq
 
   def should_generate_new_friendly_id?
     full_title_changed? || slug.blank?

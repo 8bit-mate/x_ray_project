@@ -8,6 +8,12 @@ class Track < ApplicationRecord
 
   def title = "#{number}: #{song.human_full_title}"
 
+  def duration
+    ms = web_audio.blob.metadata["duration"] || 0
+    mins, seconds = ms.divmod(60)
+    "#{mins}:#{seconds.round}"
+  end
+
   def assign_record(record_id)
     return unless record_id
 

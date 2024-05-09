@@ -1,4 +1,6 @@
 <div id="<%= dom_id song %>">
+  <h1><%= song.title %></h1>
+
   <p>
     <strong>Year of release:</strong>
     <%= song.year_of_release %>
@@ -9,4 +11,10 @@
     <%= song.notes %>
   </p>
 
+  <p>
+    <strong>Other versions:</strong>
+    <%= render "shared/songs_table", songs: song.other_versions %>
+  </p>
+
+  <%= render "shared/records_table", records: song.records %>
 </div>
