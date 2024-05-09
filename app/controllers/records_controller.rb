@@ -9,6 +9,10 @@ class RecordsController < ApplicationController
   # GET /records/1 or /records/1.json
   def show; end
 
+  def random
+    redirect_to record_url(Record.all.sample)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
