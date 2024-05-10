@@ -1,13 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 Category.find_or_create_by!(
   name_en: "Uncategorized",
   name_ru: "Несортированное",
@@ -34,3 +24,59 @@ user.password = "admin@admin.su"
 user.password_confirmation = "admin@admin.su"
 user.role = "admin"
 user.save!
+
+50.times do |_i|
+  Artist.create(
+    first_name_en: Faker::Name.first_name,
+    last_name_en: Faker::Name.last_name,
+    description_en: Faker::Hipster.sentence
+  )
+end
+
+100.times do |_i|
+  SongTitle.create(
+    title_en: Faker::Music::RockBand.song
+  )
+end
+
+150.times do |_i|
+  Song.new(
+    year_of_release: Faker::Number.within(range: 1930..1970),
+    song_title: SongTitle.all.sample,
+    artists: [Artist.all.sample, Artist.all.sample]
+  ).update_full_title
+end
+
+200.times do |_i|
+  Track.create(
+    number: %w[A1 A2 A3 A4].sample,
+    song: Song.all.sample
+  )
+end
+
+20.times do |_i|
+  FormatTag.create(
+    visible: true,
+    name_en: Faker::Hipster.word,
+    short_description_en: Faker::Hipster.sentence,
+    description_en: Faker::Hipster.sentence
+  )
+end
+
+10.times do |i|
+  record = Record.new(
+    number: i,
+    category: Category.find_or_create_by!(
+      name_en: "X-Ray Records",
+      name_ru: "Пластинки на костях",
+      visible: true
+    ),
+    format_tags: [FormatTag.all.sample, FormatTag.all.sample, FormatTag.all.sample],
+    tracks: [Track.all.sample, Track.all.sample]
+  )
+
+  record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/1.jpg")), filename: "1.jpg")
+
+  record.save
+end
+

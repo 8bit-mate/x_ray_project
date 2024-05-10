@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
 
   create_table "records", force: :cascade do |t|
     t.integer "number", default: 0, null: false
-    t.text "tech_info"
+    t.text "tech_info", default: "", null: false
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -153,10 +153,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
     t.integer "song_title_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "variation_en"
-    t.string "variation_ru"
-    t.text "notes_en"
-    t.text "notes_ru"
+    t.string "variation_en", default: "", null: false
+    t.string "variation_ru", default: "", null: false
+    t.text "notes_en", default: "", null: false
+    t.text "notes_ru", default: "", null: false
     t.string "slug"
     t.index ["notes_en"], name: "index_songs_on_notes_en"
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"

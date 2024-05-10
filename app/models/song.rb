@@ -18,6 +18,10 @@ class Song < ApplicationRecord
 
   delegate :title, to: :song_title
 
+  def records
+    tracks.map { |track| track.record }
+  end
+
   def create_or_update_tags(tags_params)
     create_or_delete_artists(tags_params[:artists_slugs])
     create_or_delete_song_title(tags_params[:song_title_id])
