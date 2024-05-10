@@ -71,6 +71,8 @@ class Admin::SongsController < ApplicationController
   def song_params
     params.require(:song).permit(
       :year_of_release,
+      :variation_en,
+      :variation_ru,
       :notes_en,
       :notes_ru
     )

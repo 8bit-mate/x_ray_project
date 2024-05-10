@@ -14,7 +14,7 @@
           <%= index + 1 %>
         </th>
         <td>
-          <%= link_to song.song_title.title, song %>
+          <%= link_to song.title, song %> <%= song.print_variation %>
         </td>
         <td>
           <% song.artists.each do |artist| %>

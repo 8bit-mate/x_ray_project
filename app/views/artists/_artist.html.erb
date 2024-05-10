@@ -12,8 +12,6 @@
   <%= render "shared/records_table", records: artist.records %>
 
   <div class="artists-songs">
-    <% artist.songs.each do |song| %>
-      <%= song.song_title.title %>
-    <% end %>
+    <%= render "shared/songs_table", songs: artist.songs %>
   </div>
 </div>

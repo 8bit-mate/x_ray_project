@@ -7,7 +7,7 @@ class Song < ApplicationRecord
   scope :without_title, -> { where(song_title: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
-  translates :notes
+  translates :notes, :variation
 
   has_many :artist_songs, dependent: :destroy
   has_many :artists, through: :artist_songs
@@ -27,10 +27,14 @@ class Song < ApplicationRecord
 
   # Return list of song's alternative versions, e.g. live versions,
   # alternative takes, or versions performed by other artists.
-  def other_versions = song_title.songs.reject { |e| e == self }
+  def other_variations = song_title.songs.reject { |e| e == self }
 
   # Tell whether the song has other versions.
-  def other_versions? = !other_versions.empty?
+  def other_variations? = !other_variations.empty?
+
+  def variation? = !variation_en.empty?
+
+  def print_variation = variation? ? "(#{variation})" : ""
 
   def join_artists = list_artists.join("; ")
 
@@ -59,7 +63,8 @@ class Song < ApplicationRecord
   def compose_full_title
     names = artists.map(&:full_name).join(" ")
     title = song_title.title_en
-    "#{names}-#{title}"
+    variation = variation? ? " (#{variation_en})" : ""
+    "#{names}-#{title}#{variation}"
   end
 
   def create_or_delete_song_title(id)

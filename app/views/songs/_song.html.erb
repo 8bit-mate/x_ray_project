@@ -11,10 +11,10 @@
     <%= song.notes %>
   </p>
 
-  <% if song.other_versions? %>
+  <% if song.other_variations? %>
     <div class="song-other-versions">
       <strong>Other versions:</strong>
-      <%= render "shared/songs_table", songs: song.other_versions %>
+      <%= render "shared/songs_table", songs: song.other_variations %>
     </div>
   <% end %>
 

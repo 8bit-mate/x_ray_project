@@ -39,6 +39,17 @@
   </div>
 
   <div>
+    <%= form.label :variation_en, style: "display: block" %>
+    <p>E.g.: live, alt. take, etc.</p>
+    <%= form.text_field :variation_en %>
+  </div>
+
+  <div>
+    <%= form.label :variation_ru, style: "display: block" %>
+    <%= form.text_field :variation_ru %>
+  </div>
+
+  <div>
     <%= form.label :notes_en, style: "display: block" %>
     <%= form.text_area :notes_en %>
   </div>

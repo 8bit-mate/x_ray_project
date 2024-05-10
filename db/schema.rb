@@ -153,6 +153,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
     t.integer "song_title_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "variation_en"
+    t.string "variation_ru"
     t.text "notes_en"
     t.text "notes_ru"
     t.string "slug"
@@ -160,6 +162,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
     t.index ["song_title_id"], name: "index_songs_on_song_title_id"
+    t.index ["variation_en"], name: "index_songs_on_variation_en"
+    t.index ["variation_ru"], name: "index_songs_on_variation_ru"
   end
 
   create_table "tracks", force: :cascade do |t|
