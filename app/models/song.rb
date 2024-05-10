@@ -25,7 +25,12 @@ class Song < ApplicationRecord
     self.full_title = compose_full_title
   end
 
+  # Return list of song's alternative versions, e.g. live versions,
+  # alternative takes, or versions performed by other artists.
   def other_versions = song_title.songs.reject { |e| e == self }
+
+  # Tell whether the song has other versions.
+  def other_versions? = !other_versions.empty?
 
   def join_artists = list_artists.join("; ")
 
