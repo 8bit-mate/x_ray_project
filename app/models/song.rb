@@ -44,8 +44,6 @@ class Song < ApplicationRecord
 
   def human_full_title = "#{join_artists} - #{song_title.title}"
 
-  def records = tracks.flat_map(&:record).uniq
-
   def should_generate_new_friendly_id?
     full_title_changed? || slug.blank?
   end

@@ -1,8 +1,14 @@
 def self.new_track
-  Track.new(
+  track = Track.new(
     number: %w[A1 A2 A3 A4].sample,
     song: Song.all.sample
   )
+
+  random_num = rand(1..5)
+  filename = "#{random_num}.mp3"
+  track.web_audio.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename: filename)
+
+  track
 end
 
 Category.find_or_create_by!(
