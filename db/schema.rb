@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_165726) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -120,15 +120,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
     t.index ["slug"], name: "index_format_tags_on_slug", unique: true
   end
 
-  create_table "record_tracks", force: :cascade do |t|
-    t.integer "record_id", null: false
-    t.integer "track_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["record_id"], name: "index_record_tracks_on_record_id"
-    t.index ["track_id"], name: "index_record_tracks_on_track_id"
-  end
-
   create_table "records", force: :cascade do |t|
     t.integer "number", default: 0, null: false
     t.text "tech_info", default: "", null: false
@@ -168,9 +159,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
 
   create_table "tracks", force: :cascade do |t|
     t.string "number"
-    t.integer "song_id", null: false
+    t.integer "song_id"
+    t.integer "record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["record_id"], name: "index_tracks_on_record_id"
     t.index ["song_id"], name: "index_tracks_on_song_id"
   end
 
@@ -193,9 +186,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_190849) do
   add_foreign_key "artist_songs", "songs"
   add_foreign_key "format_tag_records", "format_tags"
   add_foreign_key "format_tag_records", "records"
-  add_foreign_key "record_tracks", "records"
-  add_foreign_key "record_tracks", "tracks"
   add_foreign_key "records", "categories"
   add_foreign_key "songs", "song_titles"
+  add_foreign_key "tracks", "records"
   add_foreign_key "tracks", "songs"
 end

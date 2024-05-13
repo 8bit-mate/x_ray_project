@@ -1,10 +1,8 @@
 class Track < ApplicationRecord
-  belongs_to :song
+  belongs_to :song, optional: true
+  belongs_to :record, optional: true
 
   has_one_attached :web_audio, dependent: :purge_later
-
-  has_one :record_track, dependent: :destroy
-  has_one :record, through: :record_track
 
   def title = "#{number}: #{song.human_full_title}"
 

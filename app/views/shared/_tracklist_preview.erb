@@ -2,7 +2,7 @@
   <% tracks.each do |track| %>
     <li>
       <b><%= track.number %></b>: 
-      <%= render "shared/artist_tag", track: track, url_scope: nil %> - <%= track.song.song_title.title %>
+      <%= render "shared/artist_tag", track: track, url_scope: nil %> - <%= track.song.title %> <%= track.song.print_variation %>
     </li>
   <% end %>
 </ul>

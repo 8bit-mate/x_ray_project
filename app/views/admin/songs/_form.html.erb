@@ -19,7 +19,7 @@
   <div class="artist-selection">
     <p><strong>Add artists:</strong></p>
     <datalist id="artists-list">
-      <% Artist.all.each do |artist| %>
+      <% Artist.order(:slug).each do |artist| %>
         <option value="<%= artist.slug %>" artist_id="<%= artist.id %>"></option>
       <% end %>
     </datalist>

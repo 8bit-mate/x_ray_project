@@ -18,9 +18,7 @@ class Song < ApplicationRecord
 
   delegate :title, to: :song_title
 
-  def records
-    tracks.map { |track| track.record }
-  end
+  def records = tracks.map(&:record)
 
   def create_or_update_tags(tags_params)
     create_or_delete_artists(tags_params[:artists_slugs])

@@ -10,8 +10,7 @@ class Record < ApplicationRecord
   has_many :format_tag_records, dependent: :destroy
   has_many :format_tags, through: :format_tag_records
 
-  has_many :record_tracks, dependent: :destroy
-  has_many :tracks, through: :record_tracks
+  has_many :tracks, dependent: :destroy
 
   scope :without_category, -> { where(category_id: nil) }
 

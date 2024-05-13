@@ -1,3 +1,10 @@
+def self.new_track
+  Track.new(
+    number: %w[A1 A2 A3 A4].sample,
+    song: Song.all.sample
+  )
+end
+
 Category.find_or_create_by!(
   name_en: "Uncategorized",
   name_ru: "Несортированное",
@@ -25,7 +32,7 @@ user.password_confirmation = "admin@admin.su"
 user.role = "admin"
 user.save!
 
-50.times do |_i|
+25.times do |_i|
   Artist.create(
     first_name_en: Faker::Name.first_name,
     last_name_en: Faker::Name.last_name,
@@ -33,25 +40,18 @@ user.save!
   )
 end
 
-100.times do |_i|
+25.times do |_i|
   SongTitle.create(
     title_en: Faker::Music::RockBand.song
   )
 end
 
-150.times do |_i|
+25.times do |_i|
   Song.new(
     year_of_release: Faker::Number.within(range: 1930..1970),
     song_title: SongTitle.all.sample,
     artists: [Artist.all.sample, Artist.all.sample]
   ).update_full_title
-end
-
-200.times do |_i|
-  Track.create(
-    number: %w[A1 A2 A3 A4].sample,
-    song: Song.all.sample
-  )
 end
 
 20.times do |_i|
@@ -63,7 +63,7 @@ end
   )
 end
 
-10.times do |i|
+15.times do |i|
   record = Record.new(
     number: i,
     category: Category.find_or_create_by!(
@@ -72,11 +72,12 @@ end
       visible: true
     ),
     format_tags: [FormatTag.all.sample, FormatTag.all.sample, FormatTag.all.sample],
-    tracks: [Track.all.sample, Track.all.sample]
+    tracks: [new_track, new_track]
   )
 
-  record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/1.jpg")), filename: "1.jpg")
+  random_num = rand(1..22)
+  filename = "#{random_num}.jpg"
+  record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename: filename)
 
   record.save
 end
-
