@@ -33,14 +33,19 @@ export default class extends Controller {
 
   setBtnPause() {
     let btn = document.getElementById(this.trackKey);
-    if (btn) { btn.innerText = "Play" };
-    this.playButtonTarget.innerText = "Play";
+    if (btn) { btn.className = "play-button" };
+
+    if (this.trackKey) {
+      this.playButtonTarget.className = "play-button"
+    } else {
+      this.playButtonTarget.className = "play-button-disabled";
+    }
   }
 
   setBtnPlay() {
     let btn = document.getElementById(this.trackKey);
-    if (btn) { btn.innerText = "Pause" };
-    this.playButtonTarget.innerText = "Pause";
+    if (btn) { btn.className = "pause-button" };
+    this.playButtonTarget.className = "pause-button";
   } 
 
   activate(event) {

@@ -23,9 +23,9 @@
         <td>
           <% if track.web_audio.attached? %>
             <%= content_tag "button",
-              "Play",
+              "",
               id: track.web_audio_key,
-              class: "btn btn-outline-primary",
+              class: "play-button",
               data: {
                 "action": "click->track-selector#controlPlayback",
                 "track-selector-target": "button",
