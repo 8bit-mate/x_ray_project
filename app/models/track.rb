@@ -14,6 +14,8 @@ class Track < ApplicationRecord
     0
   end
 
+  def web_audio_key = web_audio.blob.try(:key)
+
   def assign_record(record_id)
     return unless record_id
 

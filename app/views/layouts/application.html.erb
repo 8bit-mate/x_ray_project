@@ -13,12 +13,12 @@
   </head>
 
   <body>
-    <%= render "application/playlist" %>
-
     <%= render "application/navbar" %>
 
-    <div class="content">
+    <div class="content" data-controller="track-selector" data-action="track-selector:select->player#activate">
       <%= yield %>
     </div>
+
+    <%= render "application/player" %>
   </body>
 </html>
