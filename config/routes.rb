@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   resources :admin
   resources :music, only: %i[index]
 
+  get "player/fetch_audio" => "player#fetch_audio", as: :player_fetch_audio
+
   # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
 
   devise_for :users
