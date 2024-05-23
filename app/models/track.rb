@@ -7,11 +7,14 @@ class Track < ApplicationRecord
   def title = "#{number}: #{song.human_full_title}"
 
   def duration
-    metadata = web_audio.blob.try(:metadata)
+    metadata = web_audio.blob.try(:metadata) || {}
 
-    # mins, seconds = ms.divmod(60)
-    # "#{mins}:#{seconds.round}"
-    0
+    return "" unless metadata.key? :duration
+
+    ms = metadata[:duration].to_i
+    mins, seconds = ms.divmod(60)
+
+    format("%<mins>.2d:%<seconds>.2d", mins:, seconds: seconds.round)
   end
 
   def web_audio_key = web_audio.blob.try(:key)

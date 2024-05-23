@@ -22,11 +22,15 @@
   margin-left: 10%;
   margin-right: 10%;
   display: grid;
-  grid-template-columns: 15% 15% 40% 30% 0%;
+  grid-template-columns: 25% 5% 40% 30% 0%;
 }
 
 .player-element {
-  margin: 0.1em;
+  margin: 0.3em;
+}
+
+#audio-container {
+  visibility: hidden;
 }
 
 .play-button {
@@ -36,8 +40,11 @@
   background: url("play-button.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
   filter: invert(42%) sepia(55%) saturate(6955%) hue-rotate(208deg) brightness(98%) contrast(104%);
 }
+
 .pause-button {
   border: none;
   min-width: 2em;
@@ -45,8 +52,11 @@
   background: url("pause-button.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
   filter: invert(42%) sepia(55%) saturate(6955%) hue-rotate(208deg) brightness(98%) contrast(104%);
 }
+
 .play-button-disabled {
   border: none;
   min-width: 2em;
@@ -54,5 +64,11 @@
   background: url("play-button.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
   filter: invert(93%) sepia(37%) saturate(6943%) hue-rotate(177deg) brightness(99%) contrast(106%);
+}
+
+.tracklist > tbody {
+	vertical-align: middle;
 }

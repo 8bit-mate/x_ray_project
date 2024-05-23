@@ -105,7 +105,7 @@ export default class extends Controller {
         container: this.waveFormTarget,
         waveColor: "#cfe2ff",
         progressColor: "#0d6efd",
-        height: 40,
+        height: 35,
         media: this.audio,
         plugins: [
           Hover.create({
