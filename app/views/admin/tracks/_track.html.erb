@@ -15,7 +15,7 @@
       Your browser does not support the audio element.
     </audio>
   <% else %>
-    <p>Track has no audio!</p>
+    <span class="badge text-bg-danger">Track has no audio!</span>
   <% end %>
 
   <p>
@@ -26,6 +26,8 @@
       <%= link_to [url_scope, record], style:"text-decoration:none" do %>
         <span class=""><%= record.id %></span>
       <% end %>
+    <% else %>
+      <span class="badge text-bg-danger">Track doesn't belong to any record!</span>
     <% end %>
   </p>
 </div>

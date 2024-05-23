@@ -15,7 +15,7 @@
           <%= index + 1 %>
         </th>
         <td>
-          <%= link_to image_tag(record.web_images.first, width: "180em"), record %>
+          <%= link_to image_tag(record.web_images.first, class: "record-image-preview"), record %>
         </td>
         <td>
           <%= record.category.name %>

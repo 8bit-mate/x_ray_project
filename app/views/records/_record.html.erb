@@ -2,20 +2,26 @@
 
   <div id="record-web-images" class="carousel slide">
     <div class="carousel-inner">
-      <% record.web_images.each do |image| %>
+      <% image = record.web_images.first %>
       <div class="carousel-item active">
-        <%= image_tag(image, class: "d-block") %>
+        <%= image_tag(image, class: "img-fit-to-height") %>
+      </div>
+      <% record.web_images.drop(1).each do |image| %>
+      <div class="carousel-item">
+        <%= image_tag(image, class: "img-fit-to-height") %>
       </div>
       <% end %>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#record-web-images" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#record-web-images" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <% if record.web_images.length > 1 %>
+      <button class="carousel-control-prev" type="button" data-bs-target="#record-web-images" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#record-web-images" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    <% end %>
   </div>
 
   <div class="accordion" id="record-info">
