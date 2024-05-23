@@ -1,7 +1,7 @@
 class Record < ApplicationRecord
   include AppendToHasManyAttached["web_images"]
-
   validates :category, presence: true
+  validates :web_images, presence: true
 
   has_many_attached :web_images, dependent: :purge_later
 
@@ -10,7 +10,7 @@ class Record < ApplicationRecord
   has_many :format_tag_records, dependent: :destroy
   has_many :format_tags, through: :format_tag_records
 
-  has_many :tracks, dependent: :destroy
+  has_many :tracks, dependent: :nullify
 
   scope :without_category, -> { where(category_id: nil) }
 
@@ -23,7 +23,7 @@ class Record < ApplicationRecord
   private
 
   def create_or_delete_tracks(tracks_ids)
-    record_tracks.destroy_all
+    self.tracks = []
 
     return unless tracks_ids
 

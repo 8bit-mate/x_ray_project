@@ -1,8 +1,13 @@
 class Track < ApplicationRecord
+  validates :number, presence: true
+  validates :song, presence: true
+
   belongs_to :song, optional: true
   belongs_to :record, optional: true
 
   has_one_attached :web_audio, dependent: :purge_later
+
+  scope :without_record_assigned, -> { where(record: nil) }
 
   def title = "#{number}: #{song.human_full_title}"
 
@@ -18,11 +23,4 @@ class Track < ApplicationRecord
   end
 
   def web_audio_key = web_audio.blob.try(:key)
-
-  def assign_record(record_id)
-    return unless record_id
-
-    record = Record.find_by(record_id)
-    record.tracks << self unless record.tracks.include?(self)
-  end
 end

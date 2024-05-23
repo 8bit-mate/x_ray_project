@@ -22,6 +22,7 @@ class Admin::RecordsController < ApplicationController
   # POST /records or /records.json
   def create
     @record = Record.new(record_params)
+
     @record.create_or_update_tags(tags_params)
 
     respond_to do |format|

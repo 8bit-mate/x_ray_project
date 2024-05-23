@@ -18,14 +18,22 @@
 
   <div>
     <%= form.label :song_id, style: "display: block" %>
-    <%= form.collection_select :song_id, Song.order(:full_title), :id, :full_title, include_blank: false %>
+    <%= form.collection_select :song_id, Song.order(:full_title), :id, :human_full_title, include_blank: false %>
   </div>
 
-  <%= form.file_field :web_audio %>
+  <div>
+    <% if track.web_audio.attached? %>
+      <audio controls>
+        <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    <% else %>
+      <p>Track has no audio yet!</p>
+    <% end %>
+  </div>
 
   <div>
-    <p><strong>Assign a record:</strong></p>
-    <%= select_tag "associations[record_id]", options_for_select(Record.all.collect{ |r| [r.category.name, r.id] }) %>
+    <%= form.file_field :web_audio %>
   </div>
 
   <div>

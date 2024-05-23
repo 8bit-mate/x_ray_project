@@ -11,11 +11,9 @@
     </div>
   <% end %>
 
-  <div class="attachment-controls">
-    <% @record.web_images.each do |web_image|%>
-      <%= link_to "Delete #{web_image.blob.filename}", purge_admin_attachment_path(web_image), data: { turbo_method: :delete } %>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag "attachment-controls" do %>
+    <% render "web_images_controls", web_images: @record.web_images %>
+  <% end %>
 
   <%= form.file_field :web_images, multiple: true %>
 
@@ -38,7 +36,7 @@
 
   <div>
     <p><strong>Select tracks:</strong></p>
-    <% Track.all.each do |tag| %>
+    <% (Track.without_record_assigned | @record.tracks).each do |tag| %>
       <%= check_box_tag "tags[tracks_ids][]", tag.id, @record.tracks.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.title %><br>
     <% end %>
