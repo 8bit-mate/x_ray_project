@@ -8,6 +8,8 @@ class SongTitle < ApplicationRecord
   after_destroy :update_songs_after_destroy
   after_update :update_songs_after_update
 
+  scope :sort_by_title, ->(ord = :asc) { i18n.order(title: ord) }
+
   private
 
   def update_songs_after_update

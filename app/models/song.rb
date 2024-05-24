@@ -18,6 +18,20 @@ class Song < ApplicationRecord
 
   delegate :title, to: :song_title
 
+  # scope :sorted_by_first_artist, -> { joins(:artists).order(first_name_en: :desc).uniq }
+
+  #   scope :sorted_by_title, -> { Song.i18n.joins(:song_title).i18n.order("title_#{I18n.locale} desc") }
+
+  scope :sort_by_title, ->(ord = :asc) { joins(:song_title).merge(SongTitle.sort_by_title(ord)) }
+  scope :sort_by_year_of_release, ->(ord = :asc) { order(year_of_release: ord) }
+
+  scope :sorted_by_first_artist, lambda {
+    joins(:artists)
+      .select("songs.*, MIN(artist_songs.id)")
+      .group("songs.id")
+      .order("first_name_#{I18n.locale} desc")
+  }
+
   def records = tracks.map(&:record)
 
   def create_or_update_tags(tags_params)
