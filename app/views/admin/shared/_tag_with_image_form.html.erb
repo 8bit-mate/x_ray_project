@@ -46,7 +46,9 @@
     <%= form.check_box :visible %>
   </div>
 
-  <%= form.file_field :image %>
+  <!%= form.file_field :image %>
+
+  <%= render "admin/shared/image_preview", form: form, tag: tag %>
 
   <div>
     <%= form.submit %>
