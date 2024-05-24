@@ -4,7 +4,9 @@ class Category < ApplicationRecord
 
   include Tag
 
-  has_one_attached :image, dependent: :purge_later
+  has_one_attached :image, dependent: :purge_later do |image|
+    image.variant :preview, resize_to_limit: [300, 300]
+  end
 
   has_many :records, dependent: :nullify
   after_destroy :handle_records_after_destroy
