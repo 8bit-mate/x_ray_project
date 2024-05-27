@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_165726) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -120,6 +120,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_165726) do
     t.index ["slug"], name: "index_format_tags_on_slug", unique: true
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.string "language"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_preferences_on_user_id"
+  end
+
   create_table "records", force: :cascade do |t|
     t.integer "number", default: 0, null: false
     t.text "tech_info", default: "", null: false
@@ -186,6 +194,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_165726) do
   add_foreign_key "artist_songs", "songs"
   add_foreign_key "format_tag_records", "format_tags"
   add_foreign_key "format_tag_records", "records"
+  add_foreign_key "preferences", "users"
   add_foreign_key "records", "categories"
   add_foreign_key "songs", "song_titles"
   add_foreign_key "tracks", "records"

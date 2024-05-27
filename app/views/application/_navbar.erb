@@ -29,12 +29,42 @@
             Playlist
           </a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= tag.div class: "#{I18n.locale}-lang" %><span><%= t("current_language.full") %></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <% switch_locale = I18n.locale == :en ? :ru : :en %>
+              <%= button_to preferences_update_path({preferences: {language: switch_locale}}), data: { "turbo-method": :post }, class: "dropdown-item btn btn-link" do %>
+                <%= tag.div class: "#{switch_locale}-lang" %><span><%= t("switch_language.full") %></span>
+              <% end %>
+            </li>
+          </ul>
+        </li>
 
         <% if current_user.try(:admin?) %>
           <li class="nav-item">
             <a class="nav-link" href=<%= admin_index_path %>>Admin panel</a>
           </li>
         <% end %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </a>
+          <ul class="dropdown-menu">
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "dropdown-item" %>
+              <% else %>
+                  <%= link_to "Sign in", new_user_session_path, class: "dropdown-item" %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+
       </ul>
     </div>
   </div>

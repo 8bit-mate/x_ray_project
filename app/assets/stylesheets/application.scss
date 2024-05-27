@@ -88,3 +88,25 @@
 .table-track-preview {
   --bs-table-bg: transparent !important;
 }
+
+.en-lang {
+  border: none;
+  min-width: 1.3em;
+  min-height: 1.3em;
+  background: url("en.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.ru-lang {
+  border: none;
+  min-width: 1.3em;
+  min-height: 1.3em;
+  background: url("ru.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+}

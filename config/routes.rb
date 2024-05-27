@@ -37,10 +37,15 @@ Rails.application.routes.draw do
   resources :music, only: %i[index]
 
   get "player/fetch_audio" => "player#fetch_audio", as: :player_fetch_audio
+  post "preferences/update" => "preferences#update", as: :preferences_update
 
   # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -6,7 +6,7 @@ def self.new_track
 
   random_num = rand(1..5)
   filename = "#{random_num}.mp3"
-  track.web_audio.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename: filename)
+  track.web_audio.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename:)
 
   track
 end
@@ -83,7 +83,8 @@ end
 
   random_num = rand(1..22)
   filename = "#{random_num}.jpg"
-  record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename: filename)
+  record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")),
+                           filename:)
 
   record.save
 end
