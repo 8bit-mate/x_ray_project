@@ -37,7 +37,8 @@ Rails.application.routes.draw do
   resources :music, only: %i[index]
 
   get "player/fetch_audio" => "player#fetch_audio", as: :player_fetch_audio
-  post "preferences/update" => "preferences#update", as: :preferences_update
+  post "users/preferences/update" => "preferences#update", as: :users_preferences_update
+  get "users/preferences" => "preferences#index", as: :users_preferences
 
   # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
 

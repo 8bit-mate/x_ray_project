@@ -1,0 +1,23 @@
+<h1>Preferences (guest mode)</h1>
+
+<%= form_with(url: users_preferences_update_path, method: "post") do |form| %>
+  <div>
+    <% I18n.available_locales.each do |locale| %>
+      <% checked = locale == I18n.locale %>
+      <%= radio_button_tag "preferences[language]", locale, checked, id: locale %>
+      <%= label_tag locale, locale %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <% Rails.application.config.available_themes.each do |theme| %>
+      <% checked = @cookies[:theme] == theme %>
+      <%= radio_button_tag "preferences[theme]", theme, checked, id: theme %>
+      <%= label_tag theme, t(theme, scope: :theme) %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

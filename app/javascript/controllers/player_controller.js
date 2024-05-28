@@ -17,6 +17,8 @@ export default class extends Controller {
     });
 
     this.playButtonTarget.disabled = true;
+
+    console.log(document.cookie);
   }
 
   connect() {

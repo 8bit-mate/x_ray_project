@@ -36,7 +36,7 @@
           <ul class="dropdown-menu">
             <li>
               <% switch_locale = I18n.locale == :en ? :ru : :en %>
-              <%= button_to preferences_update_path({preferences: {language: switch_locale}}), data: { "turbo-method": :post }, class: "dropdown-item btn btn-link" do %>
+              <%= button_to users_preferences_update_path({preferences: {language: switch_locale}}), data: { "turbo-method": :post }, class: "dropdown-item btn btn-link" do %>
                 <%= tag.div class: "#{switch_locale}-lang" %><span><%= t("switch_language.full") %></span>
               <% end %>
             </li>
@@ -54,6 +54,9 @@
             Profile
           </a>
           <ul class="dropdown-menu">
+            <li>
+              <%= link_to "Preferences", users_preferences_path, class: "dropdown-item" %>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <% if user_signed_in? %>
@@ -62,9 +65,14 @@
                   <%= link_to "Sign in", new_user_session_path, class: "dropdown-item" %>
               <% end %>
             </li>
+            <li>
           </ul>
         </li>
 
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="darkModeSwitch" data-theme-target="navbarSwitch" data-action="change->theme#toggleTheme">
+          <label class="form-check-label" for="darkModeSwitch">Dark Mode</label>
+        </div>
       </ul>
     </div>
   </div>

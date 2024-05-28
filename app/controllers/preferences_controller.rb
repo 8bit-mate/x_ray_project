@@ -1,4 +1,8 @@
 class PreferencesController < ApplicationController
+  def index
+    @cookies = cookies
+  end
+
   def update
     GuestPreferenceService.update_guest_preferences(cookies, preferences_params)
 
@@ -11,7 +15,8 @@ class PreferencesController < ApplicationController
 
   def preferences_params
     params.require(:preferences).permit(
-      :language
+      :language,
+      :theme
     )
   end
 end

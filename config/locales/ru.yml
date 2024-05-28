@@ -4,3 +4,8 @@ ru:
 
   switch_language:
     full: "English"
+
+  theme:
+    light: "Светлая"
+    dark: "Тёмная"
+    auto: "Автоматически"

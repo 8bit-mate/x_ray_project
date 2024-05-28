@@ -5,6 +5,11 @@ en:
   switch_language:
     full: "Русский"
 
+  theme:
+    light: "Light"
+    dark: "Dark"
+    auto: "Auto"
+
   hello:
     default: "hello"
     downcase: "hello"
