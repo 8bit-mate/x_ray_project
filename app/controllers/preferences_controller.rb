@@ -1,4 +1,8 @@
 class PreferencesController < ApplicationController
+  include AuthenticateController
+
+  before_action :authenticate_user, only: %i[index]
+
   def index
     @cookies = cookies
   end
@@ -14,9 +18,17 @@ class PreferencesController < ApplicationController
   private
 
   def preferences_params
-    params.require(:preferences).permit(
-      :language,
-      :theme
-    )
+    if user_signed_in?
+      # Logged-in users have access to all preferences.
+      params.require(:preferences).permit(
+        :language,
+        :theme
+      )
+    else
+      # Guests have access to a limited set of preferences.
+      params.require(:preferences).permit(
+        :language
+      )
+    end
   end
 end

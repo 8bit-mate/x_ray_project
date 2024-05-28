@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= render "registered_user_preferences" %>
+  <%= render "registered_user_preferences", cookies: @cookies %>
 <% else %>
    <%= render "guest_user_preferences", cookies: @cookies %>
 <% end %>
