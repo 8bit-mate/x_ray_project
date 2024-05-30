@@ -3,15 +3,25 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="theme"
 export default class extends Controller {
   static targets = [ "navbarSwitch" ];
-
-  connect() {
-    this.handleTheme();
+  static values = {
+    mode: String
   }
 
-  handleTheme() {
-    const element = document.documentElement;
+  connect() {
+    let darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const currentTheme = localStorage.getItem("bsTheme") || "light";
+    darkThemeMq.addEventListener('change', event => {
+      this.handleTheme(darkThemeMq);
+    });
+
+    this.handleTheme(darkThemeMq);
+  }
+
+  handleTheme(darkThemeMq) {
+    const element = document.documentElement;
+    const preferedTheme = (darkThemeMq.matches) ? "dark" : "light"
+    const currentTheme = localStorage.getItem("bsTheme") || preferedTheme;
+
     element.setAttribute("data-bs-theme", currentTheme);
     this.navbarSwitchTarget.checked = currentTheme === "dark";
   }
