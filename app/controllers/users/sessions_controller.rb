@@ -9,9 +9,13 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+
+    return unless resource.persisted? && GuestPreferenceService.guest_preferences_present?(cookies)
+
+    GuestPreferenceService.delete_guest_preferences(cookies)
+  end
 
   # DELETE /resource/sign_out
   # def destroy

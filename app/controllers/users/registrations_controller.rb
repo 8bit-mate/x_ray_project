@@ -10,9 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+
+    return unless resource.persisted?
+
+    preferences = { language: cookies[:language] || I18n.default_locale }
+    resource.create_preference(preferences)
+    GuestPreferenceService.delete_guest_preferences(cookies)
+  end
 
   # GET /resource/edit
   # def edit

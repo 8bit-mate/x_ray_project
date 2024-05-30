@@ -4,6 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :preference, dependent: :destroy
+
+  def update_preference(preferences)
+    preference.update(preferences)
+  end
+
   def admin?
     role == "admin"
   end

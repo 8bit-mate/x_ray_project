@@ -19,6 +19,18 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_locale
+    if user_signed_in?
+      extract_locale_from_user
+    else
+      extract_locale_from_guest
+    end
+  end
+
+  def extract_locale_from_user
+    current_user.preference.language || extract_locale_from_guest
+  end
+
+  def extract_locale_from_guest
     cookie_locale = GuestPreferenceService.get_preference(cookies, :language)
 
     # Case #1: there's no locale key in the cookies, i.e. a fresh visit just happened.
