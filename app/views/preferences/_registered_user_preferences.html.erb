@@ -10,14 +10,6 @@
   </div>
 
   <div>
-    <% Rails.application.config.available_themes.each do |theme| %>
-      <% checked = @cookies[:theme] == theme %>
-      <%= radio_button_tag "preferences[theme]", theme, checked, id: theme %>
-      <%= label_tag theme, t(theme, scope: :theme) %><br>
-    <% end %>
-  </div>
-
-  <div>
     <%= form.submit %>
   </div>
 <% end %>

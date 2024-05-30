@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_locale_from_user
-    current_user.preference.language || extract_locale_from_guest
+    current_user.preference.language
   end
 
   def extract_locale_from_guest
