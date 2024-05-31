@@ -1,6 +1,6 @@
 <div id="<%= dom_id artist %>">
   <h1>
-    <%= artist.last_name %>, <%= artist.first_name %>
+    Artist: <%= artist.last_name %>, <%= artist.first_name %>
   </h1>
   <p>
     <%= artist.short_description %>
@@ -8,10 +8,41 @@
   <p>
     <%= artist.description %>
   </p>
+</div>
 
-  <%= render "shared/records_table", records: @records, pagy: @pagy_for_records %>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link active"
+      id="records-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#records"
+      type="button" role="tab"
+      aria-controls="records"
+      aria-selected="true"
+    >
+      Records
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link"
+      id="songs-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#songs"
+      type="button"
+      role="tab" aria-controls="songs" aria-selected="false"
+    >
+      Songs
+    </button>
+  </li>
+</ul>
 
-  <div class="artists-songs">
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+    <%= render "shared/records_table", records: @records, pagy: @pagy_for_records %>
+  </div>
+  <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
     <%= render "shared/songs_table", songs: @songs, pagy: @pagy_for_songs %>
   </div>
 </div>

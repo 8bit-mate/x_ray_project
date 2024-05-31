@@ -1,5 +1,5 @@
 <div id="<%= dom_id format_tag %>">
   <%= render "shared/tag", tag: format_tag %>
 
-  <%= render "shared/records_table", records: format_tag.records %>
+  <%= render "shared/records_table", records: @records, pagy: @pagy %>
 </div>
