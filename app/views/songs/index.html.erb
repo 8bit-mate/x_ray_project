@@ -6,4 +6,4 @@
   <p><%= t(:songs_index_intro) %></p>
 </div>
 
-<%= render "shared/songs_table", songs: @songs.sort_by_year_of_release %>
+<%= render "shared/songs_table", songs: @songs, pagy: @pagy %>

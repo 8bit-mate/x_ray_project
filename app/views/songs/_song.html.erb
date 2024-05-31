@@ -14,9 +14,9 @@
   <% if song.other_variations? %>
     <div class="song-other-versions">
       <strong>Other versions:</strong>
-      <%= render "shared/songs_table", songs: song.other_variations %>
+      <%= render "shared/songs_table", songs: @other_variations, pagy: @pagy_for_songs %>
     </div>
   <% end %>
 
-  <%= render "shared/records_table", records: song.records %>
+  <%= render "shared/records_table", records: @records, pagy: @pagy_for_records %>
 </div>

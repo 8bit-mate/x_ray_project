@@ -9,9 +9,9 @@
     <%= artist.description %>
   </p>
 
-  <%= render "shared/records_table", records: artist.records %>
+  <%= render "shared/records_table", records: @records, pagy: @pagy_for_records %>
 
   <div class="artists-songs">
-    <%= render "shared/songs_table", songs: artist.songs %>
+    <%= render "shared/songs_table", songs: @songs, pagy: @pagy_for_songs %>
   </div>
 </div>

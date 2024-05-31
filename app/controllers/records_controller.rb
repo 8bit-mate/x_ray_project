@@ -3,7 +3,10 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    @records = Record.all
+    @pagy, @records = pagy(
+      Record.all,
+      items: Rails.application.config.pagy_n_items
+    )
   end
 
   # GET /records/1 or /records/1.json
