@@ -10,19 +10,21 @@ export default class extends Controller {
   audioContext = new AudioContext();
 
   initialize() {
-    console.log("Player controller initialized.");
+    //console.log("Player controller initialized.");
 
     document.addEventListener("turbo:load", (event) => {
       this.updateBtnState();
     });
 
-    this.playButtonTarget.disabled = true;
+    document.addEventListener("turbo:after-stream-render", (event) => {
+      this.updateBtnState();
+    });
 
-    console.log(document.cookie);
+    this.playButtonTarget.disabled = true;
   }
 
   connect() {
-    console.log("Player controller connected.");
+    //console.log("Player controller connected.");
   }
 
   updateBtnState() {

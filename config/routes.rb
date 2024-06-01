@@ -5,7 +5,9 @@ Rails.application.routes.draw do
         get "random"
       end
     end
-    resources :categories, only: %i[index show]
+    resources :categories, only: %i[index show] do
+      resources :records, only: :index
+    end
     resources :format_tags, only: %i[index show]
     resources :songs, only: %i[index show]
     resources :artists, only: %i[index show]
@@ -54,5 +56,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "records#index"
+  root "music#index"
 end

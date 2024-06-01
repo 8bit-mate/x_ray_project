@@ -1,5 +1,9 @@
+<%= turbo_frame_tag "records", target: "_top" do %>
+
 <p style="color: green"><%= notice %></p>
 
 <h1>Records</h1>
 
 <%= render "shared/records_table", records: @records, pagy: @pagy %>
+
+<% end %>

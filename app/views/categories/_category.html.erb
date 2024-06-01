@@ -1,5 +1,9 @@
 <div id="<%= dom_id category %>">
   <%= render "shared/tag", tag: category %>
 
-  <%= render "shared/records_table", records: @records, pagy: @pagy %>
+  <!= render "shared/records_table", records: @records, pagy: @pagy %>
+
+  <%= turbo_frame_tag "records", src: category_records_path(category), loading: :lazy, target: "_top" do %><% end %>
+
+  <%= link_to "test", category_records_path(category), :data => { turbo_stream: true } %>
 </div>
