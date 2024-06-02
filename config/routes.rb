@@ -2,11 +2,16 @@ Rails.application.routes.draw do
   scope :music do
     resources :records, only: %i[index show] do
       collection do
-        get "random"
+        get :random
+        post :sort
       end
     end
     resources :categories, only: %i[index show] do
-      resources :records, only: :index
+      resources :records, only: :index do
+        collection do
+          post :sort
+        end
+      end
     end
     resources :format_tags, only: %i[index show]
     resources :songs, only: %i[index show]

@@ -15,6 +15,7 @@ class Record < ApplicationRecord
   has_many :tracks, dependent: :nullify
 
   scope :without_category, -> { where(category_id: nil) }
+  scope :sort_by_category_name, ->(ord = :asc) { joins(:category).merge(Category.sort_by_name(ord)) }
 
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])

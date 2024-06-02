@@ -1,9 +1,51 @@
 <div id="<%= dom_id category %>">
   <%= render "shared/tag", tag: category %>
 
-  <!= render "shared/records_table", records: @records, pagy: @pagy %>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Sort:
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to "Number, 0-9",
+          records_path(sort_field: "number", sort_order: "asc", category_id: category.id),
+          class: "dropdown-item",
+          data: { turbo_stream: true }
+        %>
+      </li>
+      <li>
+        <%= link_to "Number, 9-0",
+          records_path(sort_field: "number", sort_order: "desc", category_id: category.id),
+          class: "dropdown-item",
+          data: { turbo_stream: true }
+        %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Sort by:
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= button_to "Number, 0-9",
+          sort_records_path,
+          method: :get,
+          class: "dropdown-item",
+          :data => { turbo_stream: true },
+          params: { sort_field: "number", sort_order: "asc", category_id: category.id } %>
+      </li>
+      <li>
+        <%= button_to "Number, 9-0",
+          sort_records_path,
+          class: "dropdown-item",
+          :data => { turbo_stream: true },
+          params: { sort_field: "number", sort_order: "desc", category_id: category.id } %>
+      </li>
+    </ul>
+  </div>
+
 
   <%= turbo_frame_tag "records", src: category_records_path(category), loading: :lazy, target: "_top" do %><% end %>
-
-  <%= link_to "test", category_records_path(category), :data => { turbo_stream: true } %>
 </div>

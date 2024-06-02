@@ -3,19 +3,28 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    puts "==================================================================================================="
-    puts params
-    puts "==================================================================================================="
+    @pagy, @records = pagy(
+      sort_records(fetch_records),
+      items: Rails.application.config.pagy_n_items,
+      anchor_string: "data-turbo-stream"
+    )
 
     # respond_to do |format|
     #   format.html { render :index }
     #   format.turbo_stream { render :index }
     # end
+  end
 
+  def sort
     @pagy, @records = pagy(
       sort_records(fetch_records),
-      records: Rails.application.config.pagy_n_items
+      items: Rails.application.config.pagy_n_items,
+      anchor_string: "data-turbo-stream"
     )
+
+    respond_to do |format|
+      format.turbo_stream { render :index }
+    end
   end
 
   # GET /records/1 or /records/1.json
@@ -36,12 +45,16 @@ class RecordsController < ApplicationController
   end
 
   def sort_by_params(records)
-    # Validate field and order to prevent SQL injection
-    valid_fields = Record.column_names  # Get allowed field names from model
-    valid_orders = %w[asc desc]         # Allow only these order values
+    valid_fields = %w[number updated_at category]
+    valid_orders = %w[asc desc]
 
     if valid_fields.include?(params[:sort_field]) && valid_orders.include?(params[:sort_order])
-      records.order(params[:sort_field] => params[:sort_order])
+      case params[:sort_field]
+      when "category"
+        records.sort_by_category_name(params[:sort_order])
+      else
+        records.order(params[:sort_field] => params[:sort_order])
+      end
     else
       default_order(records)
     end
@@ -60,12 +73,12 @@ class RecordsController < ApplicationController
     end
   end
 
-  def sort_params
-    params.fetch(:sort, {}).permit(
-      :field,
-      :order
-    )
-  end
+  # def sort_params
+  #   params.fetch(:sort, {}).permit(
+  #     :field,
+  #     :order
+  #   )
+  # end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_record

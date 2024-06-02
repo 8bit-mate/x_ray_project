@@ -11,6 +11,8 @@ class Category < ApplicationRecord
   has_many :records, dependent: :nullify
   after_destroy :handle_records_after_destroy
 
+  scope :sort_by_name, ->(ord = :asc) { i18n.order(name: ord) }
+
   def n_records_tagged
     records.length
   end
