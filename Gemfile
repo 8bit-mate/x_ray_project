@@ -78,3 +78,9 @@ end
 gem "bootstrap", "~> 5.3"
 
 gem "sassc-rails", "~> 2.1"
+
+gem "ransack", "~> 4.1"
+
+gem "pagy", "~> 8.4"
+
+gem "mobility-ransack", "~> 1.2"

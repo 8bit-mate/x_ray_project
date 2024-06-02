@@ -10,4 +10,12 @@ class FormatTag < ApplicationRecord
   def n_records_tagged
     records.uniq.length
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["records"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "name_en", "name_ru"]
+  end
 end

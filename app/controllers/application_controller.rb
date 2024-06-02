@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   before_action :set_locale
 
   # https://learn.microsoft.com/en-us/graph/search-concept-acceptlanguage-header
