@@ -6,6 +6,31 @@
   <p><%= t(:format_tags_index_intro) %></p>
 </div>
 
+<div class="list-controls">
+  <%== pagy_bootstrap_nav(@pagy) %>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Sort:
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to "Name, A-Z",
+          format_tags_path(sort_field: "name", sort_order: "asc"),
+          class: sort_button_class("name", "asc", @sort_mode)
+        %>
+      </li>
+      <li>
+        <%= link_to "Name, Z-A",
+          format_tags_path(sort_field: "name", sort_order: "desc"),
+          class: sort_button_class("name", "desc", @sort_mode)
+        %>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
 <table class="table table-responsive table-striped table-hover">
   <thead>
     <tr>
@@ -34,3 +59,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
