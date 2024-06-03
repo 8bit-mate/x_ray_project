@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   create_table "artists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "songs_count", default: 0
     t.string "first_name_en"
     t.string "first_name_ru"
     t.string "last_name_en"

@@ -12,6 +12,10 @@ class SongTitle < ApplicationRecord
 
   private
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title title_en title_ru]
+  end
+
   def update_songs_after_update
     songs.each(&:update_full_title)
   end

@@ -14,6 +14,14 @@ class Artist < ApplicationRecord
 
   after_update :update_associated_songs_full_titles
 
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[first_name first_name_en first_name_ru last_name last_name_en last_name_ru songs_count]
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

@@ -6,9 +6,9 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
-      <th scope="col">Songs found</th>
+      <th scope="col"><%= sort_link(@q, :last_name, "Last name") %></th>
+      <th scope="col"><%= sort_link(@q, :first_name, "First name") %></th>
+      <th scope="col"><%= sort_link(@q, :songs_count, "Songs in the DB") %></th>
     </tr>
   </thead>
   <tbody>
@@ -18,10 +18,10 @@
           <%= index + 1 %>
         </th>
         <td>
-          <%= artist.first_name %>
+          <%= artist.last_name %>
         </td>
         <td>
-          <%= artist.last_name %>
+          <%= artist.first_name %>
         </td>
         <td>
           <%= artist.songs.length %>
@@ -30,3 +30,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%== pagy_bootstrap_nav(@pagy) %>

@@ -67,6 +67,14 @@ class Song < ApplicationRecord
     save
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    ["song_title"]
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ["year_of_release"]
+  end
+
   private
 
   def compose_slug_title
