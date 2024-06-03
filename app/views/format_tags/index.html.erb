@@ -6,16 +6,6 @@
   <p><%= t(:format_tags_index_intro) %></p>
 </div>
 
-<%= search_form_for @q do |f| %>
-
-  # Search if the name field contains...
-  <%= f.label :name_cont %>
-  <%= f.search_field :name_cont %>
-
-  <%= f.submit %>
-<% end %>
-
-
 <table class="table table-responsive table-striped table-hover">
   <thead>
     <tr>
