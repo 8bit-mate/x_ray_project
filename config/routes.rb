@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index show]
     resources :format_tags, only: %i[index show]
     resources :songs, only: %i[index show]
-    resources :artists, only: %i[index show]
+    resources :artists, only: %i[index show] do
+      resources :songs, only: :index
+    end
     resources :song_titles, only: %i[index show]
   end
 

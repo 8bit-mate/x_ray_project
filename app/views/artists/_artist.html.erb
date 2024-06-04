@@ -12,6 +12,6 @@
   <%= render "shared/records_table", records: artist.records %>
 
   <div class="artists-songs">
-    <%= render "shared/songs_table", songs: artist.songs %>
+    <%= turbo_frame_tag "songs", src: artist_songs_path(artist), loading: :lazy, target: "_top" do %><% end %>
   </div>
 </div>
