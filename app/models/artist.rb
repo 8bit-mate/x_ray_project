@@ -12,6 +12,8 @@ class Artist < ApplicationRecord
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
 
+  has_many :records, through: :songs
+
   after_update :update_associated_songs_full_titles
 
   def self.ransackable_associations(_auth_object = nil)
@@ -26,9 +28,9 @@ class Artist < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def records
-    songs.flat_map(&:records).uniq
-  end
+  # def records
+  #   songs.flat_map(&:records).uniq
+  # end
 
   private
 

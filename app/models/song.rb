@@ -13,6 +13,7 @@ class Song < ApplicationRecord
   has_many :artists, through: :artist_songs
 
   has_many :tracks, dependent: :destroy
+  has_many :records, through: :tracks
 
   belongs_to :song_title
 

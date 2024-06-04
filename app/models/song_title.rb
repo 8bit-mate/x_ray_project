@@ -10,11 +10,11 @@ class SongTitle < ApplicationRecord
 
   scope :sort_by_title, ->(ord = :asc) { i18n.order(title: ord) }
 
-  private
-
   def self.ransackable_attributes(_auth_object = nil)
     %w[title title_en title_ru]
   end
+
+  private
 
   def update_songs_after_update
     songs.each(&:update_full_title)
