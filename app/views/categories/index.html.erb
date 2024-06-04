@@ -16,7 +16,7 @@
         <p class="card-text"><%= tag.description %></p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Records in the category: <%= tag.n_records_tagged %></li>
+        <li class="list-group-item">Records in the category: <%= tag.records_count %></li>
       </ul>
       <div class="card-body">
         <a href= <%= category_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
