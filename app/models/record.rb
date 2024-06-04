@@ -16,6 +16,10 @@ class Record < ApplicationRecord
 
   scope :without_category, -> { where(category_id: nil) }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[category_id number updated_at]
+  end
+
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])
     create_or_delete_format_tags(tags_params[:format_tags_ids])

@@ -3,7 +3,11 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    @records = Record.all
+    # @records = Record.all
+
+    @q = Record.all.ransack(params[:q])
+    @q.sorts = "number" if @q.sorts.blank?
+    @pagy, @records = pagy(@q.result)
   end
 
   # GET /records/1 or /records/1.json
