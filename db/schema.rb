@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "visible", default: false
+    t.integer "records_count", default: 0
     t.string "name_en"
     t.string "name_ru"
     t.string "short_description_en"

@@ -12,7 +12,7 @@
       <th scope="col">#</th>
       <th scope="col"><%= sort_link(@q, :name, "Name") %></th>
       <th scope="col">Description</th>
-      <th scope="col">Number of records tagged</th>
+      <th scope="col"><%= sort_link(@q, :records_count, "Number of records tagged") %></th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +28,7 @@
           <%= tag.description %>
         </td>
         <td>
-          <%= tag.n_records_tagged %>
+          <%= tag.records_count %>
         </td>
       </tr>
     <% end %>
