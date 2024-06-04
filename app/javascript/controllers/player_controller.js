@@ -16,9 +16,11 @@ export default class extends Controller {
       this.updateBtnState();
     });
 
-    this.playButtonTarget.disabled = true;
+    document.addEventListener("turbo:after-stream-render", (event) => {
+      this.updateBtnState();
+    });
 
-    console.log(document.cookie);
+    this.playButtonTarget.disabled = true;
   }
 
   connect() {
