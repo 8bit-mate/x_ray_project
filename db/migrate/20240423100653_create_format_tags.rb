@@ -4,7 +4,6 @@ class CreateFormatTags < ActiveRecord::Migration[7.1]
       t.timestamps
       t.boolean :visible, default: false
       t.integer :records_count, default: 0
-
     end
   end
 end
