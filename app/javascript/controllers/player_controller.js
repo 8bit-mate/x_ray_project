@@ -11,10 +11,20 @@ export default class extends Controller {
 
   initialize() {
     console.log("Player controller initialized.");
+
+    document.addEventListener("turbo:load", (event) => {
+      this.updateBtnState();
+    });
+
+    document.addEventListener("turbo:after-stream-render", (event) => {
+      this.updateBtnState();
+    });
+
     this.playButtonTarget.disabled = true;
   }
 
   connect() {
+    this.updateBtnState();
     console.log("Player controller connected.");
   }
 
