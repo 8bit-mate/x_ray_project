@@ -4,7 +4,7 @@ def self.new_track
     song: Song.all.sample
   )
 
-  random_num = rand(1..5)
+  random_num = rand(1..10)
   filename = "#{random_num}.mp3"
   track.web_audio.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")), filename:)
 

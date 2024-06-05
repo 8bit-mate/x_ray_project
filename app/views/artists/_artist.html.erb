@@ -9,9 +9,7 @@
     <%= artist.description %>
   </p>
 
-  <%= render "shared/records_table", records: artist.records %>
+  <%= turbo_frame_tag "records", src: artist_records_path(artist), loading: :lazy, target: "_top" do %><% end %>
 
-  <div class="artists-songs">
-    <%= turbo_frame_tag "songs", src: artist_songs_path(artist), loading: :lazy, target: "_top" do %><% end %>
-  </div>
+  <%= turbo_frame_tag "songs", src: artist_songs_path(artist), loading: :lazy, target: "_top" do %><% end %>
 </div>

@@ -11,20 +11,18 @@ export default class extends Controller {
 
   initialize() {
     console.log("Player controller initialized.");
-
-    document.addEventListener("turbo:load", (event) => {
-      this.updateBtnState();
-    });
-
-    document.addEventListener("turbo:after-stream-render", (event) => {
-      this.updateBtnState();
-    });
-
     this.playButtonTarget.disabled = true;
   }
 
   connect() {
     console.log("Player controller connected.");
+  }
+
+  onButtonConnect(event) {
+    let id = event.detail.id;
+    if (id == this.trackKey) {
+      this.updateBtnState();
+    }
   }
 
   updateBtnState() {
@@ -37,7 +35,7 @@ export default class extends Controller {
 
   setBtnPause() {
     let btn = document.getElementById(this.trackKey);
-    if (btn) { btn.className = "play-button" };
+    if (btn) {btn.className = "play-button" };
 
     if (this.trackKey) {
       this.playButtonTarget.className = "play-button"
@@ -49,6 +47,7 @@ export default class extends Controller {
   setBtnPlay() {
     let btn = document.getElementById(this.trackKey);
     if (btn) { btn.className = "pause-button" };
+
     this.playButtonTarget.className = "pause-button";
   } 
 

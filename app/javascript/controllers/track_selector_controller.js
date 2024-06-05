@@ -10,4 +10,8 @@ export default class extends Controller {
   controlPlayback(event) {
     this.dispatch("select", { detail: { target: event.target } });
   }
+
+  buttonTargetConnected(event) {
+    this.dispatch("buttonConnect", { detail: { id: event.id } });
+  }
 }

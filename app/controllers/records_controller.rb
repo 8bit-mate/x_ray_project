@@ -5,7 +5,7 @@ class RecordsController < ApplicationController
   def index
     # @records = Record.all
 
-    @q = Record.all.ransack(params[:q])
+    @q = filter_records.ransack(params[:q])
     @q.sorts = "number" if @q.sorts.blank?
     @pagy, @records = pagy(@q.result)
   end
@@ -18,6 +18,21 @@ class RecordsController < ApplicationController
   end
 
   private
+
+  def filter_records
+    if params[:category_id].present?
+      category = Category.friendly.find(params[:category_id])
+      category.records
+    elsif params[:artist_id].present?
+      artist = Artist.friendly.find(params[:artist_id])
+      artist.records
+    elsif params[:format_tag_id].present?
+      format_tag = FormatTag.friendly.find(params[:format_tag_id])
+      format_tag.records
+    else
+      Record.all
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_record

@@ -1,4 +1,9 @@
-<%= turbo_frame_tag "player", data: { turbo_permanent: true, controller: "player", action: "track-selector:select@window->player#activate" } do %>
+<%= turbo_frame_tag "player",
+data: { 
+  turbo_permanent: true,
+  controller: "player",
+  action: "track-selector:select@window->player#activate track-selector:buttonConnect@window->player#onButtonConnect"
+} do %>
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasRightLabel">Equalizer</h5>
