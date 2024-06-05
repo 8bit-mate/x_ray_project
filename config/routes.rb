@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
     resources :songs, only: %i[index show] do
       resources :records, only: :index
+      resources :songs, only: :index
     end
 
     resources :artists, only: %i[index show] do

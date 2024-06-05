@@ -11,12 +11,20 @@
     <%= song.notes %>
   </p>
 
-  <% if song.other_variations? %>
-    <div class="song-other-versions">
-      <strong>Other versions:</strong>
-      <!= render "shared/songs_table", songs: song.other_variations %>
+  <ul class="nav nav-tabs" id="recordsSongsTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="false">Records</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="songs-tab" data-bs-toggle="tab" data-bs-target="#songs" type="button" role="tab" aria-controls="songs" aria-selected="false">Songs</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="recordsSongsTabContent">
+    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+      <%= turbo_frame_tag "records", src: song_records_path(song), loading: :lazy, target: "_top" do %><% end %>
     </div>
-  <% end %>
-
-  <%= turbo_frame_tag "records", src: song_records_path(song), loading: :lazy, target: "_top" do %><% end %>
+    <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
+      <%= turbo_frame_tag "songs", src: song_songs_path(song), loading: :lazy, target: "_top" do %><% end %>
+    </div>
+  </div>
 </div>

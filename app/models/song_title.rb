@@ -8,8 +8,6 @@ class SongTitle < ApplicationRecord
   after_destroy :update_songs_after_destroy
   after_update :update_songs_after_update
 
-  scope :sort_by_title, ->(ord = :asc) { i18n.order(title: ord) }
-
   def self.ransackable_attributes(_auth_object = nil)
     %w[title title_en title_ru]
   end

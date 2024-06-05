@@ -22,6 +22,10 @@ class SongsController < ApplicationController
     elsif params[:song_title_id].present?
       song_title = SongTitle.find(params[:song_title_id])
       song_title.songs
+    elsif params[:song_id].present?
+      song = Song.friendly.find(params[:song_id])
+      song_title = song.song_title
+      song_title.songs.excluding(song)
     else
       Song.all
     end
