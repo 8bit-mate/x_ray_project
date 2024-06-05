@@ -7,7 +7,7 @@ class RecordsController < ApplicationController
 
     @q = filter_records.ransack(params[:q])
     @q.sorts = "number" if @q.sorts.blank?
-    @pagy, @records = pagy(@q.result)
+    @pagy, @records = pagy(@q.result, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /records/1 or /records/1.json
@@ -26,6 +26,9 @@ class RecordsController < ApplicationController
     elsif params[:artist_id].present?
       artist = Artist.friendly.find(params[:artist_id])
       artist.records
+    elsif params[:song_id].present?
+      song = Song.friendly.find(params[:song_id])
+      song.records
     elsif params[:format_tag_id].present?
       format_tag = FormatTag.friendly.find(params[:format_tag_id])
       format_tag.records

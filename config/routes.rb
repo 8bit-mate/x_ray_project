@@ -14,14 +14,18 @@ Rails.application.routes.draw do
       resources :records, only: :index
     end
 
-    resources :songs, only: %i[index show]
+    resources :songs, only: %i[index show] do
+      resources :records, only: :index
+    end
 
     resources :artists, only: %i[index show] do
       resources :songs, only: :index
       resources :records, only: :index
     end
 
-    resources :song_titles, only: %i[index show]
+    resources :song_titles, only: %i[index show] do
+      resources :songs, only: :index
+    end
   end
 
   namespace :admin do

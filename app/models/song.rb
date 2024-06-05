@@ -2,10 +2,9 @@ class Song < ApplicationRecord
   extend Mobility
   extend FriendlyId
 
-  friendly_id :compose_slug_title, use: :slugged
+  delegate :title, to: :song_title
 
-  scope :without_title, -> { where(song_title: nil) }
-  scope :with_full_title, ->(title) { where(full_title: title) }
+  friendly_id :compose_slug_title, use: :slugged
 
   translates :notes, :variation
 
@@ -17,23 +16,16 @@ class Song < ApplicationRecord
 
   belongs_to :song_title
 
-  delegate :title, to: :song_title
+  scope :without_title, -> { where(song_title: nil) }
+  scope :with_full_title, ->(title) { where(full_title: title) }
 
-  # scope :sorted_by_first_artist, -> { joins(:artists).order(first_name_en: :desc).uniq }
+  def self.ransackable_associations(_auth_object = nil)
+    ["song_title"]
+  end
 
-  #   scope :sorted_by_title, -> { Song.i18n.joins(:song_title).i18n.order("title_#{I18n.locale} desc") }
-
-  scope :sort_by_title, ->(ord = :asc) { joins(:song_title).merge(SongTitle.sort_by_title(ord)) }
-  scope :sort_by_year_of_release, ->(ord = :asc) { order(year_of_release: ord) }
-
-  scope :sorted_by_first_artist, lambda {
-    joins(:artists)
-      .select("songs.*, MIN(artist_songs.id)")
-      .group("songs.id")
-      .order("first_name_#{I18n.locale} desc")
-  }
-
-  def records = tracks.map(&:record)
+  def self.ransackable_attributes(_auth_object = nil)
+    ["year_of_release"]
+  end
 
   def create_or_update_tags(tags_params)
     create_or_delete_artists(tags_params[:artists_slugs])
@@ -66,14 +58,6 @@ class Song < ApplicationRecord
   def update_full_title
     self.full_title = compose_full_title
     save
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    ["song_title"]
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    ["year_of_release"]
   end
 
   private

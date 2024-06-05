@@ -12,7 +12,7 @@ class Artist < ApplicationRecord
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
 
-  has_many :records, through: :songs
+  has_many :records, -> { distinct }, through: :songs
 
   after_update :update_associated_songs_full_titles
 

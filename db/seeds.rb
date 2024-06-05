@@ -69,7 +69,7 @@ end
   )
 end
 
-5.times do |i|
+25.times do |i|
   record = Record.new(
     number: i,
     category: Category.find_or_create_by!(
