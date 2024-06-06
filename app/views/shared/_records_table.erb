@@ -3,7 +3,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Preview</th>
-      <th scope="col">Category</th>
+      <th scope="col"><%= sort_link(@q, :category_name, "Category", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :number, "Number", data: {turbo_stream: true}) %></th>
       <th scope="col">Tracklist</th>
     </tr>

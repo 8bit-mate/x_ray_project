@@ -20,6 +20,10 @@ class Record < ApplicationRecord
     %w[category_id number updated_at]
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    ["category"]
+  end
+
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])
     create_or_delete_format_tags(tags_params[:format_tags_ids])

@@ -11,6 +11,10 @@ class Category < ApplicationRecord
   has_many :records, dependent: :nullify
   after_destroy :handle_records_after_destroy
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name name_en name_ru records_count]
+  end
+
   private
 
   #
