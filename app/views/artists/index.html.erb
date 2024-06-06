@@ -18,13 +18,13 @@
           <%= index + 1 %>
         </th>
         <td>
-          <%= artist.last_name %>
+          <%= link_to artist.last_name, artist %>
         </td>
         <td>
-          <%= artist.first_name %>
+          <%= link_to artist.first_name, artist %>
         </td>
         <td>
-          <%= artist.songs.length %>
+          <%= artist.songs_count %>
         </td>
       </tr>
     <% end %>

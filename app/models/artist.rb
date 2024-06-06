@@ -28,10 +28,6 @@ class Artist < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  # def records
-  #   songs.flat_map(&:records).uniq
-  # end
-
   private
 
   def should_generate_new_friendly_id?
