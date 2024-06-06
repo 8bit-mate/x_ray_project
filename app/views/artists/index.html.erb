@@ -15,7 +15,7 @@
     <% @artists.each_with_index do |artist, index| %>
       <tr>
         <th scope="row">
-          <%= index + 1 %>
+          <%= item_index(index, @pagy) %>
         </th>
         <td>
           <%= link_to artist.last_name, artist %>

@@ -19,7 +19,7 @@
     <% @format_tags.each_with_index do |tag, index| %>
       <tr>
         <th scope="row">
-          <%= index + 1 %>
+          <%= item_index(index, @pagy) %>
         </th>
         <td>
           <%= link_to tag.name, tag %>

@@ -12,7 +12,7 @@
     <% records.each_with_index do |record, index| %>
       <tr>
         <th scope="row">
-          <%= index + 1 %>
+          <%= item_index(index, @pagy) %>
         </th>
         <td>
           <%= link_to image_tag(record.web_images.first.variant(:preview), class: "record-image-preview"), record %>
