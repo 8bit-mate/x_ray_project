@@ -9,5 +9,10 @@ class CreateSongVariationAndNotesTranslationsForMobilityColumnBackend < ActiveRe
     add_index  :songs, :notes_en, name: :index_songs_on_notes_en
     add_column :songs, :notes_ru, :text, default: "", null: false
     add_index  :songs, :notes_ru, name: :index_songs_on_notes_ru
+
+    add_column :songs, :title_en, :text, default: "", null: false
+    add_index  :songs, :title_en, name: :index_songs_on_title_en
+    add_column :songs, :title_ru, :text, default: "", null: false
+    add_index  :songs, :title_ru, name: :index_songs_on_title_ru
   end
 end

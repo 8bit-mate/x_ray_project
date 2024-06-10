@@ -159,11 +159,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.string "variation_ru", default: "", null: false
     t.text "notes_en", default: "", null: false
     t.text "notes_ru", default: "", null: false
+    t.text "title_en", default: "", null: false
+    t.text "title_ru", default: "", null: false
     t.string "slug"
     t.index ["notes_en"], name: "index_songs_on_notes_en"
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
     t.index ["song_title_id"], name: "index_songs_on_song_title_id"
+    t.index ["title_en"], name: "index_songs_on_title_en"
+    t.index ["title_ru"], name: "index_songs_on_title_ru"
     t.index ["variation_en"], name: "index_songs_on_variation_en"
     t.index ["variation_ru"], name: "index_songs_on_variation_ru"
   end

@@ -1,3 +1,41 @@
+
+TITLES = [
+  {
+    en: "Blue Suede Shoes",
+    ru: "Синие замшевые туфли"
+  },
+  {
+    en: "Blue Hotel",
+    ru: "Грустный отель"
+  },
+  {
+    en: "St. Louis Blues",
+    ru: "St. Louis Blues"
+  },
+  {
+    en: "Dark Eyes",
+    ru: "Очи чёрные"
+  },
+  {
+    en: "Serdce",
+    ru: "Сердце"
+  }
+].freeze
+
+def self.transform_string(input_string)
+  characters = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+  transformed_string = input_string.chars
+
+  num_insertions = rand(1..5)
+  num_insertions.times do
+    position = rand(0..transformed_string.length)
+    random_char = characters.sample
+    transformed_string.insert(position, random_char)
+  end
+
+  transformed_string.join
+end
+
 def self.new_track
   track = Track.new(
     number: %w[A1 A2 A3 A4].sample,
@@ -46,16 +84,21 @@ user.save!
   )
 end
 
-25.times do |_i|
+TITLES.each do |title|
   SongTitle.create(
-    title_en: Faker::Music::RockBand.song
+    title_en: title[:en],
+    title_ru: title[:ru]
   )
 end
 
-25.times do |_i|
+20.times do |_i|
+  song_title = SongTitle.all.sample
+
   Song.new(
     year_of_release: Faker::Number.within(range: 1930..1970),
-    song_title: SongTitle.all.sample,
+    song_title:,
+    title_en: transform_string(song_title.title_en),
+    title_ru: transform_string(song_title.title_ru),
     artists: [Artist.all.sample, Artist.all.sample]
   ).update_full_title
 end
@@ -69,7 +112,7 @@ end
   )
 end
 
-25.times do |i|
+30.times do |i|
   record = Record.new(
     number: i,
     category: Category.find_or_create_by!(

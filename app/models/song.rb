@@ -2,11 +2,9 @@ class Song < ApplicationRecord
   extend Mobility
   extend FriendlyId
 
-  delegate :title, to: :song_title
-
   friendly_id :compose_slug_title, use: :slugged
 
-  translates :notes, :variation
+  translates :notes, :variation, :title
 
   has_many :artist_songs, dependent: :destroy
   has_many :artists, through: :artist_songs
@@ -20,11 +18,11 @@ class Song < ApplicationRecord
   scope :with_full_title, ->(title) { where(full_title: title) }
 
   def self.ransackable_associations(_auth_object = nil)
-    ["song_title"]
+    %w[song_title artists]
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    ["year_of_release"]
+    %w[year_of_release]
   end
 
   def create_or_update_tags(tags_params)
