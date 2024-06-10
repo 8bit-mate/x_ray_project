@@ -22,7 +22,7 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[year_of_release]
+    %w[year_of_release title title_en title_ru]
   end
 
   def create_or_update_tags(tags_params)
@@ -31,13 +31,6 @@ class Song < ApplicationRecord
 
     self.full_title = compose_full_title
   end
-
-  # Return list of song's alternative versions, e.g. live versions,
-  # alternative takes, or versions performed by other artists.
-  def other_variations = song_group.songs.reject { |e| e == self }
-
-  # Tell whether the song has other versions.
-  def other_variations? = !other_variations.empty?
 
   def variation? = !variation_en.empty?
 
