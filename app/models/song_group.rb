@@ -1,4 +1,4 @@
-class SongTitle < ApplicationRecord
+class SongGroup < ApplicationRecord
   extend Mobility
 
   translates :title
@@ -19,10 +19,10 @@ class SongTitle < ApplicationRecord
   end
 
   def update_songs_after_destroy
-    default_title = SongTitle.find_or_create_by(title_en: "Unknown Title")
+    default_title = SongGroup.find_or_create_by(title_en: "Unknown Title")
 
     Song.without_title.each do |song|
-      song.song_title = default_title
+      song.song_group = default_title
       song.update_full_title
     end
   end

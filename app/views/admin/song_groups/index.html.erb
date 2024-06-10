@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Song titles</h1>
+
+<%= link_to "<<", admin_index_path %> |
+<%= link_to "New song title", new_admin_song_group_path %>
+
+<div id="song_groups">
+  <% @song_groups.each do |song_group| %>
+    <%= render song_group %>
+    <p>
+      <%= link_to "Show this song title", admin_song_group_path(song_group) %>
+    </p>
+  <% end %>
+</div>

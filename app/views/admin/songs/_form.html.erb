@@ -31,9 +31,9 @@
 
   <div>
     <p><strong>Select song title:</strong></p>
-    <% SongTitle.all.each do |tag| %>
-      <% checked = @song.song_title ? @song.song_title.id == tag.id : false %>
-      <%= radio_button_tag "tags[song_title_id]", tag.id, checked, id: dom_id(tag) %>
+    <% SongGroup.all.each do |tag| %>
+      <% checked = @song.song_group ? @song.song_group.id == tag.id : false %>
+      <%= radio_button_tag "tags[song_group_id]", tag.id, checked, id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.title %><br>
     <% end %>
   </div>

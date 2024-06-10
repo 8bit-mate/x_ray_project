@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Admin::SongTitlesControllerTest < ActionDispatch::IntegrationTest
+class SongGroupTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

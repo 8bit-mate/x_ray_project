@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :records, only: :index
     end
 
-    resources :song_titles, only: %i[index show] do
+    resources :song_groups, only: %i[index show] do
       resources :songs, only: :index
     end
   end
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :format_tags
     resources :songs
-    resources :song_titles
+    resources :song_groups
     resources :tracks
 
     resources :attachments do

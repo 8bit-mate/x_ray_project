@@ -59,7 +59,7 @@ Category.find_or_create_by!(
   visible: false
 )
 
-SongTitle.find_or_create_by!(
+SongGroup.find_or_create_by!(
   title_en: "Unknown Title",
   title_ru: "Неизвестное название"
 )
@@ -85,20 +85,20 @@ user.save!
 end
 
 TITLES.each do |title|
-  SongTitle.create(
+  SongGroup.create(
     title_en: title[:en],
     title_ru: title[:ru]
   )
 end
 
 20.times do |_i|
-  song_title = SongTitle.all.sample
+  song_group = SongGroup.all.sample
 
   Song.new(
     year_of_release: Faker::Number.within(range: 1930..1970),
-    song_title:,
-    title_en: transform_string(song_title.title_en),
-    title_ru: transform_string(song_title.title_ru),
+    song_group:,
+    title_en: transform_string(song_group.title_en),
+    title_ru: transform_string(song_group.title_ru),
     artists: [Artist.all.sample, Artist.all.sample]
   ).update_full_title
 end

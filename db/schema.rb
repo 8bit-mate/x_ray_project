@@ -140,19 +140,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.index ["category_id"], name: "index_records_on_category_id"
   end
 
-  create_table "song_titles", force: :cascade do |t|
+  create_table "song_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title_en"
     t.string "title_ru"
-    t.index ["title_en"], name: "index_song_titles_on_title_en"
-    t.index ["title_ru"], name: "index_song_titles_on_title_ru"
+    t.index ["title_en"], name: "index_song_groups_on_title_en"
+    t.index ["title_ru"], name: "index_song_groups_on_title_ru"
   end
 
   create_table "songs", force: :cascade do |t|
     t.integer "year_of_release"
     t.string "full_title"
-    t.integer "song_title_id"
+    t.integer "song_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "variation_en", default: "", null: false
@@ -165,7 +165,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.index ["notes_en"], name: "index_songs_on_notes_en"
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
-    t.index ["song_title_id"], name: "index_songs_on_song_title_id"
+    t.index ["song_group_id"], name: "index_songs_on_song_group_id"
     t.index ["title_en"], name: "index_songs_on_title_en"
     t.index ["title_ru"], name: "index_songs_on_title_ru"
     t.index ["variation_en"], name: "index_songs_on_variation_en"
@@ -203,7 +203,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   add_foreign_key "format_tag_records", "records"
   add_foreign_key "preferences", "users"
   add_foreign_key "records", "categories"
-  add_foreign_key "songs", "song_titles"
+  add_foreign_key "songs", "song_groups"
   add_foreign_key "tracks", "records"
   add_foreign_key "tracks", "songs"
 end

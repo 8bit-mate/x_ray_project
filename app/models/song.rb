@@ -12,13 +12,13 @@ class Song < ApplicationRecord
   has_many :tracks, dependent: :destroy
   has_many :records, through: :tracks
 
-  belongs_to :song_title
+  belongs_to :song_group
 
-  scope :without_title, -> { where(song_title: nil) }
+  scope :without_title, -> { where(song_group: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[song_title artists]
+    %w[song_group artists]
   end
 
   def self.ransackable_attributes(_auth_object = nil)
@@ -27,14 +27,14 @@ class Song < ApplicationRecord
 
   def create_or_update_tags(tags_params)
     create_or_delete_artists(tags_params[:artists_slugs])
-    create_or_delete_song_title(tags_params[:song_title_id])
+    create_or_delete_song_group(tags_params[:song_group_id])
 
     self.full_title = compose_full_title
   end
 
   # Return list of song's alternative versions, e.g. live versions,
   # alternative takes, or versions performed by other artists.
-  def other_variations = song_title.songs.reject { |e| e == self }
+  def other_variations = song_group.songs.reject { |e| e == self }
 
   # Tell whether the song has other versions.
   def other_variations? = !other_variations.empty?
@@ -47,7 +47,7 @@ class Song < ApplicationRecord
 
   def list_artists = artists.map(&:full_name)
 
-  def human_full_title = "#{join_artists} - #{song_title.title}"
+  def human_full_title = "#{join_artists} - #{song_group.title}"
 
   def should_generate_new_friendly_id?
     full_title_changed? || slug.blank?
@@ -67,15 +67,15 @@ class Song < ApplicationRecord
 
   def compose_full_title
     names = artists.map(&:full_name).join(" ")
-    title = song_title.title_en
+    title = song_group.title_en
     variation = variation? ? " (#{variation_en})" : ""
     "#{names}-#{title}#{variation}"
   end
 
-  def create_or_delete_song_title(id)
+  def create_or_delete_song_group(id)
     return if id.nil?
 
-    self.song_title = SongTitle.find_by(id:)
+    self.song_group = SongGroup.find_by(id:)
   end
 
   def create_or_delete_artists(slugs)

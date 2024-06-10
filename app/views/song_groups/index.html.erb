@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Song titles</h1>
+
+<div id="song_groups">
+  <% @song_groups.each do |song_group| %>
+    <%= render song_group %>
+    <p>
+      <%= link_to "Show this song title", song_group %>
+    </p>
+  <% end %>
+</div>
