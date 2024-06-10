@@ -24,7 +24,7 @@
       <%= turbo_frame_tag "records", src: song_records_path(song), loading: :lazy, target: "_top" do %><% end %>
     </div>
     <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
-      <%= turbo_frame_tag "songs", src: song_songs_path(song), loading: :lazy, target: "_top" do %><% end %>
+      <%= turbo_frame_tag "songs", src: song_related_songs_path(song), loading: :lazy, target: "_top" do %><% end %>
     </div>
   </div>
 </div>

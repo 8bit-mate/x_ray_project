@@ -21,7 +21,7 @@ class PreferencesController < ApplicationController
     current_user.update_preference(preferences_params)
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to request.path }
     end
   end
 
@@ -29,7 +29,7 @@ class PreferencesController < ApplicationController
     GuestPreferenceService.update_guest_preferences(cookies, preferences_params)
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to request.path }
     end
   end
 

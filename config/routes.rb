@@ -16,16 +16,16 @@ Rails.application.routes.draw do
 
     resources :songs, only: %i[index show] do
       resources :records, only: :index
-      resources :songs, only: :index
+      resources :related_songs, only: :index
     end
 
     resources :artists, only: %i[index show] do
-      resources :songs, only: :index
+      resources :related_songs, only: :index
       resources :records, only: :index
     end
 
     resources :song_groups, only: %i[index show] do
-      resources :songs, only: :index
+      resources :related_songs, only: :index
     end
   end
 
@@ -71,5 +71,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "records#index"
+  root "music#index"
 end
