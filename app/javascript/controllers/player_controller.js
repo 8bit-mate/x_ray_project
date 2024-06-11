@@ -20,6 +20,11 @@ export default class extends Controller {
       this.updateBtnState();
     });
 
+    document.addEventListener("turbo:before-cache", (event) => {
+      let btn = document.getElementById(this.trackKey);
+      if (btn) {btn.className = "play-button" };  
+    });
+
     this.playButtonTarget.disabled = true;
   }
 
@@ -32,6 +37,8 @@ export default class extends Controller {
     let id = event.detail.id;
     if (id == this.trackKey) {
       this.updateBtnState();
+    } else {
+      event.detail.element.setAttribute("class", "play-button");
     }
   }
 

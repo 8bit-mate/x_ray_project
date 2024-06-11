@@ -12,6 +12,6 @@ export default class extends Controller {
   }
 
   buttonTargetConnected(event) {
-    this.dispatch("buttonConnect", { detail: { id: event.id } });
+    this.dispatch("buttonConnect", { detail: { id: event.id, element: event } });
   }
 }
