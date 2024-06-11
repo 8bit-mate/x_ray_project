@@ -9,20 +9,9 @@
     <%= artist.description %>
   </p>
 
-  <ul class="nav nav-tabs" id="recordsSongsTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="false">Records</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="songs-tab" data-bs-toggle="tab" data-bs-target="#songs" type="button" role="tab" aria-controls="songs" aria-selected="false">Songs</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="recordsSongsTabContent">
-    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
-      <%= turbo_frame_tag "records", src: artist_records_path(artist), loading: :lazy, target: "_top" do %><% end %>
-    </div>
-    <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
-      <%= turbo_frame_tag "songs", src: artist_related_songs_path(artist), loading: :lazy, target: "_top" do %><% end %>
-    </div>
-  </div>
-</div>
+  <%= render "shared/records_songs_tabs",
+    records_tab_title: "Records feature this artist",
+    records_tab_src: artist_records_path(artist),
+    songs_tab_title: "Songs by this artist",
+    songs_tab_src: artist_related_songs_path(artist)
+  %>

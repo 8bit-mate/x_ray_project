@@ -60,9 +60,8 @@ class Song < ApplicationRecord
 
   def compose_full_title
     names = artists.map(&:full_name).join(" ")
-    title = song_group.title_en
     variation = variation? ? " (#{variation_en})" : ""
-    "#{names}-#{title}#{variation}"
+    "#{names}-#{title_en}#{variation}"
   end
 
   def create_or_delete_song_group(id)
