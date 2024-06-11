@@ -12,6 +12,8 @@ class Artist < ApplicationRecord
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
 
+  has_many :main_songs, class_name: "Song", foreign_key: "main_artist_id", dependent: :nullify, inverse_of: :main_artist
+
   has_many :records, -> { distinct }, through: :songs
 
   after_update :update_associated_songs_full_titles
@@ -24,8 +26,8 @@ class Artist < ApplicationRecord
     %w[first_name first_name_en first_name_ru last_name last_name_en last_name_ru songs_count]
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
+  def full_name(order = :last_name_first)
+    order == :last_name_first ? "#{last_name}, #{first_name}" : "#{first_name} #{last_name}"
   end
 
   private

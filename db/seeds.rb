@@ -49,6 +49,18 @@ def self.new_track
   track
 end
 
+user = User.new
+user.email = "admin@admin.su"
+user.password = "admin@admin.su"
+user.password_confirmation = "admin@admin.su"
+user.role = "admin"
+user.save!
+
+Preference.new(
+  language: "en",
+  user:
+).save!
+
 Category.find_or_create_by!(
   name_en: "Uncategorized",
   name_ru: "Несортированное",
@@ -69,13 +81,6 @@ Artist.find_or_create_by!(
   first_name_ru: "Неизвестный исполнитель"
 )
 
-user = User.new
-user.email = "admin@admin.su"
-user.password = "admin@admin.su"
-user.password_confirmation = "admin@admin.su"
-user.role = "admin"
-user.save!
-
 25.times do |_i|
   Artist.create(
     first_name_en: Faker::Name.first_name,
@@ -94,12 +99,15 @@ end
 20.times do |_i|
   song_group = SongGroup.all.sample
 
+  art = [Artist.all.sample, Artist.all.sample]
+
   Song.new(
     year_of_release: Faker::Number.within(range: 1930..1970),
     song_group:,
     title_en: transform_string(song_group.title_en),
     title_ru: transform_string(song_group.title_ru),
-    artists: [Artist.all.sample, Artist.all.sample]
+    artists: art,
+    main_artist: art.first
   ).update_full_title
 end
 
@@ -112,7 +120,7 @@ end
   )
 end
 
-30.times do |i|
+3.times do |i|
   record = Record.new(
     number: i,
     category: Category.find_or_create_by!(

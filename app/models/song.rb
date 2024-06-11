@@ -13,12 +13,13 @@ class Song < ApplicationRecord
   has_many :records, through: :tracks
 
   belongs_to :song_group
+  belongs_to :main_artist, class_name: "Artist"
 
   scope :without_title, -> { where(song_group: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[song_group artists]
+    %w[song_group artists main_artist]
   end
 
   def self.ransackable_attributes(_auth_object = nil)
@@ -79,5 +80,7 @@ class Song < ApplicationRecord
       artist = Artist.find_by(slug:)
       artists << artist
     end
+
+    self.main_artist = artists.first
   end
 end

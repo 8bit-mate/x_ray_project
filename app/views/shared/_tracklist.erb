@@ -7,11 +7,7 @@
             <%= track.number %>
           </th>
           <td>
-            <% track.song.artists.each do |artist| %>
-              <%= link_to [url_scope, artist], style:"text-decoration:none" do %>
-                <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.full_name %></span>
-              <% end %>
-            <% end %>
+            <%== list_artists(track.artists, :first_name_first, url_scope: url_scope) %>
           </td>
           <td>
             <%= track.song.title %> <%= track.song.print_variation %>

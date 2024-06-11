@@ -153,6 +153,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.integer "year_of_release"
     t.string "full_title"
     t.integer "song_group_id"
+    t.integer "main_artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "variation_en", default: "", null: false
@@ -162,6 +163,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.text "title_en", default: "", null: false
     t.text "title_ru", default: "", null: false
     t.string "slug"
+    t.index ["main_artist_id"], name: "index_songs_on_main_artist_id"
     t.index ["notes_en"], name: "index_songs_on_notes_en"
     t.index ["notes_ru"], name: "index_songs_on_notes_ru"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
@@ -203,6 +205,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   add_foreign_key "format_tag_records", "records"
   add_foreign_key "preferences", "users"
   add_foreign_key "records", "categories"
+  add_foreign_key "songs", "artists", column: "main_artist_id"
   add_foreign_key "songs", "song_groups"
   add_foreign_key "tracks", "records"
   add_foreign_key "tracks", "songs"

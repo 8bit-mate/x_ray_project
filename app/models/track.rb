@@ -9,6 +9,8 @@ class Track < ApplicationRecord
 
   scope :without_record_assigned, -> { where(record: nil) }
 
+  delegate :artists, to: :song
+
   def title = "#{number}: #{song.human_full_title}"
 
   def duration
