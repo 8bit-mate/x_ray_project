@@ -1,4 +1,3 @@
 <%= turbo_stream.update "records" do %>
-  <h1>Records from turbo!</h1>
   <%= render "shared/records_table", records: @records %>
 <% end %>

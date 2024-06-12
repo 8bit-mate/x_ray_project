@@ -10,6 +10,7 @@ module Tag
     friendly_id :name_en, use: :slugged
 
     scope :visible, -> { where(visible: true) }
+    scope :with_records, -> { where("records_count > ?", 0) }
   end
 
   def should_generate_new_friendly_id?

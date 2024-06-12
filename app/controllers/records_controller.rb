@@ -3,8 +3,6 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    # @records = Record.all
-
     @q = filter_records.ransack(params[:q])
     @q.sorts = "number" if @q.sorts.blank?
     @pagy, @records = pagy(@q.result, anchor_string: 'data-turbo-stream="true"')

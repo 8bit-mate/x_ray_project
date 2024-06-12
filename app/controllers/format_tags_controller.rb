@@ -1,7 +1,7 @@
 class FormatTagsController < ApplicationController
   # GET /format_tags or /format_tags.json
   def index
-    @q = FormatTag.visible.ransack(params[:q])
+    @q = FormatTag.visible.with_records.ransack(params[:q])
     @q.sorts = "name" if @q.sorts.blank?
     @pagy, @format_tags = pagy(@q.result)
   end
