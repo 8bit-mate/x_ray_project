@@ -78,7 +78,10 @@ class Song < ApplicationRecord
 
     slugs.reject(&:empty?).each do |slug|
       artist = Artist.find_by(slug:)
-      artists << artist
+      # artists << artist
+
+      artist_song = artist_songs.build(artist:, role: "")
+      artist_song.save
     end
 
     self.main_artist = artists.first

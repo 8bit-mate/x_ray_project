@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
+    t.string "role", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_artist_songs_on_artist_id"
@@ -49,9 +50,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   end
 
   create_table "artists", force: :cascade do |t|
+    t.integer "songs_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "songs_count", default: 0
+    t.integer "records_count"
     t.string "first_name_en"
     t.string "first_name_ru"
     t.string "last_name_en"
@@ -73,10 +75,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "visible", default: false
     t.integer "records_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "slug"
     t.string "name_en"
     t.string "name_ru"
@@ -103,10 +105,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   end
 
   create_table "format_tags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "visible", default: false
     t.integer "records_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name_en"
     t.string "name_ru"
     t.string "short_description_en"
