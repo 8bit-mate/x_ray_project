@@ -10,7 +10,7 @@ class Song < ApplicationRecord
   has_many :artists, through: :artist_songs
 
   has_many :tracks, dependent: :destroy
-  has_many :records, through: :tracks
+  has_many :records, -> { distinct }, through: :tracks
 
   belongs_to :song_group
   belongs_to :main_artist, class_name: "Artist"
@@ -23,7 +23,7 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[year_of_release title title_en title_ru]
+    %w[year_of_release title title_en title_ru records_count]
   end
 
   def create_or_update_tags(tags_params)
