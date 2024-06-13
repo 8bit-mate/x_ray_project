@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_103758) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_145232) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -137,6 +137,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_103758) do
     t.index ["slug"], name: "index_format_tags_on_slug", unique: true
   end
 
+  create_table "labels", force: :cascade do |t|
+    t.integer "parent_label_id"
+    t.boolean "visible", default: false
+    t.integer "records_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name_en"
+    t.string "name_ru"
+    t.string "short_description_en"
+    t.string "short_description_ru"
+    t.text "description_en"
+    t.text "description_ru"
+    t.string "slug"
+    t.index ["description_en"], name: "index_labels_on_description_en"
+    t.index ["description_ru"], name: "index_labels_on_description_ru"
+    t.index ["name_en"], name: "index_labels_on_name_en"
+    t.index ["name_ru"], name: "index_labels_on_name_ru"
+    t.index ["parent_label_id"], name: "index_labels_on_parent_label_id"
+    t.index ["short_description_en"], name: "index_labels_on_short_description_en"
+    t.index ["short_description_ru"], name: "index_labels_on_short_description_ru"
+    t.index ["slug"], name: "index_labels_on_slug", unique: true
+  end
+
   create_table "preferences", force: :cascade do |t|
     t.string "language"
     t.integer "user_id", null: false
@@ -149,9 +172,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_103758) do
     t.integer "number", default: 0, null: false
     t.text "tech_info", default: "", null: false
     t.integer "category_id"
+    t.integer "label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_records_on_category_id"
+    t.index ["label_id"], name: "index_records_on_label_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -231,8 +256,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_103758) do
   add_foreign_key "artists", "artists", column: "primary_artist_id"
   add_foreign_key "format_tag_records", "format_tags"
   add_foreign_key "format_tag_records", "records"
+  add_foreign_key "labels", "labels", column: "parent_label_id"
   add_foreign_key "preferences", "users"
   add_foreign_key "records", "categories"
+  add_foreign_key "records", "labels"
   add_foreign_key "songs", "artists", column: "main_artist_id"
   add_foreign_key "songs", "song_groups"
   add_foreign_key "tracks", "records"

@@ -46,6 +46,15 @@
     <%= form.check_box :visible %>
   </div>
 
+  <div>
+    <p><strong>Parent label:</strong></p>
+    <% Label.all.each do |l| %>
+      <% checked = tag.parent_label ? tag.parent_label.id == l.id : false %>
+      <%= radio_button_tag "label[parent_label_id]", l.id, checked, id: dom_id(l) %>
+      <%= label_tag dom_id(l), l.name %><br>
+    <% end %>
+  </div>
+
   <%= render "admin/shared/image_preview", form: form, tag: tag %>
 
   <div>

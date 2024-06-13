@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     resources :song_groups, only: %i[index show] do
       resources :related_songs, only: :index
     end
+
+    resources :labels, only: %i[index show] do
+      resources :records, only: :index
+    end
   end
 
   namespace :admin do
@@ -43,6 +47,7 @@ Rails.application.routes.draw do
     resources :song_groups
     resources :tracks
     resources :roles
+    resources :labels
 
     resources :attachments do
       member do

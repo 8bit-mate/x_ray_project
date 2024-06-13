@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Labels</h1>
+
+<%= link_to "<<", admin_index_path %> |
+<%= link_to "New label", new_admin_label_path %>
+
+<div id="labels">
+  <% @labels.each do |label| %>
+    <%= render label %>
+    <p>
+      <%= link_to "Show this label", admin_label_path(label) %> |
+      <%= link_to "Edit this label", edit_admin_label_path(label) %>
+    </p>
+    <hr />
+  <% end %>
+</div>

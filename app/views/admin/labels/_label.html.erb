@@ -1,0 +1,4 @@
+<div id="<%= dom_id label %>">
+  <%= image_tag(label.image.variant(:preview)) if label.image.attached? %>
+  <%= render "shared/tag_admin", tag: label %>
+</div>

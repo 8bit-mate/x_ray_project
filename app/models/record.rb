@@ -8,6 +8,7 @@ class Record < ApplicationRecord
   end
 
   belongs_to :category, counter_cache: :records_count
+  belongs_to :label, counter_cache: :records_count
 
   has_many :format_tag_records, dependent: :destroy
   has_many :format_tags, through: :format_tag_records
@@ -15,6 +16,7 @@ class Record < ApplicationRecord
   has_many :tracks, dependent: :nullify
 
   scope :without_category, -> { where(category_id: nil) }
+  scope :without_label, -> { where(label_id: nil) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[category_id number updated_at]

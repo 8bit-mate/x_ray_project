@@ -27,6 +27,15 @@
   </div>
 
   <div>
+    <p><strong>Select label:</strong></p>
+    <% Label.all.each do |tag| %>
+      <% checked = @record.label ? @record.label.id == tag.id : false %>
+      <%= radio_button_tag "tags[label_id]", tag.id, checked, id: dom_id(tag) %>
+      <%= label_tag dom_id(tag), tag.name %><br>
+    <% end %>
+  </div>
+
+  <div>
     <p><strong>Select format tags:</strong></p>
     <% FormatTag.all.each do |tag| %>
       <%= check_box_tag "tags[format_tags_ids][]", tag.id, @record.format_tags.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>

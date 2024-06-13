@@ -1,4 +1,3 @@
-
 TITLES = [
   {
     en: "Blue Suede Shoes",
@@ -23,7 +22,7 @@ TITLES = [
 ].freeze
 
 def self.transform_string(input_string)
-  characters = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+  characters = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
   transformed_string = input_string.chars
 
   num_insertions = rand(1..5)

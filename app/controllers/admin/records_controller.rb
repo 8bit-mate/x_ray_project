@@ -79,6 +79,7 @@ class Admin::RecordsController < ApplicationController
   def tags_params
     params.require(:tags).permit(
       :category_id,
+      :label_id,
       format_tags_ids: [],
       tracks_ids: []
     )
