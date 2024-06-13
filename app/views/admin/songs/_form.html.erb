@@ -24,8 +24,17 @@
       <% end %>
     </datalist>
 
-    <% song.artists.all.each_with_index do |artist, idx| %>
+    <datalist id="roles-list">
+      <% Role.order(:name_en).each do |role| %>
+        <option value="<%= role.name_en %>"></option>
+      <% end %>
+    </datalist>
+
+    <% song.artists.each_with_index do |artist, idx| %>
       <%= text_field_tag "tags[artists_slugs][]", artist.slug, class: "artist-input", id: idx, list: "artists-list" %>
+      <% role = song.artist_songs[idx].role %>
+      <% name = role ? role.name_en : "" %>
+      <%= text_field_tag "tags[roles_names][]", name, class: "roles-input", id: idx, list: "roles-list" %>
     <% end %>
   <% end %>
 

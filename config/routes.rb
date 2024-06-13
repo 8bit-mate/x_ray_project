@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources :songs
     resources :song_groups
     resources :tracks
+    resources :roles
 
     resources :attachments do
       member do

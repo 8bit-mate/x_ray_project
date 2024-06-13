@@ -28,7 +28,7 @@ class Song < ApplicationRecord
   end
 
   def create_or_update_tags(tags_params)
-    create_or_delete_artists(tags_params[:artists_slugs])
+    create_or_delete_artists(tags_params[:artists_slugs], tags_params[:roles_names])
     create_or_delete_song_group(tags_params[:song_group_id])
 
     self.full_title = compose_full_title
@@ -72,16 +72,17 @@ class Song < ApplicationRecord
     self.song_group = SongGroup.find_by(id:)
   end
 
-  def create_or_delete_artists(slugs)
+  def create_or_delete_artists(slugs, roles)
     artist_songs.destroy_all
 
     return unless slugs
 
-    slugs.reject(&:empty?).each do |slug|
+    slugs.reject(&:empty?).each_with_index do |slug, idx|
       artist = Artist.find_by(slug:)
       # artists << artist
 
-      artist_song = artist_songs.build(artist:, role: "")
+      role = Role.find_by(name_en: roles[idx])
+      artist_song = artist_songs.build(artist:, role:)
       artist_song.save
     end
 

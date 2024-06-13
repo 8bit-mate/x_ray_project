@@ -81,6 +81,7 @@ class Admin::SongsController < ApplicationController
   def tags_params
     params.require(:tags).permit(
       :song_group_id,
+      roles_names: [],
       artists_slugs: []
     )
   end
