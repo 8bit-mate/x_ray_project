@@ -86,7 +86,7 @@ Artist.find_or_create_by!(
     first_name_en: Faker::Name.first_name,
     last_name_en: Faker::Name.last_name,
     description_en: Faker::Hipster.sentence,
-    primary_artist: Artist.all.sample
+    related_artists: [Artist.find_by(id: 1)]
   )
 end
 

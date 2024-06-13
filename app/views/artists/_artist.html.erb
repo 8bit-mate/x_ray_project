@@ -9,7 +9,7 @@
     <%= artist.description %>
   </p>
 
-  <%= render "aliaces", artist: artist if artist.aliaces.count.positive? %>
+  <%= render "aliases", artist: artist if artist.aliases.count.positive? %>
 
   <%= render "shared/records_songs_tabs",
     records_tab_title: "Records feature this artist",
