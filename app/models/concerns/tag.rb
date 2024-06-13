@@ -1,6 +1,7 @@
 # Concern for any model that can act as a 'tag'.
 module Tag
   extend ActiveSupport::Concern
+  include WithRecordsScope
 
   included do
     translates :name
@@ -10,7 +11,6 @@ module Tag
     friendly_id :name_en, use: :slugged
 
     scope :visible, -> { where(visible: true) }
-    scope :with_records, -> { where("records_count > ?", 0) }
   end
 
   def should_generate_new_friendly_id?

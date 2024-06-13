@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   create_table "artists", force: :cascade do |t|
     t.integer "songs_count", default: 0
     t.integer "records_count", default: 0
+    t.integer "primary_artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name_en"
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
     t.index ["first_name_ru"], name: "index_artists_on_first_name_ru"
     t.index ["last_name_en"], name: "index_artists_on_last_name_en"
     t.index ["last_name_ru"], name: "index_artists_on_last_name_ru"
+    t.index ["primary_artist_id"], name: "index_artists_on_primary_artist_id"
     t.index ["short_description_en"], name: "index_artists_on_short_description_en"
     t.index ["short_description_ru"], name: "index_artists_on_short_description_ru"
     t.index ["slug"], name: "index_artists_on_slug", unique: true
@@ -204,6 +206,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_061051) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artist_songs", "artists"
   add_foreign_key "artist_songs", "songs"
+  add_foreign_key "artists", "artists", column: "primary_artist_id"
   add_foreign_key "format_tag_records", "format_tags"
   add_foreign_key "format_tag_records", "records"
   add_foreign_key "preferences", "users"

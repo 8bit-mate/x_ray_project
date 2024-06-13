@@ -9,6 +9,9 @@ class Artist < ApplicationRecord
 
   friendly_id :full_name, use: :slugged
 
+  has_many :aliaces, class_name: "Artist", foreign_key: "primary_artist_id", dependent: :nullify, inverse_of: :primary_artist
+  belongs_to :primary_artist, class_name: "Artist", optional: true
+
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
 

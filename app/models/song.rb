@@ -1,6 +1,7 @@
 class Song < ApplicationRecord
   extend Mobility
   extend FriendlyId
+  include WithRecordsScope
 
   friendly_id :compose_slug_title, use: :slugged
 

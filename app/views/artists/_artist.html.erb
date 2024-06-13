@@ -1,6 +1,6 @@
 <div id="<%= dom_id artist %>">
   <h1>
-    <%= artist.last_name %>, <%= artist.first_name %>
+    <%= artist.full_name %>
   </h1>
   <p>
     <%= artist.short_description %>
@@ -8,6 +8,8 @@
   <p>
     <%= artist.description %>
   </p>
+
+  <%= render "aliaces", artist: artist if artist.aliaces.count.positive? %>
 
   <%= render "shared/records_songs_tabs",
     records_tab_title: "Records feature this artist",
