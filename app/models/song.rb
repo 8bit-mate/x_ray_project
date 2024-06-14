@@ -19,6 +19,8 @@ class Song < ApplicationRecord
   scope :without_title, -> { where(song_group: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
+  accepts_nested_attributes_for :artist_songs, allow_destroy: true
+
   def self.ransackable_associations(_auth_object = nil)
     %w[song_group artists main_artist]
   end
@@ -28,7 +30,10 @@ class Song < ApplicationRecord
   end
 
   def create_or_update_tags(tags_params)
-    create_or_delete_artists(tags_params[:artists_slugs], tags_params[:roles_names])
+    artist_songs.destroy_all
+
+    self.main_artist = Artist.find_by(id: 1)
+    # create_or_delete_artists(tags_params[:artists_slugs])
     create_or_delete_song_group(tags_params[:song_group_id])
 
     self.full_title = compose_full_title
@@ -72,20 +77,20 @@ class Song < ApplicationRecord
     self.song_group = SongGroup.find_by(id:)
   end
 
-  def create_or_delete_artists(slugs, roles)
+  def create_or_delete_artists(slugs)
     artist_songs.destroy_all
 
     return unless slugs
 
     slugs.reject(&:empty?).each_with_index do |slug, idx|
       artist = Artist.find_by(slug:)
-      # artists << artist
+      artists << artist
 
-      role = Role.find_by(name_en: roles[idx])
-      artist_song = artist_songs.build(artist:, role:)
-      artist_song.save
+      # role = Role.find_by(name_en: roles[idx])
+      # artist_song = artist_songs.build(artist:, role:)
+      # #artist_song.save
     end
 
-    self.main_artist = artists.first
+    #self.main_artist = artists.first
   end
 end

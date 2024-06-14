@@ -2,4 +2,6 @@ class ArtistSong < ApplicationRecord
   belongs_to :artist, counter_cache: :songs_count
   belongs_to :song
   belongs_to :role, optional: true
+
+  # accepts_nested_attributes_for :artist, :role
 end

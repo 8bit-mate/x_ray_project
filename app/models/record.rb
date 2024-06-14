@@ -28,6 +28,7 @@ class Record < ApplicationRecord
 
   def create_or_update_tags(tags_params)
     create_or_update_category(tags_params[:category_id])
+    create_or_update_label(tags_params[:label_id])
     create_or_delete_format_tags(tags_params[:format_tags_ids])
     create_or_delete_tracks(tags_params[:tracks_ids])
   end
@@ -58,5 +59,11 @@ class Record < ApplicationRecord
     return if id.nil?
 
     self.category = Category.find_by(id:)
+  end
+
+  def create_or_update_label(id)
+    return if id.nil?
+
+    self.label = Label.find_by(id:)
   end
 end

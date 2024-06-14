@@ -22,6 +22,8 @@ class Label < ApplicationRecord
     %w[name name_en name_ru records_count]
   end
 
+  def sub_labels? = sub_labels.count.positive?
+
   private
 
   #

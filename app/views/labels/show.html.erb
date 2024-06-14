@@ -1,0 +1,10 @@
+<h1><%= @label.name %></h1>
+
+<p>
+  <%= @label.description %>
+</p>
+
+<% if @label.sub_labels? %>
+  <h3>Variants</h3>
+  <%= render "shared/tags_cards_list", tags: @label.sub_labels %>
+<% end %>

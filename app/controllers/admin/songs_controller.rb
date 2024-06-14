@@ -14,6 +14,7 @@ class Admin::SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
+    @song.artist_songs.build
   end
 
   # GET /songs/1/edit
@@ -74,7 +75,8 @@ class Admin::SongsController < ApplicationController
       :variation_en,
       :variation_ru,
       :notes_en,
-      :notes_ru
+      :notes_ru,
+      artist_songs_attributes: [:id, :artist_id, :role_id, :_destroy, artist_attributes: [:id], role_attributes: [:id]]
     )
   end
 

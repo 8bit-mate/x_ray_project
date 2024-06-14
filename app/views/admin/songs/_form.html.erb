@@ -47,6 +47,20 @@
     <% end %>
   </div>
 
+
+  <h3>Artists and Roles</h3>
+  <% 2.times do |i| %> 
+    <%= form.fields_for :artist_songs, @song.artist_songs.build do |artist_song_fields| %>
+      <h3>Artist <%= i + 1 %></h3> 
+
+      <%= artist_song_fields.label :artist_id, "Artist" %>
+      <%= artist_song_fields.collection_select :artist_id, Artist.all, :id, :first_name %>
+
+      <%= artist_song_fields.label :role_id, "Role" %>
+      <%= artist_song_fields.collection_select :role_id, Role.all, :id, :name %>
+    <% end %>
+  <% end %>
+
   <div>
     <%= form.label :variation_en, style: "display: block" %>
     <p>E.g.: live, alt. take, etc.</p>

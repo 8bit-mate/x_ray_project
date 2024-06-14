@@ -12,7 +12,7 @@
   <% end %>
 
   <%= turbo_frame_tag "attachment-controls" do %>
-    <% render "web_images_controls", web_images: @record.web_images %>
+    <!% render "web_images_controls", web_images: @record.web_images %>
   <% end %>
 
   <%= form.file_field :web_images, multiple: true %>

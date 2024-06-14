@@ -1,10 +1,9 @@
 class Track < ApplicationRecord
   validates :number, presence: true
   validates :song, presence: true
-  validates :record, presence: true
 
   belongs_to :song, counter_cache: :records_count
-  belongs_to :record
+  belongs_to :record, optional: true
 
   has_one_attached :web_audio, dependent: :purge_later
 
