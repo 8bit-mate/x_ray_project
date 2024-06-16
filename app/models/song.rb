@@ -7,8 +7,9 @@ class Song < ApplicationRecord
 
   translates :notes, :variation, :title
 
-  has_many :artist_songs, dependent: :destroy
+  has_many :artist_songs, dependent: :destroy, inverse_of: :song
   has_many :artists, through: :artist_songs
+  accepts_nested_attributes_for :artist_songs, allow_destroy: true
 
   has_many :tracks, dependent: :destroy
   has_many :records, -> { distinct }, through: :tracks
@@ -19,8 +20,6 @@ class Song < ApplicationRecord
   scope :without_title, -> { where(song_group: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
-  accepts_nested_attributes_for :artist_songs, allow_destroy: true
-
   def self.ransackable_associations(_auth_object = nil)
     %w[song_group artists main_artist]
   end
@@ -29,13 +28,16 @@ class Song < ApplicationRecord
     %w[year_of_release title title_en title_ru records_count]
   end
 
-  def create_or_update_tags(tags_params)
-    artist_songs.destroy_all
-
+  def create_tags(tags_params)
     self.main_artist = Artist.find_by(id: 1)
-    # create_or_delete_artists(tags_params[:artists_slugs])
     create_or_delete_song_group(tags_params[:song_group_id])
+    self.full_title = compose_full_title
+  end
 
+  def update_tags(tags_params)
+    artist_songs.destroy_all
+    self.main_artist = Artist.find_by(id: 1)
+    create_or_delete_song_group(tags_params[:song_group_id])
     self.full_title = compose_full_title
   end
 
@@ -82,7 +84,7 @@ class Song < ApplicationRecord
 
     return unless slugs
 
-    slugs.reject(&:empty?).each_with_index do |slug, idx|
+    slugs.reject(&:empty?).each_with_index do |slug, _idx|
       artist = Artist.find_by(slug:)
       artists << artist
 
@@ -91,6 +93,6 @@ class Song < ApplicationRecord
       # #artist_song.save
     end
 
-    #self.main_artist = artists.first
+    # self.main_artist = artists.first
   end
 end

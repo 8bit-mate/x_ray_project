@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_145232) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,11 +51,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_145232) do
   create_table "artist_songs", force: :cascade do |t|
     t.integer "artist_id", null: false
     t.integer "song_id", null: false
-    t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role_en", default: "", null: false
+    t.string "role_ru", default: "", null: false
     t.index ["artist_id"], name: "index_artist_songs_on_artist_id"
-    t.index ["role_id"], name: "index_artist_songs_on_role_id"
+    t.index ["role_en"], name: "index_artist_songs_on_role_en"
+    t.index ["role_ru"], name: "index_artist_songs_on_role_ru"
     t.index ["song_id"], name: "index_artist_songs_on_song_id"
   end
 
@@ -179,15 +181,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_145232) do
     t.index ["label_id"], name: "index_records_on_label_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name_en"
-    t.string "name_ru"
-    t.index ["name_en"], name: "index_roles_on_name_en"
-    t.index ["name_ru"], name: "index_roles_on_name_ru"
-  end
-
   create_table "song_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -251,7 +244,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_145232) do
   add_foreign_key "aliases", "artists"
   add_foreign_key "aliases", "artists", column: "related_artist_id"
   add_foreign_key "artist_songs", "artists"
-  add_foreign_key "artist_songs", "roles"
   add_foreign_key "artist_songs", "songs"
   add_foreign_key "artists", "artists", column: "primary_artist_id"
   add_foreign_key "format_tag_records", "format_tags"

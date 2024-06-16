@@ -23,19 +23,6 @@
         <option value="<%= artist.slug %>"></option>
       <% end %>
     </datalist>
-
-    <datalist id="roles-list">
-      <% Role.order(:name_en).each do |role| %>
-        <option value="<%= role.name_en %>"></option>
-      <% end %>
-    </datalist>
-
-    <% song.artists.each_with_index do |artist, idx| %>
-      <%= text_field_tag "tags[artists_slugs][]", artist.slug, class: "artist-input", id: idx, list: "artists-list" %>
-      <% role = song.artist_songs[idx].role %>
-      <% name = role ? role.name_en : "" %>
-      <%= text_field_tag "tags[roles_names][]", name, class: "roles-input", id: idx, list: "roles-list" %>
-    <% end %>
   <% end %>
 
   <div>
@@ -47,18 +34,9 @@
     <% end %>
   </div>
 
-
   <h3>Artists and Roles</h3>
-  <% 2.times do |i| %> 
-    <%= form.fields_for :artist_songs, @song.artist_songs.build do |artist_song_fields| %>
-      <h3>Artist <%= i + 1 %></h3> 
-
-      <%= artist_song_fields.label :artist_id, "Artist" %>
-      <%= artist_song_fields.collection_select :artist_id, Artist.all, :id, :first_name %>
-
-      <%= artist_song_fields.label :role_id, "Role" %>
-      <%= artist_song_fields.collection_select :role_id, Role.all, :id, :name %>
-    <% end %>
+  <%= turbo_frame_tag "artist_songs", target: "_top" do %>
+    <%= render "artist_songs_fields", song: @song, form: form, n_artists: artists_count(@song) %>
   <% end %>
 
   <div>

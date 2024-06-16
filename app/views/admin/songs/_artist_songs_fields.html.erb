@@ -1,0 +1,14 @@
+  <% n_artists.times do |i| %> 
+    <%= form.fields_for :artist_songs, song.artist_songs.build do |artist_song_fields| %>
+      <h3>Artist <%= i + 1 %></h3> 
+
+      <%= artist_song_fields.label :artist_id, "Artist" %>
+      <%= artist_song_fields.collection_select :artist_id, Artist.all, :id, :first_name, selected: selected_artist_id(song, i) %>
+
+      <%= artist_song_fields.label :role_en %>
+      <%= artist_song_fields.text_field :role_en, value: song.artist_songs[i].role_en %>
+
+      <%= artist_song_fields.label :role_ru %>
+      <%= artist_song_fields.text_field :role_ru, value: song.artist_songs[i].role_ru %>
+    <% end %>
+  <% end %>

@@ -14,7 +14,7 @@ class Admin::SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
-    @song.artist_songs.build
+    # @song.artist_songs.build
   end
 
   # GET /songs/1/edit
@@ -23,7 +23,7 @@ class Admin::SongsController < ApplicationController
   # POST /songs or /songs.json
   def create
     @song = Song.new(song_params)
-    @song.create_or_update_tags(tags_params)
+    @song.create_tags(tags_params)
 
     respond_to do |format|
       if @song.save
@@ -38,7 +38,8 @@ class Admin::SongsController < ApplicationController
 
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
-    @song.create_or_update_tags(tags_params)
+    @song.update_tags(tags_params)
+    @song.main_artist = @song.artists.first
 
     respond_to do |format|
       if @song.update(song_params)
@@ -76,15 +77,13 @@ class Admin::SongsController < ApplicationController
       :variation_ru,
       :notes_en,
       :notes_ru,
-      artist_songs_attributes: [:id, :artist_id, :role_id, :_destroy, artist_attributes: [:id], role_attributes: [:id]]
+      artist_songs_attributes: %i[id artist_id role_en role_ru _destroy]
     )
   end
 
   def tags_params
     params.require(:tags).permit(
-      :song_group_id,
-      roles_names: [],
-      artists_slugs: []
+      :song_group_id
     )
   end
 end
