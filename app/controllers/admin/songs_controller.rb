@@ -39,7 +39,6 @@ class Admin::SongsController < ApplicationController
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
     @song.update_tags(tags_params)
-    @song.main_artist = @song.artists.first
 
     respond_to do |format|
       if @song.update(song_params)
