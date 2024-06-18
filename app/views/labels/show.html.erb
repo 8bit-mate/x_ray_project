@@ -8,3 +8,5 @@
   <h3>Variants</h3>
   <%= render "shared/tags_cards_list", tags: @label.sub_labels %>
 <% end %>
+
+<%= turbo_frame_tag "records", src: label_records_path(@label), loading: :lazy, target: "_top" do %><% end %>

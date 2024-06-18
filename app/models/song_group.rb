@@ -1,6 +1,9 @@
 class SongGroup < ApplicationRecord
   extend Mobility
 
+  validates :title_en, presence: true
+  validates :title_ru, presence: true
+
   translates :title
 
   has_many :songs, dependent: :nullify

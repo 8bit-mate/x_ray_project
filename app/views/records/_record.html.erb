@@ -49,7 +49,8 @@
                   Label
                 </th>
                 <td>
-                  ...
+                  <% tag = record.label %>
+                  <%= render "shared/tag_display", tag: tag, url_scope: nil if tag.visible %>
                 </td>
               </tr>
               <tr>

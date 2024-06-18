@@ -6,6 +6,6 @@ class LabelsController < ApplicationController
 
   # GET /labels/1 or /labels/1.json
   def show
-    @label = Label.visible.friendly.find(params[:id])
+    @label = Label.visible.friendly.includes(sub_labels: { sub_labels: :records }).find(params[:id])
   end
 end

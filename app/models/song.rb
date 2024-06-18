@@ -3,6 +3,8 @@ class Song < ApplicationRecord
   extend FriendlyId
   include WithRecordsScope
 
+  validates :song_group, presence: true
+
   friendly_id :compose_slug_title, use: :slugged
 
   translates :notes, :variation, :title

@@ -40,6 +40,14 @@ class Label < ApplicationRecord
 
   def lonely? = parent? || sub? ? false : true
 
+  def all_records
+    Record.where(label_id: all_label_ids)
+  end
+
+  def all_label_ids
+    [id] + sub_labels.map(&:all_label_ids).flatten.uniq
+  end
+
   private
 
   #

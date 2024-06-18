@@ -10,6 +10,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Preview</th>
+      <th scope="col"><%= sort_link(@q, :id, "ID", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :name_en, "Name en", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :name_ru, "Name ru", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :parent_label, "Parent label", data: {turbo_stream: true}) %></th>
@@ -25,7 +26,10 @@
           <%= item_index(index, @pagy) %>
         </th>
         <td>
-          <%= image_tag(label.image.variant(:preview)) if label.image.attached? %>
+          <%= image_tag(label.image.variant(:preview), class: "admin-table-img-preview") if label.image.attached? %>
+        </td>
+        <td>
+          <%= label.id %>
         </td>
         <td>
           <%= label.name_en %>

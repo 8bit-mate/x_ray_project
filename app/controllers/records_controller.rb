@@ -21,6 +21,10 @@ class RecordsController < ApplicationController
     if params[:category_id].present?
       category = Category.friendly.find(params[:category_id])
       category.records
+    elsif params[:label_id].present?
+      # label = Label.friendly.find(params[:label_id])
+      label = Label.visible.friendly.includes(sub_labels: { sub_labels: :records }).find(params[:label_id])
+      label.all_records
     elsif params[:artist_id].present?
       artist = Artist.friendly.find(params[:artist_id])
       artist.records

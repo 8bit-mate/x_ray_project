@@ -1,2 +1,21 @@
 <h1>Labels</h1>
-<%= render "shared/tags_cards_list", tags: @labels %>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @labels.each do |tag| %>
+    <div class="col">
+      <div class="card">
+        <%= link_to image_tag(tag.image.variant(:preview), class: "card-img-top"), tag if tag.image.attached? %>
+        <div class="card-body">
+          <h5 class="card-title"><%= tag.name %></h5>
+          <p class="card-text"><%= tag.description %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Records: <%= tag.all_records.count %></li>
+        </ul>
+        <div class="card-body">
+          <a href= <%= label_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

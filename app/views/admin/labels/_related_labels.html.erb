@@ -1,6 +1,6 @@
 <% if label.sub? %>
   <p>
-    <strong>Parent label:</strong> <%= link_to label.parent_label.name, admin_label_path(label) %>
+    <strong>Parent label:</strong> <%= link_to label.parent_label.name, admin_label_path(label.parent_label) %>
   </p>
 <% end %>
 

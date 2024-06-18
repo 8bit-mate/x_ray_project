@@ -5,9 +5,9 @@
     data: { previews_target: "input", action: "change->previews#preview" } %>
   <div class="image-container">
     <% if tag.image.attached? %>
-      <%= image_tag tag.image, data: { previews_target: "preview" }, class: "image" %>
+      <%= image_tag tag.image, data: { previews_target: "preview" }, class: "img-upload-preview" %>
     <% else %>
-      <%= image_tag "", data: { previews_target: "preview" }, class: "image" %>
+      <%= image_tag "", data: { previews_target: "preview" }, class: "img-upload-preview" %>
     <% end %>
   </div>
 </div>
