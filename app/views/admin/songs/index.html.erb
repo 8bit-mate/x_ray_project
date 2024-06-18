@@ -3,14 +3,53 @@
 <h1>Songs</h1>
 
 <%= link_to "<<", admin_index_path %> |
-<%= link_to "New song", new_admin_song_path %>
+<%= link_to "New song", new_admin_song_path, class: "btn btn-primary btn-sm" %>
 
-<div id="songs">
-  <% @songs.each do |song| %>
-    <%= render song %>
-    <p>
-      <%= link_to "Show this song", admin_song_path(song) %> |
-      <%= link_to "Edit this song", edit_admin_song_path(song) %>
-    </p>
-  <% end %>
-</div>
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= sort_link(@q, :id, "ID") %></th>
+      <th scope="col"><%= sort_link(@q, :year_of_release, "Year of release") %></th>
+      <th scope="col"><%= sort_link(@q, :title_en, "Title en") %></th>
+      <th scope="col"><%= sort_link(@q, :title_ru, "Title ru") %></th>
+      <th scope="col"><%= sort_link(@q, :created_at, "Created at") %></th>
+      <th scope="col"><%= sort_link(@q, :updated_at, "Updated at") %></th>
+      <th scope="col">Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each_with_index do |song, index| %>
+      <tr>
+        <th scope="row">
+          <%= item_index(index, @pagy) %>
+        </th>
+        <td>
+          <%= song.id %>
+        </td>
+        <td>
+          <%= song.year_of_release %>
+        </td>
+        <td>
+          <%= song.title_en %>
+        </td>
+        <td>
+          <%= song.title_ru %>
+        </td>
+        <td>
+          <%= song.created_at %>
+        </td>
+        <td>
+          <%= song.updated_at %>
+        </td>
+        <td>
+          <%= link_to "Show", admin_song_path(song) %> |
+          <%= link_to "Edit", edit_admin_song_path(song) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+<%== pagy_info(@pagy) %>

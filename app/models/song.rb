@@ -20,12 +20,20 @@ class Song < ApplicationRecord
   scope :without_title, -> { where(song_group: nil) }
   scope :with_full_title, ->(title) { where(full_title: title) }
 
-  def self.ransackable_associations(_auth_object = nil)
-    %w[song_group artists main_artist]
+  def self.ransackable_associations(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[song_group artists artist_songs main_artist]
+    end
   end
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[year_of_release title title_en title_ru records_count]
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[year_of_release title title_en title_ru records_count]
+    end
   end
 
   def create_tags(tags_params)

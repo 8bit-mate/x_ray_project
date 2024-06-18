@@ -18,11 +18,27 @@ class Label < ApplicationRecord
   has_many :records, dependent: :nullify
   after_destroy :handle_records_after_destroy
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[name name_en name_ru records_count]
+  def self.ransackable_associations(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[records]
+    end
   end
 
-  def sub_labels? = sub_labels.count.positive?
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[name records_count]
+    end
+  end
+
+  def parent? = sub_labels.count.positive?
+
+  def sub? = parent_label ? true : false
+
+  def lonely? = parent? || sub? ? false : true
 
   private
 

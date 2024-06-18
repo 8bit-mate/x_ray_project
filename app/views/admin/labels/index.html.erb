@@ -5,13 +5,55 @@
 <%= link_to "<<", admin_index_path %> |
 <%= link_to "New label", new_admin_label_path %>
 
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Preview</th>
+      <th scope="col"><%= sort_link(@q, :name_en, "Name en", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :name_ru, "Name ru", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :parent_label, "Parent label", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :records_count, "Records count", data: {turbo_stream: true}) %></th>
+      <th scope="col">Status</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @labels.each_with_index do |label, index| %>
+      <tr>
+        <th scope="row">
+          <%= item_index(index, @pagy) %>
+        </th>
+        <td>
+          <%= image_tag(label.image.variant(:preview)) if label.image.attached? %>
+        </td>
+        <td>
+          <%= label.name_en %>
+        </td>
+        <td>
+          <%= label.name_ru %>
+        </td>
+        <td>
+          <%= label.parent_label ? label.parent_label.name : "-" %>
+        </td>
+        <td>
+          <%= label.records_count %>
+        </td>
+        <td>
+          <%= render "status_tags", label: label %>
+        </td>
+        <td>
+          <%= link_to "Show", admin_label_path(label) %> |
+          <%= link_to "Edit", edit_admin_label_path(label) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+<%== pagy_info(@pagy) %>
+
+
 <div id="labels">
-  <% @labels.each do |label| %>
-    <%= render label %>
-    <p>
-      <%= link_to "Show this label", admin_label_path(label) %> |
-      <%= link_to "Edit this label", edit_admin_label_path(label) %>
-    </p>
-    <hr />
-  <% end %>
 </div>

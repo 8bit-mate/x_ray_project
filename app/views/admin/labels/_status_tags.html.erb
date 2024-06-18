@@ -1,0 +1,3 @@
+<%= content_tag(:span, "Parent", class: "badge text-bg-success") if label.parent? %>
+<%= content_tag(:span, "Sub-label", class: "badge text-bg-info") if label.sub? %>
+<%= content_tag(:span, "Forever alone", class: "badge text-bg-warning") if label.lonely? %>

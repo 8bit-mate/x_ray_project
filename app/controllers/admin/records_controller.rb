@@ -5,7 +5,9 @@ class Admin::RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    @records = Record.all
+    @q = Record.all.ransack(params[:q], auth_object: :admin)
+    @q.sorts = "id" if @q.sorts.blank?
+    @pagy, @records = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /records/1 or /records/1.json

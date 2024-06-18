@@ -6,7 +6,9 @@ class Admin::FormatTagsController < ApplicationController
 
   # GET /format_tags or /format_tags.json
   def index
-    @format_tags = FormatTag.all
+    @q = FormatTag.all.ransack(params[:q], auth_object: :admin)
+    @q.sorts = "id" if @q.sorts.blank?
+    @pagy, @format_tags = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /format_tags/1 or /format_tags/1.json

@@ -44,6 +44,11 @@
   </p>
 
   <p>
+    <strong>Slug:</strong>
+    <%= song.slug %>
+  </p>
+
+  <p>
     <strong>Records featured this song:</strong>
     <% song.tracks.each do |track| %>
       <% url_scope = :admin %>

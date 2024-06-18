@@ -1,0 +1,17 @@
+<% if label.sub? %>
+  <p>
+    <strong>Parent label:</strong> <%= link_to label.parent_label.name, admin_label_path(label) %>
+  </p>
+<% end %>
+
+<% if label.parent? %>
+  <h5>Sub-labels:</h5>
+
+  <ul>
+    <% label.sub_labels.each do |s| %>
+      <li>
+        <%= link_to s.name, admin_label_path(s) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

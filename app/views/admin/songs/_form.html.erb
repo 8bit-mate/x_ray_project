@@ -16,15 +16,6 @@
     <%= form.number_field :year_of_release %>
   </div>
 
-  <%= tag.div class: "artist-selection", data: { controller: "artist-selector" } do %>
-    <p><strong>Add artists:</strong></p>
-    <datalist id="artists-list">
-      <% Artist.order(:slug).each do |artist| %>
-        <option value="<%= artist.slug %>"></option>
-      <% end %>
-    </datalist>
-  <% end %>
-
   <div>
     <p><strong>Select song title:</strong></p>
     <% SongGroup.all.each do |tag| %>

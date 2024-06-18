@@ -6,7 +6,9 @@ class Admin::LabelsController < ApplicationController
 
   # GET /labels or /labels.json
   def index
-    @labels = Label.all
+    @q = Label.all.ransack(params[:q], auth_object: :admin)
+    @q.sorts = "id" if @q.sorts.blank?
+    @pagy, @labels = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /labels/1 or /labels/1.json

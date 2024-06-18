@@ -3,14 +3,56 @@
 <h1>Format tags</h1>
 
 <%= link_to "<<", admin_index_path %> |
-<%= link_to "New format tag", new_admin_format_tag_path %>
+<%= link_to "New format tag", new_admin_format_tag_path, class: "btn btn-primary btn-sm" %>
+
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= sort_link(@q, :id, "ID") %></th>
+      <th scope="col"><%= sort_link(@q, :name_en, "Name en") %></th>
+      <th scope="col"><%= sort_link(@q, :name_ru, "Name ru") %></th>
+      <th scope="col"><%= sort_link(@q, :records_count, "Records count") %></th>
+      <th scope="col"><%= sort_link(@q, :created_at, "Created at") %></th>
+      <th scope="col"><%= sort_link(@q, :updated_at, "Updated at") %></th>
+      <th scope="col">Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @format_tags.each_with_index do |tag, index| %>
+      <tr>
+        <th scope="row">
+          <%= item_index(index, @pagy) %>
+        </th>
+        <td>
+          <%= tag.id %>
+        </td>
+        <td>
+          <%= tag.name_en %>
+        </td>
+        <td>
+          <%= tag.name_ru %>
+        </td>
+        <td>
+          <%= tag.records_count %>
+        </td>
+        <td>
+          <%= tag.created_at %>
+        </td>
+        <td>
+          <%= tag.updated_at %>
+        </td>
+        <td>
+          <%= link_to "Show", admin_format_tag_path(tag) %> |
+          <%= link_to "Edit", edit_admin_format_tag_path(tag) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+<%== pagy_info(@pagy) %>
 
 <div id="format_tags">
-  <% @format_tags.each do |format_tag| %>
-    <%= render format_tag %>
-    <p>
-      <%= link_to "Show this format tag", admin_format_tag_path(format_tag) %> |
-      <%= link_to "Edit this format tag", edit_admin_format_tag_path(format_tag) %>
-    </p>
-  <% end %>
 </div>
