@@ -1,5 +1,6 @@
 class Record < ApplicationRecord
   include AppendToHasManyAttached["web_images"]
+
   validates :category, presence: true
   validates :web_images, presence: true
 

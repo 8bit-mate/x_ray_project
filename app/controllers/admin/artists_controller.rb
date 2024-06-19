@@ -57,16 +57,6 @@ class Admin::ArtistsController < ApplicationController
     end
   end
 
-  def fetch
-    search_first_name = params[:first_name]
-
-    data = Artist.i18n do
-      first_name.matches("%#{search_first_name}%")
-    end
-
-    render json: { data: }
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -76,10 +66,10 @@ class Admin::ArtistsController < ApplicationController
 
   def artist_params
     params.require(:artist).permit(
-      :first_name_en,
-      :first_name_ru,
-      :last_name_en,
-      :last_name_ru,
+      :stage_name_en,
+      :stage_name_ru,
+      :real_name_en,
+      :real_name_ru,
       :short_description_en,
       :short_description_ru,
       :description_en,

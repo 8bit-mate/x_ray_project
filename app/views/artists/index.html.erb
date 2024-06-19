@@ -6,8 +6,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col"><%= sort_link(@q, :last_name, "Last name") %></th>
-      <th scope="col"><%= sort_link(@q, :first_name, "First name") %></th>
+      <th scope="col"><%= sort_link(@q, :stage_name, "Stage name") %></th>
       <th scope="col"><%= sort_link(@q, :songs_count, "Songs in the database") %></th>
     </tr>
   </thead>
@@ -18,10 +17,7 @@
           <%= item_index(index, @pagy) %>
         </th>
         <td>
-          <%= link_to artist.last_name, artist %>
-        </td>
-        <td>
-          <%= link_to artist.first_name, artist %>
+          <%= link_to artist.stage_name, artist %>
         </td>
         <td>
           <%= artist.songs_count %>

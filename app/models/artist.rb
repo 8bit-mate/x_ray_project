@@ -2,12 +2,14 @@ class Artist < ApplicationRecord
   extend Mobility
   extend FriendlyId
 
-  translates :first_name
-  translates :last_name
+  validates :stage_name, presence: true
+
+  translates :stage_name
+  translates :real_name
   translates :short_description
   translates :description
 
-  friendly_id :full_name, use: :slugged
+  friendly_id :stage_name, use: :slugged
 
   # has_many :aliaces, class_name: "Artist", foreign_key: "primary_artist_id", dependent: :nullify, inverse_of: :primary_artist
   # belongs_to :primary_artist, class_name: "Artist", optional: true
@@ -28,18 +30,18 @@ class Artist < ApplicationRecord
     []
   end
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[first_name first_name_en first_name_ru last_name last_name_en last_name_ru songs_count]
-  end
-
-  def full_name(order = :last_name_first)
-    order == :last_name_first ? "#{last_name}, #{first_name}" : "#{first_name} #{last_name}"
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[stage_name real_name songs_count]
+    end
   end
 
   private
 
   def should_generate_new_friendly_id?
-    first_name_en_changed? || last_name_en_changed? || slug.blank?
+    stage_name_en_changed? || slug.blank?
   end
 
   def update_associated_songs_full_titles

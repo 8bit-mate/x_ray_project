@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
     # @artists = Artist.all
 
     @q = Artist.all.ransack(params[:q])
-    @q.sorts = "last_name" if @q.sorts.blank?
+    @q.sorts = "stage_name" if @q.sorts.blank?
     @pagy, @artists = pagy(@q.result)
   end
 

@@ -76,14 +76,13 @@ SongGroup.find_or_create_by!(
 )
 
 Artist.find_or_create_by!(
-  first_name_en: "Unknown Artist",
-  first_name_ru: "Неизвестный исполнитель"
+  stage_name_en: "Unknown Artist",
+  stage_name_ru: "Неизвестный исполнитель"
 )
 
 25.times do |_i|
   Artist.create(
-    first_name_en: Faker::Name.first_name,
-    last_name_en: Faker::Name.last_name,
+    stage_name_en: Faker::Name.name,
     description_en: Faker::Hipster.sentence,
     related_artists: [Artist.find_by(id: 1)]
   )
@@ -126,6 +125,11 @@ end
     category: Category.find_or_create_by!(
       name_en: "X-Ray Records",
       name_ru: "Пластинки на костях",
+      visible: true
+    ),
+    label: Label.find_or_create_by!(
+      name_en: "Golden Dog Records",
+      name_ru: "Золотая собака",
       visible: true
     ),
     format_tags: [FormatTag.all.sample, FormatTag.all.sample, FormatTag.all.sample],

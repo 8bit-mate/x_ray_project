@@ -7,7 +7,7 @@
             <%= track.number %>
           </th>
           <td>
-            <%== list_artists(track.artists, :first_name_first, url_scope: url_scope) %>
+            <%= render "shared/list_artists", artists: track.artists, url_scope: url_scope %>
           </td>
           <td>
             <%= track.song.title %> <%= track.song.print_variation %>

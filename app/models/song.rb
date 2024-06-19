@@ -60,7 +60,7 @@ class Song < ApplicationRecord
 
   def join_artists = list_artists.join("; ")
 
-  def list_artists = artists.map(&:full_name)
+  def list_artists = artists.map(&:stage_name)
 
   def human_full_title = "#{join_artists} - #{song_group.title}"
 
@@ -81,7 +81,7 @@ class Song < ApplicationRecord
   end
 
   def compose_full_title
-    names = artists.map(&:full_name).join(" ")
+    names = artists.map(&:stage_name_en).join(" ")
     variation = variation? ? " (#{variation_en})" : ""
     "#{names}-#{title_en}#{variation}"
   end

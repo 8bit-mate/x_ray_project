@@ -67,10 +67,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
     t.integer "primary_artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name_en"
-    t.string "first_name_ru"
-    t.string "last_name_en"
-    t.string "last_name_ru"
+    t.string "stage_name_en"
+    t.string "stage_name_ru"
+    t.string "real_name_en"
+    t.string "real_name_ru"
     t.string "short_description_en"
     t.string "short_description_ru"
     t.text "description_en"
@@ -78,14 +78,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
     t.string "slug"
     t.index ["description_en"], name: "index_artists_on_description_en"
     t.index ["description_ru"], name: "index_artists_on_description_ru"
-    t.index ["first_name_en"], name: "index_artists_on_first_name_en"
-    t.index ["first_name_ru"], name: "index_artists_on_first_name_ru"
-    t.index ["last_name_en"], name: "index_artists_on_last_name_en"
-    t.index ["last_name_ru"], name: "index_artists_on_last_name_ru"
     t.index ["primary_artist_id"], name: "index_artists_on_primary_artist_id"
+    t.index ["real_name_en"], name: "index_artists_on_real_name_en"
+    t.index ["real_name_ru"], name: "index_artists_on_real_name_ru"
     t.index ["short_description_en"], name: "index_artists_on_short_description_en"
     t.index ["short_description_ru"], name: "index_artists_on_short_description_ru"
     t.index ["slug"], name: "index_artists_on_slug", unique: true
+    t.index ["stage_name_en"], name: "index_artists_on_stage_name_en"
+    t.index ["stage_name_ru"], name: "index_artists_on_stage_name_ru"
   end
 
   create_table "categories", force: :cascade do |t|

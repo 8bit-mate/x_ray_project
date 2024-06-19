@@ -34,12 +34,16 @@ class Label < ApplicationRecord
     end
   end
 
+  # The label is a parent label for sub-labels?
   def parent? = sub_labels.count.positive?
 
+  # The label is a sub-label?
   def sub? = parent_label ? true : false
 
+  # The label is "lonely" (i.e. doesn't have any relations with other labels)?
   def lonely? = parent? || sub? ? false : true
 
+  # Find all records associated with this label and all its sub-labels.
   def all_records
     Record.where(label_id: all_label_ids)
   end

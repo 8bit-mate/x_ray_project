@@ -3,7 +3,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col"><%= sort_link(@q, :title, "Title", data: {turbo_stream: true}) %></th>
-      <th scope="col"><%= sort_link(@q, :main_artist_last_name, "Performed by", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :main_artist_stage_name, "Performed by", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :year_of_release, "Year of release", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :records_count, "Records", data: {turbo_stream: true}) %></th>
     </tr>
@@ -18,7 +18,7 @@
           <%= link_to song.title, song %> <%= song.print_variation %>
         </td>
         <td>
-          <%== list_artists(song.artists, :last_name_first) %>
+          <%= render "shared/list_artists", artists: song.artists, url_scope: nil %>
         </td>
         <td>
           <%= song.year_of_release %>

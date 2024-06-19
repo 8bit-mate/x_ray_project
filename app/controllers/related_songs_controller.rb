@@ -9,17 +9,29 @@ class RelatedSongsController < ApplicationController
 
   def filter_songs
     if params[:artist_id].present?
-      artist = Artist.friendly.find(params[:artist_id])
-      artist.songs
+      find_songs_by_artist
     elsif params[:song_group_id].present?
-      song_group = SongGroup.find(params[:song_group_id])
-      song_group.songs
+      find_songs_by_song_group
     elsif params[:song_id].present?
-      song = Song.friendly.find(params[:song_id])
-      song_group = song.song_group
-      song_group.songs.excluding(song)
+      find_songs_by_primary_song
     else
       Song.all
     end
+  end
+
+  def find_songs_by_artist
+    artist = Artist.friendly.find(params[:artist_id])
+    artist.songs.with_records
+  end
+
+  def find_songs_by_song_group
+    song_group = SongGroup.find(params[:song_group_id])
+    song_group.songs.with_records
+  end
+
+  def find_songs_by_primary_song
+    song = Song.friendly.find(params[:song_id])
+    song_group = song.song_group
+    song_group.songs.with_records.excluding(song)
   end
 end
