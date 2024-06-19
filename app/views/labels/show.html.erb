@@ -9,4 +9,5 @@
   <%= render "shared/tags_cards_list", tags: @label.sub_labels %>
 <% end %>
 
+<h3>Records of the label</h3>
 <%= turbo_frame_tag "records", src: label_records_path(@label), loading: :lazy, target: "_top" do %><% end %>

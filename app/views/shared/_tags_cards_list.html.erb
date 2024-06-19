@@ -11,7 +11,7 @@
           <li class="list-group-item">Records: <%= tag.records_count %></li>
         </ul>
         <div class="card-body">
-          <a href= <%= category_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
+          <a href= <%= polymorphic_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
         </div>
       </div>
     </div>

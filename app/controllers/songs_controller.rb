@@ -1,8 +1,8 @@
 class SongsController < ApplicationController
   # GET /songs or /songs.json
   def index
-    @q = Song.with_records.ransack(params[:q])
-    @q.sorts = "song_group_title" if @q.sorts.blank?
+    @q = Song.with_records.with_first_artist.ransack(params[:q])
+    @q.sorts = "title" if @q.sorts.blank?
     @pagy, @songs = pagy(@q.result, anchor_string: 'data-turbo-stream="true"')
   end
 

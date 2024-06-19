@@ -38,15 +38,18 @@ class Song < ApplicationRecord
     end
   end
 
+  def create_or_update_main_artist(song_params)
+    id = song_params[:artist_songs_attributes]["0"][:artist_id]
+    self.main_artist = Artist.find_by(id:)
+  end
+
   def create_tags(tags_params)
-    self.main_artist = Artist.find_by(id: 1)
     create_or_delete_song_group(tags_params[:song_group_id])
     self.full_title = compose_full_title
   end
 
   def update_tags(tags_params)
     artist_songs.destroy_all
-    self.main_artist = Artist.find_by(id: 1)
     create_or_delete_song_group(tags_params[:song_group_id])
     self.full_title = compose_full_title
   end

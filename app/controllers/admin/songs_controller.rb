@@ -26,6 +26,7 @@ class Admin::SongsController < ApplicationController
   def create
     @song = Song.new(song_params)
     @song.create_tags(tags_params)
+    @song.create_or_update_main_artist(song_params)
 
     respond_to do |format|
       if @song.save
@@ -41,6 +42,7 @@ class Admin::SongsController < ApplicationController
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
     @song.update_tags(tags_params)
+    @song.create_or_update_main_artist(song_params)
 
     respond_to do |format|
       if @song.update(song_params)
