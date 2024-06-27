@@ -1,6 +1,6 @@
 <p>
-  See also: 
-  <% artist.related_artists.each do |a| %>
-    <%= link_to a.stage_name, a %>
+  <strong><%= title %></strong>: 
+  <% collection.each do |a| %>
+    <%= link_to a.stage_name, a %><% concat (", ") if collection.last != a %>
   <% end %>
 </p>

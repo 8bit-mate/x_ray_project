@@ -36,6 +36,17 @@
   </div>
 
   <div>
+    <datalist id="format-sizes-list">
+      <% %w[07 08 09 10].each do |value| %>
+        <option value="<%= value %>"></option>
+      <% end %>
+    </datalist>
+
+    <%= form.label :format_size, style: "display: block" %>
+    <%= form.text_field :format_size, list: "format-sizes-list" %>
+  </div>
+
+  <div>
     <p><strong>Select format tags:</strong></p>
     <% FormatTag.all.each do |tag| %>
       <%= check_box_tag "tags[format_tags_ids][]", tag.id, @record.format_tags.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
@@ -49,11 +60,6 @@
       <%= check_box_tag "tags[tracks_ids][]", tag.id, @record.tracks.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.title %><br>
     <% end %>
-  </div>
-
-  <div>
-    <%= form.label :tech_info, style: "display: block" %>
-    <%= form.text_area :tech_info %>
   </div>
 
   <div>

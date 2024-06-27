@@ -33,6 +33,29 @@
   visibility: hidden;
 }
 
+.btn-text {
+  background:none;
+  border:none;
+  margin:0;
+  padding:0;
+  text-decoration: underline dotted;
+}
+
+.btn-text:hover {
+}
+
+.help-button {
+  border: none;
+  min-width: 0.8em;
+  min-height: 0.8em;
+  background: url("question-mark.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+  filter: invert(66%) sepia(42%) saturate(2526%) hue-rotate(189deg) brightness(99%) contrast(102%);
+}
+
 .play-button {
   border: none;
   min-width: 2em;
@@ -45,6 +68,10 @@
   filter: invert(42%) sepia(55%) saturate(6955%) hue-rotate(208deg) brightness(98%) contrast(104%);
 }
 
+.play-button:hover {
+  filter: invert(66%) sepia(42%) saturate(2526%) hue-rotate(189deg) brightness(99%) contrast(102%);
+}
+
 .pause-button {
   border: none;
   min-width: 2em;
@@ -55,6 +82,10 @@
   vertical-align: middle;
   display: inline-block;
   filter: invert(42%) sepia(55%) saturate(6955%) hue-rotate(208deg) brightness(98%) contrast(104%);
+}
+
+.pause-button:hover {
+  filter: invert(66%) sepia(42%) saturate(2526%) hue-rotate(189deg) brightness(99%) contrast(102%);
 }
 
 .play-button-disabled {

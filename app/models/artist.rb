@@ -11,11 +11,29 @@ class Artist < ApplicationRecord
 
   friendly_id :stage_name, use: :slugged
 
-  # has_many :aliaces, class_name: "Artist", foreign_key: "primary_artist_id", dependent: :nullify, inverse_of: :primary_artist
-  # belongs_to :primary_artist, class_name: "Artist", optional: true
+  has_many :aliases,
+           class_name: "Artist",
+           foreign_key: "primary_artist_id",
+           dependent: :nullify,
+           inverse_of: :primary_artist
+  belongs_to :primary_artist,
+             class_name: "Artist",
+             optional: true
 
-  has_many :aliases, dependent: :destroy
-  has_many :related_artists, through: :aliases
+  # Associations for when the artist is a band
+  has_many :band_memberships,
+           class_name: "ArtistBand",
+           foreign_key: "band_id",
+           dependent: :destroy,
+           inverse_of: :members
+  has_many :members,
+           through: :band_memberships,
+           source: :artist,
+           class_name: "Artist"
+
+  # Associations for when the artist is a member of bands
+  has_many :artist_bands, dependent: :destroy
+  has_many :bands, through: :artist_bands, source: :band
 
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
@@ -37,6 +55,18 @@ class Artist < ApplicationRecord
       %w[stage_name real_name songs_count]
     end
   end
+
+  # The artist is a band?
+  def band? = members.count.positive?
+
+  # The artist is a member of any band?
+  def member? = bands.count.positive?
+
+  # The artist is a root artist for aliases?
+  def primary_artist? = aliases.count.positive?
+
+  # The artist is an alias for another artist?
+  def alias? = primary_artist ? true : false
 
   private
 

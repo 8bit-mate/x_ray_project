@@ -4,6 +4,7 @@ class CreateArtists < ActiveRecord::Migration[7.1]
       t.integer :songs_count, default: 0
       t.integer :records_count, default: 0
       t.references :primary_artist, foreign_key: { to_table: :artists }
+      # t.references :group, foreign_key: { to_table: :artists }
 
       t.timestamps
     end

@@ -1,5 +1,0 @@
-<% track.song.artists.each do |artist| %>
-  <%= link_to [url_scope, artist], style:"text-decoration:none" do %>
-    <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.stage_name %></span>
-  <% end %>
-<% end %>

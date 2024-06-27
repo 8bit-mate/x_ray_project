@@ -9,11 +9,14 @@
     <%= artist.description %>
   </p>
 
-  <%= render "aliases", artist: artist if artist.aliases.count.positive? %>
+  <%= render "aliases", collection: artist.bands, title: "In groups" if artist.member? %>
+  <%= render "aliases", collection: artist.members, title: "Members" if artist.band? %>
+  <%= render "aliases", collection: artist.aliases, title: "Aliases" if artist.primary_artist? %>
+  <%= render "primary_artist", artist: artist.primary_artist if artist.alias? %>
 
   <%= render "shared/records_songs_tabs",
     records_tab_title: "Records feature this artist",
     records_tab_src: artist_records_path(artist),
-    songs_tab_title: "Songs by this artist",
+    songs_tab_title: "Songs feature this artist",
     songs_tab_src: artist_related_songs_path(artist)
   %>

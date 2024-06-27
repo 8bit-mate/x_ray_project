@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_144646) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,13 +39,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "aliases", force: :cascade do |t|
-    t.integer "artist_id", null: false
-    t.integer "related_artist_id", null: false
+  create_table "artist_bands", force: :cascade do |t|
+    t.integer "artist_id"
+    t.integer "band_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["artist_id"], name: "index_aliases_on_artist_id"
-    t.index ["related_artist_id"], name: "index_aliases_on_related_artist_id"
+    t.index ["artist_id"], name: "index_artist_bands_on_artist_id"
+    t.index ["band_id"], name: "index_artist_bands_on_band_id"
   end
 
   create_table "artist_songs", force: :cascade do |t|
@@ -172,13 +172,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
 
   create_table "records", force: :cascade do |t|
     t.integer "number", default: 0, null: false
+    t.integer "format_size", default: 0, null: false
+    t.string "cat_number", default: "", null: false
     t.text "tech_info", default: "", null: false
     t.integer "category_id"
     t.integer "label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["category_id"], name: "index_records_on_category_id"
     t.index ["label_id"], name: "index_records_on_label_id"
+    t.index ["slug"], name: "index_records_on_slug", unique: true
   end
 
   create_table "song_groups", force: :cascade do |t|
@@ -241,8 +245,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_120210) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "aliases", "artists"
-  add_foreign_key "aliases", "artists", column: "related_artist_id"
+  add_foreign_key "artist_bands", "artists"
+  add_foreign_key "artist_bands", "artists", column: "band_id"
   add_foreign_key "artist_songs", "artists"
   add_foreign_key "artist_songs", "songs"
   add_foreign_key "artists", "artists", column: "primary_artist_id"

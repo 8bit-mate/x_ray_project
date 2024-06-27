@@ -37,6 +37,18 @@
             <tbody>
               <tr>
                 <th scope="row">
+                  Catalog number
+                  <button type="button" class="help-button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top"></th>
+
+                  <button type="button" class="btn-text" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+                    Tooltip on top
+                  </button>
+                <td>
+                  <%= record.cat_number %>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
                   Category
                 </th>
                 <td>
@@ -55,15 +67,7 @@
               </tr>
               <tr>
                 <th scope="row">
-                  Cat. number
-                </th>
-                <td>
-                  ...
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Format description:
+                  Format description
                 </th>
                 <td>
                   <% tags = record.format_tags.visible %>

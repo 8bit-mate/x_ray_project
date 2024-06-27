@@ -44,13 +44,13 @@ class Song < ApplicationRecord
   end
 
   def create_tags(tags_params)
-    create_or_delete_song_group(tags_params[:song_group_id])
+    create_or_update_song_group(tags_params[:song_group_id])
     self.full_title = compose_full_title
   end
 
   def update_tags(tags_params)
     artist_songs.destroy_all
-    create_or_delete_song_group(tags_params[:song_group_id])
+    create_or_update_song_group(tags_params[:song_group_id])
     self.full_title = compose_full_title
   end
 
@@ -86,13 +86,13 @@ class Song < ApplicationRecord
     "#{names}-#{title_en}#{variation}"
   end
 
-  def create_or_delete_song_group(id)
+  def create_or_update_song_group(id)
     return if id.nil?
 
     self.song_group = SongGroup.find_by(id:)
   end
 
-  def create_or_delete_artists(slugs)
+  def create_or_update_artists(slugs)
     artist_songs.destroy_all
 
     return unless slugs

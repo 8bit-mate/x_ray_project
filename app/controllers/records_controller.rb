@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
   def show; end
 
   def random
-    redirect_to record_url(Record.all.sample)
+    redirect_to record_url(Record.find(Record.pluck(:id).sample))
   end
 
   private
@@ -41,6 +41,6 @@ class RecordsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_record
-    @record = Record.find(params[:id])
+    @record = Record.friendly.find(params[:id])
   end
 end

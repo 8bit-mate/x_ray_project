@@ -21,17 +21,17 @@ class RelatedSongsController < ApplicationController
 
   def find_songs_by_artist
     artist = Artist.friendly.find(params[:artist_id])
-    artist.songs.with_records
+    artist.songs
   end
 
   def find_songs_by_song_group
     song_group = SongGroup.find(params[:song_group_id])
-    song_group.songs.with_records
+    song_group.songs
   end
 
   def find_songs_by_primary_song
     song = Song.friendly.find(params[:song_id])
     song_group = song.song_group
-    song_group.songs.with_records.excluding(song)
+    song_group.songs.excluding(song)
   end
 end

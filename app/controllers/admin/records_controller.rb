@@ -67,13 +67,14 @@ class Admin::RecordsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_record
-    @record = Record.find(params[:id])
+    @record = Record.friendly.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def record_params
     params.require(:record).permit(
       :tech_info,
+      :format_size,
       web_images: []
     )
   end

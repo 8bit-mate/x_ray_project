@@ -48,6 +48,13 @@ def self.new_track
   track
 end
 
+def self.new_band
+  Artist.create(
+    stage_name_en: Faker::Music.band,
+    description_en: Faker::Hipster.sentence
+  )
+end
+
 user = User.new
 user.email = "admin@admin.su"
 user.password = "admin@admin.su"
@@ -84,7 +91,8 @@ Artist.find_or_create_by!(
   Artist.create(
     stage_name_en: Faker::Name.name,
     description_en: Faker::Hipster.sentence,
-    related_artists: [Artist.find_by(id: 1)]
+    bands: [new_band, new_band],
+    aliases: [Artist.all.sample]
   )
 end
 
@@ -119,7 +127,7 @@ end
   )
 end
 
-3.times do |i|
+30.times do |i|
   record = Record.new(
     number: i,
     category: Category.find_or_create_by!(
@@ -133,6 +141,7 @@ end
       visible: true
     ),
     format_tags: [FormatTag.all.sample, FormatTag.all.sample, FormatTag.all.sample],
+    format_size: [7, 8, 9, 10].sample,
     tracks: [new_track, new_track]
   )
 
@@ -140,6 +149,7 @@ end
   filename = "#{random_num}.jpg"
   record.web_images.attach(io: File.open(Pathname(__dir__).join("../storage/fake_data/#{filename}")),
                            filename:)
+  sleep(1)
 
   record.save
 end

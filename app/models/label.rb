@@ -41,7 +41,7 @@ class Label < ApplicationRecord
   def sub? = parent_label ? true : false
 
   # The label is "lonely" (i.e. doesn't have any relations with other labels)?
-  def lonely? = parent? || sub? ? false : true
+  def lonely? = !(parent? || sub?)
 
   # Find all records associated with this label and all its sub-labels.
   def all_records

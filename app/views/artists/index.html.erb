@@ -2,6 +2,12 @@
 
 <h1>Artists</h1>
 
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :stage_name_cont, placeholder: "Search by name..." %>
+  <%= f.submit "Search", class: "btn btn-primary btn-sm", data: { turbo_stream: true } %>
+  <%= link_to "Clear Search", request.path, class:"btn btn-secondary btn-sm" %>
+<% end %>
+
 <table class="table table-responsive table-striped table-hover">
   <thead>
     <tr>
