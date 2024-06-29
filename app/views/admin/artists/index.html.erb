@@ -6,10 +6,10 @@
 <%= link_to "New artist", new_admin_artist_path %>
 
 <%= search_form_for(@q, url: admin_artists_path) do |f| %>
-  <%= f.select :aliases, [["Is alias", "true"]], include_blank: "All" %>
-  <%= f.select :band_members, [["Is band member", "true"]], include_blank: "All" %>
-  <%= f.select :primary_artists, [["Is primary", "true"]], include_blank: "All" %>
-  <%= f.select :bands, [["Is band", "true"]], include_blank: "All" %>
+  <%= f.select :aliases, [["Is alias", "true"]], include_blank: "Any" %>
+  <%= f.select :band_members, [["Is band member", "true"]], include_blank: "Any" %>
+  <%= f.select :primary_artists, [["Is primary", "true"]], include_blank: "Any" %>
+  <%= f.select :bands, [["Is band", "true"]], include_blank: "Any" %>
   <%= f.submit "Filter", class: "btn btn-primary btn-sm", data: { turbo_stream: true } %>
   <%= link_to "Clear filters", request.path, class:"btn btn-secondary btn-sm" %>
 <% end %>
@@ -45,10 +45,7 @@
           <%= artist.songs_count %>
         </td>
         <td>
-          <%= content_tag(:span, "Primary", class: "badge text-bg-primary") if artist.primary? %>
-          <%= content_tag(:span, "Band", class: "badge text-bg-success") if artist.band? %>
-          <%= content_tag(:span, "Member", class: "badge text-bg-secondary") if artist.member? %>
-          <%= content_tag(:span, "Alias", class: "badge text-bg-info") if artist.alias? %>
+          <%= render "status", artist: artist %>
         </td>
         <td>
           <%= link_to "Show", admin_artist_path(artist) %> |
