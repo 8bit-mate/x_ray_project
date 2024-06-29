@@ -65,7 +65,7 @@ class Song < ApplicationRecord
   def human_full_title = "#{join_artists} - #{song_group.title}"
 
   def should_generate_new_friendly_id?
-    full_title_changed? || slug.blank?
+    full_title_changed? || slug.blank? || variation_en_changed?
   end
 
   def update_full_title

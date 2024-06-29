@@ -1,0 +1,12 @@
+<% if track.web_audio.attached? %>
+  <%= content_tag "button",
+    "",
+    id: track.web_audio_key,
+    class: "play-button",
+    data: {
+      "action": "click->track-selector#controlPlayback",
+      "track-selector-target": "button",
+      "track-key": track.web_audio_key,
+      "title": track.song.title
+    } %>
+<% end %>

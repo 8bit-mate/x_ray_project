@@ -73,6 +73,8 @@ class Admin::RecordsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def record_params
     params.require(:record).permit(
+      :category_id,
+      :label_id,
       :tech_info,
       :format_size,
       web_images: []
@@ -81,8 +83,6 @@ class Admin::RecordsController < ApplicationController
 
   def tags_params
     params.require(:tags).permit(
-      :category_id,
-      :label_id,
       format_tags_ids: [],
       tracks_ids: []
     )

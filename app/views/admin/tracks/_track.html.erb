@@ -9,25 +9,10 @@
     <%= track.song.human_full_title %>
   </p>
 
-  <% if track.web_audio.attached? %>
-    <audio controls>
-      <source src="<%= rails_blob_url(track.web_audio) %>" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  <% else %>
-    <span class="badge text-bg-danger">Track has no audio!</span>
-  <% end %>
+  <%= render "audio", track: track %>
 
   <p>
     <strong>Record assigned:</strong>
-    <% record = track.record %>
-    <% url_scope = :admin %>
-    <% if record %>
-      <%= link_to [url_scope, record], style:"text-decoration:none" do %>
-        <span class=""><%= record.id %></span>
-      <% end %>
-    <% else %>
-      <span class="badge text-bg-danger">Track doesn't belong to any record!</span>
-    <% end %>
+    <%= render "associated_record", record: track.record %>
   </p>
 </div>

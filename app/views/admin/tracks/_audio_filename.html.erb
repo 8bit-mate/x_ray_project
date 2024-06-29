@@ -1,0 +1,5 @@
+<% if track.web_audio.attached? %>
+  <%= track.web_audio.filename %>
+<% else %>
+  <span class="badge text-bg-danger">Track has no audio!</span>
+<% end %>

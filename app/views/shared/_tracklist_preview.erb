@@ -7,18 +7,7 @@
           <%= render "shared/list_artists", artists: track.artists, url_scope: nil %> - <%= track.song.title %> <%= track.song.print_variation %>
         </td>
         <td>
-          <% if track.web_audio.attached? %>
-            <%= content_tag "button",
-              "",
-              id: track.web_audio_key,
-              class: "play-button",
-              data: {
-                "action": "click->track-selector#controlPlayback",
-                "track-selector-target": "button",
-                "track-key": track.web_audio_key,
-                "title": track.song.title
-              } %>
-          <% end %>
+          <%= render "shared/track_play_button", track: track %>
         </td>
       </tr>
     <% end %>

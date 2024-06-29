@@ -7,6 +7,7 @@ class Record < ApplicationRecord
   friendly_id :compose_cat_number, use: :slugged
 
   validates :category, presence: true
+  validates :label, presence: true
   validates :web_images, presence: true
 
   has_many_attached :web_images, dependent: :purge_later do |image|
@@ -41,8 +42,6 @@ class Record < ApplicationRecord
   end
 
   def create_or_update_tags(tags_params)
-    create_or_update_category(tags_params[:category_id])
-    create_or_update_label(tags_params[:label_id])
     create_or_update_format_tags(tags_params[:format_tags_ids])
     create_or_update_tracks(tags_params[:tracks_ids])
   end
@@ -66,6 +65,8 @@ class Record < ApplicationRecord
   private
 
   def category_short_name
+    return unless category
+
     parts = category.name_en.split(" ", 2)
 
     select_letters(parts).join.upcase
@@ -77,7 +78,7 @@ class Record < ApplicationRecord
     elsif parts.length == 1
       [parts[0][0], parts[0][1]]
     else
-      [""]
+      ["??"]
     end
   end
 
@@ -99,17 +100,5 @@ class Record < ApplicationRecord
     format_tags_ids.uniq.each do |id|
       format_tags << FormatTag.find_by(id:)
     end
-  end
-
-  def create_or_update_category(id)
-    return if id.nil?
-
-    self.category = Category.find_by(id:)
-  end
-
-  def create_or_update_label(id)
-    return if id.nil?
-
-    self.label = Label.find_by(id:)
   end
 end

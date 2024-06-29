@@ -5,7 +5,9 @@ class Admin::ArtistsController < ApplicationController
 
   # GET /artists or /artists.json
   def index
-    @artists = Artist.all
+    @q = Artist.all.ransack(params[:q], auth_object: :admin)
+    @q.sorts = "id" if @q.sorts.blank?
+    @pagy, @artists = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /artists/1 or /artists/1.json

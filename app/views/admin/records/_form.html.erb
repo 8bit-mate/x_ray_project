@@ -21,7 +21,7 @@
     <p><strong>Select category:</strong></p>
     <% Category.all.each do |tag| %>
       <% checked = @record.category ? @record.category.id == tag.id : false %>
-      <%= radio_button_tag "tags[category_id]", tag.id, checked, id: dom_id(tag) %>
+      <%= radio_button_tag "record[category_id]", tag.id, checked, id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.name %><br>
     <% end %>
   </div>
@@ -30,7 +30,7 @@
     <p><strong>Select label:</strong></p>
     <% Label.all.each do |tag| %>
       <% checked = @record.label ? @record.label.id == tag.id : false %>
-      <%= radio_button_tag "tags[label_id]", tag.id, checked, id: dom_id(tag) %>
+      <%= radio_button_tag "record[label_id]", tag.id, checked, id: dom_id(tag) %>
       <%= label_tag dom_id(tag), tag.name %><br>
     <% end %>
   </div>

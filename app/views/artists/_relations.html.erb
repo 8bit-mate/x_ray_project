@@ -1,0 +1,4 @@
+  <%= render "aliases", collection: artist.bands, title: "In groups" if artist.member? %>
+  <%= render "aliases", collection: artist.members, title: "Members" if artist.band? %>
+  <%= render "aliases", collection: artist.aliases, title: "Aliases" if artist.primary? %>
+  <%= render "primary_artist", artist: artist.primary_artist if artist.alias? %>

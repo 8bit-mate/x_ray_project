@@ -5,12 +5,47 @@
 <%= link_to "<<", admin_index_path %> |
 <%= link_to "New track", new_admin_track_path %>
 
-<div id="tracks">
-  <% @tracks.each do |track| %>
-    <%= render track %>
-    <p>
-      <%= link_to "Show this track", admin_track_path(track) %> |
-      <%= link_to "Edit this track", edit_admin_track_path(track) %>
-    </p>
-  <% end %>
-</div>
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= sort_link(@q, :number, "Num.", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :song_full_title, "Song", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :record_cat_number, "Record", data: {turbo_stream: true}) %></th>
+      <th scope="col">Web-audio fn</th>
+      <th scope="col">Play</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tracks.each_with_index do |track, index| %>
+      <tr>
+        <th scope="row">
+          <%= item_index(index, @pagy) %>
+        </th>
+        <td>
+          <%= track.number %>
+        </td>
+        <td>
+          <%= link_to track.song.full_title, [:admin, track.song] %>
+        </td>
+        <td>
+          <%= render "associated_record", record: track.record %>
+        </td>
+        <td>
+          <%= render "audio_filename", track: track %>
+        </td>
+        <td>
+          <%= render "shared/track_play_button", track: track %>
+        </td>
+        <td>
+          <%= link_to "Show", admin_track_path(track) %> |
+          <%= link_to "Edit", edit_admin_track_path(track) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+<%== pagy_info(@pagy) %>

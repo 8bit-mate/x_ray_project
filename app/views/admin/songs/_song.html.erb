@@ -50,14 +50,16 @@
 
   <p>
     <strong>Records featured this song:</strong>
-    <% song.tracks.each do |track| %>
-      <% url_scope = :admin %>
-      <% record = track.record %>
-      <% if record %>
-        <%= link_to [url_scope, record], style:"text-decoration:none" do %>
-          <span class=""><%= record.id %></span>
+    <% if song.records_count.positive? %>
+      <ol>
+        <% song.records.each do |r| %>
+          <li>
+            <%= link_to r.cat_number, [:admin, r] %>
+          </li>
         <% end %>
-      <% end %>
+      </ol>
+    <% else %>
+      <span class="badge text-bg-danger">Orphan song!</span>
     <% end %>
   </p>
 </div>

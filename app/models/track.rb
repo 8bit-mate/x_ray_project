@@ -11,6 +11,22 @@ class Track < ApplicationRecord
 
   delegate :artists, to: :song
 
+  def self.ransackable_associations(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[record]
+    end
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[number]
+    end
+  end
+
   def title = "#{number}: #{song.human_full_title}"
 
   def duration

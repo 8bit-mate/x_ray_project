@@ -1,0 +1,5 @@
+<% if record %>
+  <%= link_to record.cat_number, [:admin, record] %>
+<% else %>
+  <span class="badge text-bg-danger">Track doesn't belong to any record!</span>
+<% end %>
