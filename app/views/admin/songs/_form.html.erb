@@ -26,7 +26,6 @@
   </div>
 
   <h3>Artists and Roles</h3>
-
   <%= tag.div id: :artist_songs do %>
     <%= form.fields_for :artist_songs do |ff| %>
       <%= render "artist_songs_fields", f: ff %>
@@ -39,13 +38,25 @@
     data: { turbo_method: :post } %>
 
   <div>
+    <datalist id="titles-en-list">
+      <% Song.order(:title_en).each do |s| %>
+        <option value="<%= s.title_en %>"></option>
+      <% end %>
+    </datalist>
+
     <%= form.label :title_en, style: "display: block" %>
-    <%= form.text_field :title_en %>
+    <%= form.text_field :title_en, list: "titles-en-list" %>
   </div>
 
   <div>
+    <datalist id="titles-ru-list">
+      <% Song.order(:title_ru).each do |s| %>
+        <option value="<%= s.title_ru %>"></option>
+      <% end %>
+    </datalist>
+
     <%= form.label :title_ru, style: "display: block" %>
-    <%= form.text_field :title_ru %>
+    <%= form.text_field :title_ru, list: "titles-ru-list" %>
   </div>
 
   <div>
