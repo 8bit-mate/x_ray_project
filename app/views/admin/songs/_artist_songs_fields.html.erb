@@ -1,14 +1,13 @@
-  <% n_artists.times do |i| %> 
-    <%= form.fields_for :artist_songs, song.artist_songs.build do |artist_song_fields| %>
-      <h3>Artist <%= i + 1 %></h3> 
+<%= tag.div do %>
+  <%= f.label :artist_id, "Artist" %>
+  <%= f.collection_select :artist_id, Artist.all, :id, :stage_name %>
 
-      <%= artist_song_fields.label :artist_id, "Artist" %>
-      <%= artist_song_fields.collection_select :artist_id, Artist.all, :id, :stage_name, selected: selected_artist_id(song, i) %>
+  <%= f.label :role_en %>
+  <%= f.text_field :role_en %>
 
-      <%= artist_song_fields.label :role_en %>
-      <%= artist_song_fields.text_field :role_en, value: song.artist_songs[i].role_en %>
+  <%= f.label :role_ru %>
+  <%= f.text_field :role_ru %>
 
-      <%= artist_song_fields.label :role_ru %>
-      <%= artist_song_fields.text_field :role_ru, value: song.artist_songs[i].role_ru %>
-    <% end %>
-  <% end %>
+  <%= f.label "Delete?" %>
+  <%= f.check_box :_destroy, title: "Check to delete" %>
+<% end %>

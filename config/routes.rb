@@ -43,10 +43,13 @@ Rails.application.routes.draw do
     resources :records
     resources :categories
     resources :format_tags
-    resources :songs
+
+    resources :songs do
+      post :add_artist, on: :collection
+    end
+
     resources :song_groups
     resources :tracks
-    resources :roles
     resources :labels
 
     resources :attachments do
@@ -61,6 +64,7 @@ Rails.application.routes.draw do
 
   get "player/fetch_audio" => "player#fetch_audio", as: :player_fetch_audio
   post "users/preferences/update" => "preferences#update", as: :users_preferences_update
+  # post "admin/songs/new/append_artist" => "admin/songs#append_artist", as: :append_artist_admin_songs
   get "users/preferences" => "preferences#index", as: :users_preferences
 
   # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
@@ -69,8 +73,6 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

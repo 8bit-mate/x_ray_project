@@ -10,13 +10,27 @@ class Admin::SongsController < ApplicationController
     @pagy, @songs = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
+  # https://stackoverflow.com/questions/71713303/rails-7-dynamic-nested-forms-with-hotwire-turbo-frames
+  def add_artist
+    helpers.fields model: Song.new do |f|
+      f.fields_for :artist_songs, ArtistSong.new,
+                   child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff|
+        render turbo_stream: turbo_stream.append(
+          "artist_songs",
+          partial: "artist_songs_fields",
+          locals: { f: ff }
+        )
+      end
+    end
+  end
+
   # GET /songs/1 or /songs/1.json
   def show; end
 
   # GET /songs/new
   def new
     @song = Song.new
-    # @song.artist_songs.build
+    @song.artist_songs.build
   end
 
   # GET /songs/1/edit
@@ -25,11 +39,11 @@ class Admin::SongsController < ApplicationController
   # POST /songs or /songs.json
   def create
     @song = Song.new(song_params)
-    @song.create_tags(tags_params)
     @song.create_or_update_main_artist(song_params)
 
     respond_to do |format|
       if @song.save
+        @song.update_full_title
         format.html { redirect_to admin_song_url(@song), notice: "Song was successfully created." }
         format.json { render :show, status: :created, location: @song }
       else
@@ -41,11 +55,11 @@ class Admin::SongsController < ApplicationController
 
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
-    @song.update_tags(tags_params)
     @song.create_or_update_main_artist(song_params)
 
     respond_to do |format|
       if @song.update(song_params)
+        @song.update_full_title
         format.html { redirect_to admin_song_url(@song), notice: "Song was successfully updated." }
         format.json { render :show, status: :ok, location: @song }
       else
@@ -75,18 +89,15 @@ class Admin::SongsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def song_params
     params.require(:song).permit(
+      :song_group_id,
+      :title_en,
+      :title_ru,
       :year_of_release,
       :variation_en,
       :variation_ru,
       :notes_en,
       :notes_ru,
       artist_songs_attributes: %i[id artist_id role_en role_ru _destroy]
-    )
-  end
-
-  def tags_params
-    params.require(:tags).permit(
-      :song_group_id
     )
   end
 end

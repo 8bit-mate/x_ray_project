@@ -65,7 +65,7 @@ class Artist < ApplicationRecord
 
   scope :primary_artists, -> { joins(:aliases).distinct }
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     %i[aliases bands band_members primary_artists]
   end
 

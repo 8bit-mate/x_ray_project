@@ -10,4 +10,12 @@ module Admin::SongsHelper
   def artists_count(song)
     song.artist_songs.count.positive? ? song.artist_songs.count : 1
   end
+
+  def role_en_value(song, index)
+    song.artist_songs[index] ? song.artist_songs[index].role_en : ""
+  end
+
+  def role_ru_value(song, index)
+    song.artist_songs[index] ? song.artist_songs[index].role_ru : ""
+  end
 end

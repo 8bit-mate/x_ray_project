@@ -39,19 +39,9 @@ class Song < ApplicationRecord
   end
 
   def create_or_update_main_artist(song_params)
-    id = song_params[:artist_songs_attributes]["0"][:artist_id]
+    # id = song_params[:artist_songs_attributes]["0"][:artist_id]
+    id = song_params[:artist_songs_attributes].to_h.values[0][:artist_id]
     self.main_artist = Artist.find_by(id:)
-  end
-
-  def create_tags(tags_params)
-    create_or_update_song_group(tags_params[:song_group_id])
-    self.full_title = compose_full_title
-  end
-
-  def update_tags(tags_params)
-    artist_songs.destroy_all
-    create_or_update_song_group(tags_params[:song_group_id])
-    self.full_title = compose_full_title
   end
 
   def variation? = !variation_en.empty?
@@ -84,28 +74,5 @@ class Song < ApplicationRecord
     names = artists.map(&:stage_name_en).join(" ")
     variation = variation? ? " (#{variation_en})" : ""
     "#{names}-#{title_en}#{variation}"
-  end
-
-  def create_or_update_song_group(id)
-    return if id.nil?
-
-    self.song_group = SongGroup.find_by(id:)
-  end
-
-  def create_or_update_artists(slugs)
-    artist_songs.destroy_all
-
-    return unless slugs
-
-    slugs.reject(&:empty?).each_with_index do |slug, _idx|
-      artist = Artist.find_by(slug:)
-      artists << artist
-
-      # role = Role.find_by(name_en: roles[idx])
-      # artist_song = artist_songs.build(artist:, role:)
-      # #artist_song.save
-    end
-
-    # self.main_artist = artists.first
   end
 end
