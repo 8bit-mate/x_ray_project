@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_184814) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_052625) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,16 +44,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_184814) do
     t.integer "band_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role_en_en"
-    t.string "role_en_ru"
-    t.string "role_ru_en"
-    t.string "role_ru_ru"
+    t.string "role_en"
+    t.string "role_ru"
     t.index ["artist_id"], name: "index_artist_bands_on_artist_id"
     t.index ["band_id"], name: "index_artist_bands_on_band_id"
-    t.index ["role_en_en"], name: "index_artist_bands_on_role_en_en"
-    t.index ["role_en_ru"], name: "index_artist_bands_on_role_en_ru"
-    t.index ["role_ru_en"], name: "index_artist_bands_on_role_ru_en"
-    t.index ["role_ru_ru"], name: "index_artist_bands_on_role_ru_ru"
+    t.index ["role_en"], name: "index_artist_bands_on_role_en"
+    t.index ["role_ru"], name: "index_artist_bands_on_role_ru"
   end
 
   create_table "artist_songs", force: :cascade do |t|

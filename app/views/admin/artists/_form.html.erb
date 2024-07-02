@@ -1,15 +1,17 @@
-<%= form_with(model: [:admin, tag]) do |form| %>
-  <% if tag.errors.any? %>
+<%= form_with(model: [:admin, artist]) do |form| %>
+  <% if artist.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
 
       <ul>
-        <% tag.errors.each do |error| %>
+        <% artist.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
+  <%= artist.band_memberships %>
 
   <div>
     <%= form.label :stage_name_en, style: "display: block" %>
@@ -50,6 +52,18 @@
     <%= form.label :description_ru, style: "display: block" %>
     <%= form.text_field :description_ru %>
   </div>
+
+  <h3>Band members and their roles:</h3>
+  <%= tag.div id: :band_memberships do %>
+    <%= form.fields_for :band_memberships do |ff| %>
+      <%= render "artist_bands_fields", f: ff if artist.band? %>
+    <% end %>
+  <% end %>
+
+  <%= link_to "Add member",
+    add_band_member_admin_artists_path,
+    class: "btn btn-primary btn-sm",
+    data: { turbo_method: :post } %>
 
   <div>
     <%= form.submit %>

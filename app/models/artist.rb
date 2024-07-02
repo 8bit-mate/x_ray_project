@@ -26,7 +26,7 @@ class Artist < ApplicationRecord
            class_name: "ArtistBand",
            foreign_key: "band_id",
            dependent: :destroy,
-           inverse_of: :artist
+           inverse_of: :band
   has_many :members,
            through: :band_memberships,
            source: :artist,
@@ -35,6 +35,9 @@ class Artist < ApplicationRecord
   # Associations for when the artist is a member of bands
   has_many :artist_bands, dependent: :destroy
   has_many :bands, through: :artist_bands, source: :band
+
+  # accepts_nested_attributes_for :artist_bands, allow_destroy: true
+  accepts_nested_attributes_for :band_memberships, allow_destroy: true
 
   has_many :artist_songs, dependent: :destroy
   has_many :songs, through: :artist_songs
@@ -96,6 +99,8 @@ class Artist < ApplicationRecord
 
   # The artist is an alias for another artist?
   def alias? = primary_artist ? true : false
+
+  def solo? = !band? && !member?
 
   private
 

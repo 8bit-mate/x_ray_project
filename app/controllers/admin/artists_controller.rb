@@ -10,12 +10,26 @@ class Admin::ArtistsController < ApplicationController
     @pagy, @artists = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
+  def add_band_member
+    helpers.fields model: Artist.new do |f|
+      f.fields_for :band_memberships, ArtistBand.new,
+                   child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff|
+        render turbo_stream: turbo_stream.append(
+          "band_memberships",
+          partial: "artist_bands_fields",
+          locals: { f: ff }
+        )
+      end
+    end
+  end
+
   # GET /artists/1 or /artists/1.json
   def show; end
 
   # GET /artists/new
   def new
     @artist = Artist.new
+    @artist.band_memberships.build
   end
 
   # GET /artists/1/edit
@@ -75,7 +89,8 @@ class Admin::ArtistsController < ApplicationController
       :short_description_en,
       :short_description_ru,
       :description_en,
-      :description_ru
+      :description_ru,
+      band_memberships_attributes: %i[id artist_id member_id band_id role_en role_ru _destroy]
     )
   end
 end

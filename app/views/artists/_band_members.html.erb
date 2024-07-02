@@ -1,0 +1,7 @@
+<p>
+  <strong>Group members</strong>:
+  <% band.band_memberships.each do |i| %>
+    <%= link_to i.artist.stage_name, i.artist %>
+    <%= "(#{i.role})" if i.role %><% concat (", ") if band.band_memberships.last != i %>
+  <% end %>
+</p>

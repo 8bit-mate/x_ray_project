@@ -1,0 +1,13 @@
+<%= tag.div do %>
+  <%= f.label :artist_id, "Artist" %>
+  <%= f.collection_select :artist_id, Artist.all, :id, :stage_name %>
+
+  <%= f.label :role_en %>
+  <%= f.text_field :role_en %>
+
+  <%= f.label :role_ru %>
+  <%= f.text_field :role_ru %>
+
+  <%= f.label "Delete?" %>
+  <%= f.check_box :_destroy, title: "Check to delete" %>
+<% end %>

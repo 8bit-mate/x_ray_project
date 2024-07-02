@@ -2,3 +2,4 @@
 <%= content_tag(:span, "Band", class: "badge text-bg-success") if artist.band? %>
 <%= content_tag(:span, "Member", class: "badge text-bg-secondary") if artist.member? %>
 <%= content_tag(:span, "Alias", class: "badge text-bg-info") if artist.alias? %>
+<%= content_tag(:span, "Solo", class: "badge text-bg-warning") if artist.solo? %>

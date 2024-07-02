@@ -1,5 +1,10 @@
 <div id="<%= dom_id artist %>">
   <p>
+    <strong>ID:</strong>
+    <%= artist.id %>
+  </p>
+
+  <p>
     <strong>Stage name en:</strong>
     <%= artist.stage_name_en %>
   </p>
@@ -42,6 +47,10 @@
   <p>
     <strong>Slug:</strong>
     <%= artist.slug %>
+  </p>
+
+  <p>
+    <%= render "band_members", band: artist if artist.band? %>
   </p>
 
   <p>

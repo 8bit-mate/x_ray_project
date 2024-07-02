@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope :music do
     resources :records, only: %i[index show] do
       collection do
-        get "random"
+        get :random
       end
     end
 
@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :artists do
       collection do
-        get "fetch"
+        get :fetch
+        post :add_band_member
       end
     end
 
@@ -54,7 +55,7 @@ Rails.application.routes.draw do
 
     resources :attachments do
       member do
-        delete "purge"
+        delete :purge
       end
     end
   end
@@ -64,7 +65,6 @@ Rails.application.routes.draw do
 
   get "player/fetch_audio" => "player#fetch_audio", as: :player_fetch_audio
   post "users/preferences/update" => "preferences#update", as: :users_preferences_update
-  # post "admin/songs/new/append_artist" => "admin/songs#append_artist", as: :append_artist_admin_songs
   get "users/preferences" => "preferences#index", as: :users_preferences
 
   # delete "admin/attachments/:id/purge", to: "admin/attachments#purge", as: "admin_purge_attachment"
