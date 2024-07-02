@@ -49,8 +49,10 @@ def self.new_track
 end
 
 def self.new_band
+  name = Faker::Music.band
   Artist.create(
-    stage_name_en: Faker::Music.band,
+    stage_name_en: name,
+    stage_name_ru: name,
     description_en: Faker::Hipster.sentence
   )
 end
@@ -88,8 +90,10 @@ Artist.find_or_create_by!(
 )
 
 25.times do |_i|
+  name = Faker::Name.name
   Artist.create(
-    stage_name_en: Faker::Name.name,
+    stage_name_en: name,
+    stage_name_ru: name,
     description_en: Faker::Hipster.sentence,
     bands: [new_band, new_band],
     aliases: [Artist.all.sample]
