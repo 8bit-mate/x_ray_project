@@ -19,20 +19,12 @@
 
   <div>
     <p><strong>Select category:</strong></p>
-    <% Category.all.each do |tag| %>
-      <% checked = @record.category ? @record.category.id == tag.id : false %>
-      <%= radio_button_tag "record[category_id]", tag.id, checked, id: dom_id(tag) %>
-      <%= label_tag dom_id(tag), tag.name %><br>
-    <% end %>
+    <%= form.collection_select :category_id, Category.all, :id, :name_en %>
   </div>
 
   <div>
     <p><strong>Select label:</strong></p>
-    <% Label.all.each do |tag| %>
-      <% checked = @record.label ? @record.label.id == tag.id : false %>
-      <%= radio_button_tag "record[label_id]", tag.id, checked, id: dom_id(tag) %>
-      <%= label_tag dom_id(tag), tag.name %><br>
-    <% end %>
+    <%= form.collection_select :label_id, Label.all, :id, :name_en %>
   </div>
 
   <div>
@@ -48,17 +40,25 @@
 
   <div>
     <p><strong>Select format tags:</strong></p>
-    <% FormatTag.all.each do |tag| %>
-      <%= check_box_tag "tags[format_tags_ids][]", tag.id, @record.format_tags.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
-      <%= label_tag dom_id(tag), tag.name %><br>
+    <% FormatTag.all.each do |t| %>
+      <%= check_box_tag "tags[format_tags_ids][]",
+        t.id,
+        @record.format_tags.map{ |e| e.id}.include?(t.id),
+        id: dom_id(t) %>
+
+      <%= label_tag dom_id(t), t.name %><br>
     <% end %>
   </div>
 
   <div>
     <p><strong>Select tracks:</strong></p>
-    <% (Track.without_record_assigned | @record.tracks).each do |tag| %>
-      <%= check_box_tag "tags[tracks_ids][]", tag.id, @record.tracks.map{ |e| e.id}.include?(tag.id), id: dom_id(tag) %>
-      <%= label_tag dom_id(tag), tag.title %><br>
+    <% (Track.without_record_assigned | @record.tracks).each do |t| %>
+      <%= check_box_tag "tags[tracks_ids][]",
+        t.id,
+        @record.tracks.map{ |e| e.id}.include?(t.id),
+        id: dom_id(t) %>
+
+      <%= label_tag dom_id(t), t.title %><br>
     <% end %>
   </div>
 

@@ -90,6 +90,7 @@ class Admin::ArtistsController < ApplicationController
       :short_description_ru,
       :description_en,
       :description_ru,
+      :primary_artist_id,
       band_memberships_attributes: %i[id artist_id member_id band_id role_en role_ru _destroy]
     )
   end

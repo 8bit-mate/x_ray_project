@@ -6,10 +6,10 @@
 <%= link_to "New artist", new_admin_artist_path %>
 
 <%= search_form_for(@q, url: admin_artists_path) do |f| %>
-  <%= f.select :aliases, [["Is alias", "true"]], include_blank: "Any" %>
-  <%= f.select :band_members, [["Is band member", "true"]], include_blank: "Any" %>
-  <%= f.select :primary_artists, [["Is primary", "true"]], include_blank: "Any" %>
-  <%= f.select :bands, [["Is band", "true"]], include_blank: "Any" %>
+  <%= f.select :aliases, [["Is alias", "true"]], include_blank: "Alias?" %>
+  <%= f.select :band_members, [["Is band member", "true"]], include_blank: "Band member?" %>
+  <%= f.select :primary_artists, [["Is primary", "true"]], include_blank: "Primary?" %>
+  <%= f.select :bands, [["Is band", "true"]], include_blank: "Band?" %>
   <%= f.submit "Filter", class: "btn btn-primary btn-sm", data: { turbo_stream: true } %>
   <%= link_to "Clear filters", request.path, class:"btn btn-secondary btn-sm" %>
 <% end %>

@@ -1,32 +1,24 @@
 <div>
-  <h3>Group members</h3>
+  <h3>Aliases</h3>
   <table class="table table-responsive table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Stage name en</th>
         <th scope="col">Stage name ru</th>
-        <th scope="col">Role en</th>
-        <th scope="col">Role ru</th>
       </tr>
     </thead>
     <tbody>
-      <% band.band_memberships.each_with_index do |item, index| %>
+      <% artist.aliases.each_with_index do |artist, index| %>
         <tr>
           <th scope="row">
             <%= index + 1 %>
           </th>
           <td>
-            <%= link_to item.artist.stage_name_en, [:admin, item.artist] %>
+            <%= link_to artist.stage_name_en, [:admin, artist] %>
           </td>
           <td>
-            <%= link_to item.artist.stage_name_ru, [:admin, item.artist] %>
-          </td>
-          <td>
-            <%= item.role_en %>
-          </td>
-          <td>
-            <%= item.role_ru %>
+            <%= link_to artist.stage_name_ru, [:admin, artist] %>
           </td>
         </tr>
       <% end %>

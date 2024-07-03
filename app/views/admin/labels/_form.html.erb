@@ -1,10 +1,10 @@
-<%= form_with(model: [:admin, tag]) do |form| %>
-  <% if tag.errors.any? %>
+<%= form_with(model: [:admin, label]) do |form| %>
+  <% if label.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <h2><%= pluralize(label.errors.count, "error") %> prohibited this label from being saved:</h2>
 
       <ul>
-        <% tag.errors.each do |error| %>
+        <% label.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -48,14 +48,10 @@
 
   <div>
     <p><strong>Parent label:</strong></p>
-    <% Label.all.each do |l| %>
-      <% checked = tag.parent_label ? tag.parent_label.id == l.id : false %>
-      <%= radio_button_tag "label[parent_label_id]", l.id, checked, id: dom_id(l) %>
-      <%= label_tag dom_id(l), l.name %><br>
-    <% end %>
+    <%= form.collection_select :parent_label_id, Label.excluding(label), :id, :name_en, include_blank: "Optional parent label..." %>
   </div>
 
-  <%= render "admin/shared/image_preview", form: form, tag: tag %>
+  <%= render "admin/shared/image_preview", form: form, obj: label %>
 
   <div>
     <%= form.submit %>

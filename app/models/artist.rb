@@ -100,6 +100,7 @@ class Artist < ApplicationRecord
   # The artist is an alias for another artist?
   def alias? = primary_artist ? true : false
 
+  # The artist isn't a band and isn't a member of any band?
   def solo? = !band? && !member?
 
   private

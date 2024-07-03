@@ -18,11 +18,7 @@
 
   <div>
     <p><strong>Select song title:</strong></p>
-    <% SongGroup.all.each do |tag| %>
-      <% checked = @song.song_group ? @song.song_group.id == tag.id : false %>
-      <%= radio_button_tag "song[song_group_id]", tag.id, checked, id: dom_id(tag) %>
-      <%= label_tag dom_id(tag), tag.title %><br>
-    <% end %>
+    <%= form.collection_select :song_group_id, SongGroup.all, :id, :title_en %>
   </div>
 
   <h3>Artists and Roles</h3>

@@ -50,10 +50,10 @@
   </p>
 
   <p>
-    <%= render "band_members", band: artist if artist.band? %>
-  </p>
-
-  <p>
     <%= render "status", artist: artist %>
   </p>
+
+  <%= render "band_members", band: artist if artist.band? %>
+
+  <%= render "aliases_table", artist: artist if artist.primary? %>
 </div>

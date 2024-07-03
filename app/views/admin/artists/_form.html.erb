@@ -11,8 +11,6 @@
     </div>
   <% end %>
 
-  <%= artist.band_memberships %>
-
   <div>
     <%= form.label :stage_name_en, style: "display: block" %>
     <%= form.text_field :stage_name_en %>
@@ -35,22 +33,22 @@
 
   <div>
     <%= form.label :short_description_en, style: "display: block" %>
-    <%= form.text_field :short_description_en %>
+    <%= form.text_area :short_description_en %>
   </div>
 
   <div>
     <%= form.label :short_description_ru, style: "display: block" %>
-    <%= form.text_field :short_description_ru %>
+    <%= form.text_area :short_description_ru %>
   </div>
 
   <div>
     <%= form.label :description_en, style: "display: block" %>
-    <%= form.text_field :description_en %>
+    <%= form.text_area :description_en %>
   </div>
 
   <div>
     <%= form.label :description_ru, style: "display: block" %>
-    <%= form.text_field :description_ru %>
+    <%= form.text_area :description_ru %>
   </div>
 
   <h3>Band members and their roles:</h3>
@@ -64,6 +62,11 @@
     add_band_member_admin_artists_path,
     class: "btn btn-primary btn-sm",
     data: { turbo_method: :post } %>
+
+  <div>
+    <%= form.label :primary_artist_id, "Artist" %>
+    <%= form.collection_select :primary_artist_id, Artist.all, :id, :stage_name, include_blank: "Optional primary artist..." %>
+  </div>
 
   <div>
     <%= form.submit %>
