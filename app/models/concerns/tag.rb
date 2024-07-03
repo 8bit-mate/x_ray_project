@@ -8,6 +8,9 @@ module Tag
     translates :short_description
     translates :description
 
+    validates :name_en, presence: true
+    validates :name_ru, presence: true
+
     friendly_id :name_en, use: :slugged
 
     scope :visible, -> { where(visible: true) }

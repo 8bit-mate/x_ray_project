@@ -4,6 +4,9 @@ class Song < ApplicationRecord
   include WithRecordsScope
 
   validates :song_group, presence: true
+  validates :title_en, presence: true
+  validates :title_ru, presence: true
+  validates :artist_songs, presence: true
 
   friendly_id :compose_slug_title, use: :slugged
 

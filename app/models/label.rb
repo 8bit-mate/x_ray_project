@@ -4,6 +4,8 @@ class Label < ApplicationRecord
 
   include Tag
 
+  validates :image, presence: true
+
   has_many :sub_labels,
            class_name: "Label",
            foreign_key: "parent_label_id",
