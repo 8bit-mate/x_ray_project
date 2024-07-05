@@ -1,6 +1,7 @@
 class Record < ApplicationRecord
   include AppendToHasManyAttached["web_images"]
   extend FriendlyId
+  attr_accessor :tags_attributes
 
   before_save :assign_cat_number
 
@@ -9,6 +10,9 @@ class Record < ApplicationRecord
   validates :category, presence: true
   validates :label, presence: true
   validates :web_images, presence: true
+  validates :format_size, presence: true
+  validate :format_tags_presence
+  validate :tracks_presence
 
   has_many_attached :web_images, dependent: :purge_later do |image|
     image.variant :preview, resize_to_limit: [300, 300]
@@ -41,9 +45,9 @@ class Record < ApplicationRecord
     end
   end
 
-  def create_or_update_tags(tags_params)
-    create_or_update_format_tags(tags_params[:format_tags_ids])
-    create_or_update_tracks(tags_params[:tracks_ids])
+  def create_or_update_tags
+    create_or_update_format_tags(@tags_attributes[:format_tags_ids])
+    create_or_update_tracks(@tags_attributes[:tracks_ids])
   end
 
   def compose_cat_number
@@ -63,6 +67,18 @@ class Record < ApplicationRecord
   end
 
   private
+
+  def format_tags_presence
+    return if tags_attributes.present? && tags_attributes[:format_tags_ids].present?
+
+    errors.add(:base, "At least one format tag should present")
+  end
+
+  def tracks_presence
+    return if tags_attributes.present? && tags_attributes[:tracks_ids].present?
+
+    errors.add(:base, "At least one track should present")
+  end
 
   def category_short_name
     return unless category

@@ -25,7 +25,8 @@ class Admin::RecordsController < ApplicationController
   def create
     @record = Record.new(record_params)
 
-    @record.create_or_update_tags(tags_params)
+    @record.tags_attributes = tags_params
+    @record.create_or_update_tags
 
     respond_to do |format|
       if @record.save
@@ -40,7 +41,8 @@ class Admin::RecordsController < ApplicationController
 
   # PATCH/PUT /records/1 or /records/1.json
   def update
-    @record.create_or_update_tags(tags_params)
+    @record.tags_attributes = tags_params
+    @record.create_or_update_tags
 
     respond_to do |format|
       if @record.update(record_params)
@@ -82,7 +84,7 @@ class Admin::RecordsController < ApplicationController
   end
 
   def tags_params
-    params.require(:tags).permit(
+    params.fetch(:tags, {}).permit(
       format_tags_ids: [],
       tracks_ids: []
     )
