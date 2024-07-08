@@ -11,8 +11,8 @@ class Record < ApplicationRecord
   validates :label, presence: true
   validates :web_images, presence: true
   validates :format_size, presence: true
-  validate :format_tags_presence
-  validate :tracks_presence
+  # validate :format_tags_presence
+  # validate :tracks_presence
 
   has_many_attached :web_images, dependent: :purge_later do |image|
     image.variant :preview, resize_to_limit: [300, 300]

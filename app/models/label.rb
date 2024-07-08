@@ -4,7 +4,7 @@ class Label < ApplicationRecord
 
   include Tag
 
-  validates :image, presence: true
+  # validates :image, presence: true
 
   has_many :sub_labels,
            class_name: "Label",

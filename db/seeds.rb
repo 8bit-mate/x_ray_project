@@ -36,7 +36,7 @@ def self.transform_string(input_string)
 end
 
 def self.new_track
-  track = Track.new(
+  track = Track.create!(
     number: %w[A1 A2 A3 A4].sample,
     song: Song.all.sample
   )
@@ -50,7 +50,7 @@ end
 
 def self.new_band
   name = Faker::Music.band
-  Artist.create(
+  Artist.create!(
     stage_name_en: name,
     stage_name_ru: name,
     description_en: Faker::Hipster.sentence
@@ -64,10 +64,10 @@ user.password_confirmation = "admin@admin.su"
 user.role = "admin"
 user.save!
 
-Preference.new(
+Preference.create!(
   language: "en",
   user:
-).save!
+)
 
 Category.find_or_create_by!(
   name_en: "Uncategorized",
@@ -91,7 +91,7 @@ Artist.find_or_create_by!(
 
 25.times do |_i|
   name = Faker::Name.name
-  Artist.create(
+  Artist.create!(
     stage_name_en: name,
     stage_name_ru: name,
     description_en: Faker::Hipster.sentence,
@@ -101,7 +101,7 @@ Artist.find_or_create_by!(
 end
 
 TITLES.each do |title|
-  SongGroup.create(
+  SongGroup.create!(
     title_en: title[:en],
     title_ru: title[:ru]
   )
@@ -112,7 +112,7 @@ end
 
   art = [Artist.all.sample, Artist.all.sample]
 
-  Song.new(
+  Song.create!(
     year_of_release: Faker::Number.within(range: 1930..1970),
     song_group:,
     title_en: transform_string(song_group.title_en),
@@ -123,9 +123,12 @@ end
 end
 
 20.times do |_i|
-  FormatTag.create(
+  word = Faker::Hipster.word
+
+  FormatTag.create!(
     visible: true,
-    name_en: Faker::Hipster.word,
+    name_en: word,
+    name_ru: word,
     short_description_en: Faker::Hipster.sentence,
     description_en: Faker::Hipster.sentence
   )
@@ -144,7 +147,7 @@ end
       name_ru: "Золотая собака",
       visible: true
     ),
-    format_tags: [FormatTag.all.sample, FormatTag.all.sample, FormatTag.all.sample],
+    format_tags: [FormatTag.find(FormatTag.pluck(:id).sample)],
     format_size: [7, 8, 9, 10].sample,
     tracks: [new_track, new_track]
   )
@@ -155,5 +158,5 @@ end
                            filename:)
   sleep(1)
 
-  record.save
+  record.save!
 end

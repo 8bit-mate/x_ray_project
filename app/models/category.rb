@@ -3,7 +3,7 @@ class Category < ApplicationRecord
   extend FriendlyId
   include Tag
 
-  validates :image, presence: true
+  # validates :image, presence: true
 
   has_one_attached :image, dependent: :purge_later do |image|
     image.variant :preview, resize_to_limit: [300, 300]
