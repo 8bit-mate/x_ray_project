@@ -1,9 +1,9 @@
 <div id="<%= dom_id song %>">
   <p>
     <strong>Artists:</strong>
-    <% song.artists.each do |tag| %>
-      <%= link_to [:admin, tag], style:"text-decoration:none" do %>
-        <span class=<%= "tag" %> title="<%= tag.short_description %>"><%= tag.stage_name %></span>
+    <% song.artists.each do |artist| %>
+      <%= link_to [:admin, artist], style:"text-decoration:none" do %>
+        <span class=<%= "tag" %> title="<%= artist.short_description %>"><%= artist.stage_name %></span>
       <% end %>
     <% end %>
   </p>

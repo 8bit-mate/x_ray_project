@@ -16,19 +16,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @format_tags.each_with_index do |tag, index| %>
+    <% @format_tags.each_with_index do |t, index| %>
       <tr>
         <th scope="row">
           <%= item_index(index, @pagy) %>
         </th>
         <td>
-          <%= link_to tag.name, tag %>
+          <%= link_to t.name, t %>
         </td>
         <td>
-          <%= tag.description %>
+          <%= t.description %>
         </td>
         <td>
-          <%= tag.records_count %>
+          <%= t.records_count %>
         </td>
       </tr>
     <% end %>

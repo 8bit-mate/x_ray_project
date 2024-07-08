@@ -11,14 +11,12 @@
 
   <p>
     <strong>Category:</strong>
-    <% tag = record.category %>
-    <%= render "shared/tag_display", tag: tag, url_scope: :admin %>
+    <%= render "shared/tag_display", obj: record.category, url_scope: :admin %>
   </p>
 
   <p>
     <strong>Format:</strong>
-    <% tags = record.format_tags %>
-    <%= render "shared/tag_array_display", tags: tags, url_scope: :admin %>
+    <%= render "shared/tag_array_display", tags: record.format_tags, url_scope: :admin %>
   </p>
 
   <% record.tracks.each do |track| %>

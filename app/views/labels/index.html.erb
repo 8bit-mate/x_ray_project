@@ -1,19 +1,19 @@
 <h1>Labels</h1>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <% @labels.each do |tag| %>
+  <% @labels.each do |label| %>
     <div class="col">
       <div class="card">
-        <%= link_to image_tag(tag.image.variant(:preview), class: "card-img-top"), tag if tag.image.attached? %>
+        <%= link_to image_tag(label.image.variant(:preview), class: "card-img-top"), label if label.image.attached? %>
         <div class="card-body">
-          <h5 class="card-title"><%= tag.name %></h5>
-          <p class="card-text"><%= tag.description %></p>
+          <h5 class="card-title"><%= label.name %></h5>
+          <p class="card-text"><%= label.description %></p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Records: <%= tag.all_records.count %></li>
+          <li class="list-group-item">Records: <%= label.all_records.count %></li>
         </ul>
         <div class="card-body">
-          <a href= <%= label_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
+          <a href= <%= label_path(label) %> class="btn btn-primary">Browse <%= label.name %></a>
         </div>
       </div>
     </div>
