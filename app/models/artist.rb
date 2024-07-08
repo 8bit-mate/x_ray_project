@@ -19,7 +19,8 @@ class Artist < ApplicationRecord
            inverse_of: :primary_artist
   belongs_to :primary_artist,
              class_name: "Artist",
-             optional: true
+             optional: true,
+             touch: true
 
   # Associations for when the artist is a band
   has_many :band_memberships,
@@ -52,20 +53,24 @@ class Artist < ApplicationRecord
 
   after_update :update_associated_songs_full_titles
 
+  # Scope to find all artists that belong to a band.
   scope :band_members, lambda {
     left_joins(:artist_bands)
       .where.not(artist_bands: { id: nil })
       .distinct
   }
 
+  # Scope to find all bands (artists with members).
   scope :bands, lambda {
     left_joins(:band_memberships)
       .where.not(band_memberships: { id: nil })
       .distinct
   }
 
+  # Scope to find all artists that are aliases for other artists.
   scope :aliases, -> { where.not(primary_artist_id: nil) }
 
+  # Scope to find all artists that have aliases.
   scope :primary_artists, -> { joins(:aliases).distinct }
 
   def self.ransackable_scopes(_auth_object = nil)

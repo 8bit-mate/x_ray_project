@@ -11,7 +11,10 @@ class Label < ApplicationRecord
            foreign_key: "parent_label_id",
            dependent: :nullify,
            inverse_of: :parent_label
-  belongs_to :parent_label, class_name: "Label", optional: true
+  belongs_to :parent_label,
+             class_name: "Label",
+             optional: true,
+             touch: true
 
   has_one_attached :image, dependent: :purge_later do |image|
     image.variant :preview, resize_to_limit: [300, 300]
@@ -39,11 +42,14 @@ class Label < ApplicationRecord
   # The label is a parent label for sub-labels?
   def parent? = sub_labels.count.positive?
 
+  # The label has at lease one visible sub-label?
+  def parent_of_visible? = sub_labels.visible.count.positive?
+
   # The label is a sub-label?
   def sub? = parent_label ? true : false
 
-  # The label is "lonely" (i.e. doesn't have any relations with other labels)?
-  def lonely? = !(parent? || sub?)
+  # The label is "stand_alone" (i.e. doesn't have any relations with other labels)?
+  def stand_alone? = !(parent? || sub?)
 
   # Find all records associated with this label and all its sub-labels.
   def all_records

@@ -12,7 +12,6 @@ module AdministrableController
   def require_admin
     return if admin?
 
-    flash[:error] = "You are not authorized to perform this action."
-    redirect_to new_user_session_path
+    redirect_to new_user_session_path, notice: "You are not authorized to perform this action."
   end
 end

@@ -28,6 +28,7 @@ class Record < ApplicationRecord
 
   scope :without_category, -> { where(category_id: nil) }
   scope :without_label, -> { where(label_id: nil) }
+  scope :visible, -> { joins(:category).where(categories: { visible: true }) }
 
   def self.ransackable_associations(auth_object = nil)
     if auth_object == :admin

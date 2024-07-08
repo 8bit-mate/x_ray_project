@@ -4,7 +4,7 @@
   <%= @label.description %>
 </p>
 
-<% if @label.parent? %>
+<% if @label.parent_of_visible? %>
   <h3>Variants</h3>
   <%= render "shared/tags_cards_list", tags: @label.sub_labels %>
 <% end %>

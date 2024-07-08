@@ -3,7 +3,7 @@ class Track < ApplicationRecord
   validates :song, presence: true
 
   belongs_to :song, counter_cache: :records_count
-  belongs_to :record, optional: true
+  belongs_to :record, optional: true, touch: true
 
   has_one_attached :web_audio, dependent: :purge_later
 

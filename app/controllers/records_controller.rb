@@ -20,20 +20,19 @@ class RecordsController < ApplicationController
   def filter_records
     if params[:category_id].present?
       category = Category.friendly.find(params[:category_id])
-      category.records
+      category.records.visible
     elsif params[:label_id].present?
-      # label = Label.friendly.find(params[:label_id])
       label = Label.visible.friendly.includes(sub_labels: { sub_labels: :records }).find(params[:label_id])
-      label.all_records
+      label.all_records.visible
     elsif params[:artist_id].present?
       artist = Artist.friendly.find(params[:artist_id])
-      artist.records
+      artist.records.visible
     elsif params[:song_id].present?
       song = Song.friendly.find(params[:song_id])
-      song.records
+      song.records.visible
     elsif params[:format_tag_id].present?
       format_tag = FormatTag.friendly.find(params[:format_tag_id])
-      format_tag.records
+      format_tag.records.visible
     else
       Record.all
     end
@@ -41,6 +40,6 @@ class RecordsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_record
-    @record = Record.friendly.find(params[:id])
+    @record = Record.visible.friendly.find(params[:id])
   end
 end
