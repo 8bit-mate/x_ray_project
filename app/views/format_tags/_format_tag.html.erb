@@ -1,6 +1,5 @@
 <div id="<%= dom_id format_tag %>">
-  <%= render "shared/tag", tag: format_tag %>
+  <%= render "shared/tag", tag_obj: format_tag %>
 
-  <!= render "shared/records_table", records: format_tag.records %>
   <%= turbo_frame_tag "records", src: format_tag_records_path(format_tag), loading: :lazy, target: "_top" do %><% end %>
 </div>

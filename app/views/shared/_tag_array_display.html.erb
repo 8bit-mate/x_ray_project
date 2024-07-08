@@ -1,0 +1,5 @@
+<% tags.each do |t| %>
+  <%= link_to [url_scope, t], style:"text-decoration:none" do %>
+    <span class="<%= t.span_class_name %>" title="<%= t.short_description %>"><%= t.name %></span>
+  <% end %>
+<% end %>

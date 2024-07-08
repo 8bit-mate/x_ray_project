@@ -6,7 +6,7 @@
 
   <p>
     <strong>Song:</strong>
-    <%= track.song.human_full_title %>
+    <%= link_to track.song.human_full_title, admin_song_path(track.song) %>
   </p>
 
   <%= render "audio", track: track %>

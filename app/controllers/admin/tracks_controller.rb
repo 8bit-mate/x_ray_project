@@ -5,7 +5,9 @@ class Admin::TracksController < ApplicationController
 
   # GET /tracks or /tracks.json
   def index
-    @q = Track.all.ransack(params[:q], auth_object: :admin)
+    @q = Track.all
+              .includes(%i[song record web_audio_attachment])
+              .ransack(params[:q], auth_object: :admin)
     @q.sorts = "id" if @q.sorts.blank?
     @pagy, @tracks = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end

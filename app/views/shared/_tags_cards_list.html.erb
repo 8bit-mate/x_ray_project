@@ -1,17 +1,17 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <% tags.each do |tag| %>
+  <% tags.each do |obj| %>
     <div class="col">
       <div class="card">
-        <%= link_to image_tag(tag.image.variant(:preview), class: "card-img-top"), tag if tag.image.attached? %>
+        <%= link_to image_tag(obj.image.variant(:preview), class: "card-img-top"), obj if obj.image.attached? %>
         <div class="card-body">
-          <h5 class="card-title"><%= tag.name %></h5>
-          <p class="card-text"><%= tag.description %></p>
+          <h5 class="card-title"><%= obj.name %></h5>
+          <p class="card-text"><%= obj.description %></p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Records: <%= tag.records_count %></li>
+          <li class="list-group-item">Records: <%= obj.records_count %></li>
         </ul>
         <div class="card-body">
-          <a href= <%= polymorphic_path(tag) %> class="btn btn-primary">Browse <%= tag.name %></a>
+          <a href= <%= polymorphic_path(obj) %> class="btn btn-primary">Browse <%= obj.name %></a>
         </div>
       </div>
     </div>

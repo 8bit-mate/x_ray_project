@@ -1,5 +1,5 @@
 <div id="<%= dom_id category %>">
-  <%= render "shared/tag", tag: category %>
+  <%= render "shared/tag", tag_obj: category %>
 
   <%= turbo_frame_tag "records", src: category_records_path(category), loading: :lazy, target: "_top" do %><% end %>
 </div>

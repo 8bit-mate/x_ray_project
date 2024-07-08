@@ -19,32 +19,32 @@
     </tr>
   </thead>
   <tbody>
-    <% @format_tags.each_with_index do |tag, index| %>
+    <% @format_tags.each_with_index do |t, index| %>
       <tr>
         <th scope="row">
           <%= item_index(index, @pagy) %>
         </th>
         <td>
-          <%= tag.id %>
+          <%= t.id %>
         </td>
         <td>
-          <%= tag.name_en %>
+          <%= t.name_en %>
         </td>
         <td>
-          <%= tag.name_ru %>
+          <%= t.name_ru %>
         </td>
         <td>
-          <%= tag.records_count %>
+          <%= t.records_count %>
         </td>
         <td>
-          <%= tag.created_at %>
+          <%= t.created_at %>
         </td>
         <td>
-          <%= tag.updated_at %>
+          <%= t.updated_at %>
         </td>
         <td>
-          <%= link_to "Show", admin_format_tag_path(tag) %> |
-          <%= link_to "Edit", edit_admin_format_tag_path(tag) %>
+          <%= link_to "Show", admin_format_tag_path(t) %> |
+          <%= link_to "Edit", edit_admin_format_tag_path(t) %>
         </td>
       </tr>
     <% end %>

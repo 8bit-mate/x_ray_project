@@ -51,7 +51,7 @@
     <%= form.collection_select :parent_label_id, Label.excluding(label), :id, :name_en, include_blank: "Optional parent label..." %>
   </div>
 
-  <%= render "admin/shared/image_preview", form: form, obj: label %>
+  <%= render "admin/shared/form_image_preview", form: form, obj: label %>
 
   <div>
     <%= form.submit %>

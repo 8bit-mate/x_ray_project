@@ -3,7 +3,7 @@
 <h1>Labels</h1>
 
 <%= link_to "<<", admin_index_path %> |
-<%= link_to "New label", new_admin_label_path %>
+<%= link_to "New label", new_admin_label_path, class: "btn btn-primary btn-sm" %>
 
 <table class="table table-responsive table-striped table-hover">
   <thead>
@@ -26,7 +26,7 @@
           <%= item_index(index, @pagy) %>
         </th>
         <td>
-          <%= image_tag(label.image.variant(:preview), class: "admin-table-img-preview") if label.image.attached? %>
+          <%= render "admin/shared/table_image_preview", obj: label %>
         </td>
         <td>
           <%= label.id %>

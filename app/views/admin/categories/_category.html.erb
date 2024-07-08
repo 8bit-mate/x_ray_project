@@ -1,4 +1,4 @@
 <div id="<%= dom_id category %>">
   <%= image_tag(category.image.variant(:preview)) if category.image.attached? %>
-  <%= render "shared/tag_admin", tag: category %>
+  <%= render "admin/shared/tag", tag_obj: category %>
 </div>

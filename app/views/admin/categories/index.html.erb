@@ -3,15 +3,54 @@
 <h1>Categories</h1>
 
 <%= link_to "<<", admin_index_path %> |
-<%= link_to "New category", new_admin_category_path %>
+<%= link_to "New category", new_admin_category_path, class: "btn btn-primary btn-sm" %>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", admin_category_path(category) %> |
-      <%= link_to "Edit this category", edit_admin_category_path(category) %>
-    </p>
-    <hr />
-  <% end %>
-</div>
+<table class="table table-responsive table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Preview</th>
+      <th scope="col"><%= sort_link(@q, :id, "ID", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :name_en, "Name en", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :name_ru, "Name ru", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :records_count, "Records count", data: {turbo_stream: true}) %></th>
+      <th scope="col">Visiability</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each_with_index do |category, index| %>
+      <tr>
+        <th scope="row">
+          <%= item_index(index, @pagy) %>
+        </th>
+        <td>
+          <%= render "admin/shared/table_image_preview", obj: category %>
+        </td>
+        <td>
+          <%= category.id %>
+        </td>
+        <td>
+          <%= category.name_en %>
+        </td>
+        <td>
+          <%= category.name_ru %>
+        </td>
+        <td>
+          <%= category.records_count %>
+        </td>
+        <td>
+          ...
+        </td>
+        <td>
+          <%= link_to "Show", admin_category_path(category) %> |
+          <%= link_to "Edit", edit_admin_category_path(category) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
+<%== pagy_info(@pagy) %>
+

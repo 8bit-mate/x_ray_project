@@ -6,7 +6,11 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @q = Category.all
+                 .includes(%i[image_attachment])
+                 .ransack(params[:q], auth_object: :admin)
+    @q.sorts = "id" if @q.sorts.blank?
+    @pagy, @categories = pagy(@q.result, items: 50, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /categories/1 or /categories/1.json
