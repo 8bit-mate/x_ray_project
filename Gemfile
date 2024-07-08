@@ -34,6 +34,16 @@ gem "i18n", "~> 1.14", ">= 1.14.4"
 
 gem "devise", "~> 4.9", ">= 4.9.4"
 
+gem "bootstrap", "~> 5.3"
+
+gem "sassc-rails", "~> 2.1"
+
+gem "ransack", "~> 4.1"
+
+gem "pagy", "~> 8.4"
+
+gem "mobility-ransack", "~> 1.2"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -61,6 +71,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "faker"
   gem "web-console"
+  gem "bullet"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -75,12 +86,3 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "bootstrap", "~> 5.3"
-
-gem "sassc-rails", "~> 2.1"
-
-gem "ransack", "~> 4.1"
-
-gem "pagy", "~> 8.4"
-
-gem "mobility-ransack", "~> 1.2"
