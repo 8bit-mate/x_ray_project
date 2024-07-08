@@ -13,6 +13,7 @@
       <th scope="col"><%= sort_link(@q, :id, "ID", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :category_name, "Category", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :number, "Number", data: {turbo_stream: true}) %></th>
+      <th scope="col"><%= sort_link(@q, :label_name, "Lable", data: {turbo_stream: true}) %></th>
       <th scope="col">Tracklist</th>
       <th scope="col">Controls</th>
     </tr>
@@ -34,6 +35,9 @@
         </td>
         <td>
           <%= record.number %>
+        </td>
+        <td>
+          <%= record.label.name %>
         </td>
         <td>
           <%= render "shared/tracklist_preview", tracks: record.tracks.order(:number), url_scope: nil %>

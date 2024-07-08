@@ -27,7 +27,6 @@ class Record < ApplicationRecord
   has_many :tracks, dependent: :nullify
 
   scope :without_category, -> { where(category_id: nil) }
-  scope :without_label, -> { where(label_id: nil) }
   scope :visible, -> { joins(:category).where(categories: { visible: true }) }
 
   def self.ransackable_associations(auth_object = nil)

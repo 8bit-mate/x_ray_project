@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    @q = filter_records.ransack(params[:q])
+    @q = filter_records.visible.ransack(params[:q])
     @q.sorts = "number" if @q.sorts.blank?
     @pagy, @records = pagy(@q.result, anchor_string: 'data-turbo-stream="true"')
   end
@@ -20,19 +20,19 @@ class RecordsController < ApplicationController
   def filter_records
     if params[:category_id].present?
       category = Category.friendly.find(params[:category_id])
-      category.records.visible
+      category.records
     elsif params[:label_id].present?
       label = Label.visible.friendly.includes(sub_labels: { sub_labels: :records }).find(params[:label_id])
-      label.all_records.visible
+      label.all_records
     elsif params[:artist_id].present?
       artist = Artist.friendly.find(params[:artist_id])
-      artist.records.visible
+      artist.records
     elsif params[:song_id].present?
       song = Song.friendly.find(params[:song_id])
-      song.records.visible
+      song.records
     elsif params[:format_tag_id].present?
       format_tag = FormatTag.friendly.find(params[:format_tag_id])
-      format_tag.records.visible
+      format_tag.records
     else
       Record.all
     end

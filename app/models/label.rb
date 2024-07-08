@@ -22,6 +22,9 @@ class Label < ApplicationRecord
 
   has_many :records, dependent: :destroy
 
+  scope :independent, -> { where(parent_label_id: nil) }
+  scope :subs, -> { where.not(parent_label_id: nil) }
+
   def self.ransackable_associations(auth_object = nil)
     if auth_object == :admin
       super

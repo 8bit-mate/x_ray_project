@@ -23,7 +23,7 @@ class Category < ApplicationRecord
   # the current category has been destroyed.
   #
   def handle_records_after_destroy
-    category = Category.find_or_create_by(name_en: "Uncategorized")
+    category = Category.find_by(id: 1)
 
     Record.without_category.each do |record|
       record.category = category
