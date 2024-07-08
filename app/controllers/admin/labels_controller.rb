@@ -54,15 +54,31 @@ class Admin::LabelsController < ApplicationController
 
   # DELETE /labels/1 or /labels/1.json
   def destroy
-    @label.destroy!
-
     respond_to do |format|
-      format.html { redirect_to admin_labels_url, notice: "Label was successfully destroyed." }
-      format.json { head :no_content }
+      if @label.records?
+        prevent_from_destroy(format, "Cannot delete a label with associated records.")
+      elsif @label.parent?
+        prevent_from_destroy(format, "Cannot delete a label that has sub-labels.")
+      else
+        destroy_label(format)
+      end
     end
   end
 
   private
+
+  def prevent_from_destroy(format, msg)
+    @label.errors.add(:base, msg)
+    format.html { render :edit, status: :unprocessable_entity }
+    format.json { render json: @label.errors, status: :unprocessable_entity }
+  end
+
+  def destroy_label(format)
+    @label.destroy!
+
+    format.html { redirect_to admin_labels_url, notice: "Label was successfully destroyed." }
+    format.json { head :no_content }
+  end
 
   def tag_params(tag_name)
     params.require(tag_name).permit(

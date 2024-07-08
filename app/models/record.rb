@@ -18,8 +18,8 @@ class Record < ApplicationRecord
     image.variant :preview, resize_to_limit: [300, 300]
   end
 
-  belongs_to :category, counter_cache: :records_count
-  belongs_to :label, counter_cache: :records_count
+  belongs_to :category, counter_cache: :records_count, touch: true
+  belongs_to :label, counter_cache: :records_count, touch: true
 
   has_many :format_tag_records, dependent: :destroy
   has_many :format_tags, through: :format_tag_records
