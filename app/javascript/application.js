@@ -5,3 +5,6 @@ import "wavesurfer"
 import "hover"
 import "bootstrap"
 import "popper"
+
+import "trix"
+import "@rails/actiontext"

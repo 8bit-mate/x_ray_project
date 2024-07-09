@@ -1,0 +1,58 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.button "Save", type: "submit", class: "btn btn-success" %>
+  </div>
+
+  <hr/>
+
+  <div>
+    <ul class="nav nav-tabs" id="blog" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="english-tab" data-bs-toggle="tab" data-bs-target="#english" type="button" role="tab" aria-controls="english" aria-selected="false">
+          English
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="russian-tab" data-bs-toggle="tab" data-bs-target="#russian" type="button" role="tab" aria-controls="russian" aria-selected="false">
+          Russian
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="blogContent">
+      <div class="tab-pane fade show active" id="english" role="tabpanel" aria-labelledby="english-tab">
+        <h3>English version</h3>
+
+        <div class="field">
+          <%= form.text_field :title_en, placeholder: "English title..." %>
+        </div>
+
+        <% I18n.with_locale(:en) do %>
+          <%= form.rich_text_area :body_en, value: post.body %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="russian" role="tabpanel" aria-labelledby="russian-tab">
+        <h3>Russian version</h3>
+
+        <div class="field">
+          <%= form.text_field :title_ru, placeholder: "Russian title..."  %>
+        </div>
+
+        <% I18n.with_locale(:ru) do %>
+          <%= form.rich_text_area :body_ru, value: post.body %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

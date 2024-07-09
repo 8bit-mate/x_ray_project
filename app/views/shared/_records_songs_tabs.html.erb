@@ -1,20 +1,20 @@
-  <ul class="nav nav-tabs" id="recordsSongsTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="false">
-        <%= records_tab_title || "Records" %>
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="songs-tab" data-bs-toggle="tab" data-bs-target="#songs" type="button" role="tab" aria-controls="songs" aria-selected="false">
-        <%= songs_tab_title || "Songs" %>
-      </button>
-    </li>
-  </ul>
-  <div class="tab-content" id="recordsSongsTabContent">
-    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
-      <%= turbo_frame_tag "records", src: records_tab_src, loading: :lazy, target: "_top" do %><% end %>
-    </div>
-    <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
-      <%= turbo_frame_tag "songs", src: songs_tab_src, loading: :lazy, target: "_top" do %><% end %>
-    </div>
+<ul class="nav nav-tabs" id="recordsSongsTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="false">
+      <%= records_tab_title || "Records" %>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="songs-tab" data-bs-toggle="tab" data-bs-target="#songs" type="button" role="tab" aria-controls="songs" aria-selected="false">
+      <%= songs_tab_title || "Songs" %>
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="recordsSongsTabContent">
+  <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+    <%= turbo_frame_tag "records", src: records_tab_src, loading: :lazy, target: "_top" do %><% end %>
   </div>
+  <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
+    <%= turbo_frame_tag "songs", src: songs_tab_src, loading: :lazy, target: "_top" do %><% end %>
+  </div>
+</div>

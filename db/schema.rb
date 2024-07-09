@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_02_052625) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_09_201624) do
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "locale", null: false
+    t.index ["record_type", "record_id", "name", "locale"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -164,6 +175,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_052625) do
     t.index ["short_description_en"], name: "index_labels_on_short_description_en"
     t.index ["short_description_ru"], name: "index_labels_on_short_description_ru"
     t.index ["slug"], name: "index_labels_on_slug", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title_en"
+    t.string "title_ru"
+    t.index ["title_en"], name: "index_posts_on_title_en"
+    t.index ["title_ru"], name: "index_posts_on_title_ru"
   end
 
   create_table "preferences", force: :cascade do |t|

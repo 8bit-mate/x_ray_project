@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  scope :blog do
+    resources :posts
+  end
+
   scope :music do
     resources :records, only: %i[index show] do
       collection do
