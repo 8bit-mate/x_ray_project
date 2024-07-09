@@ -1,0 +1,5 @@
+<% if obj.visible? %>
+  <%= content_tag(:span, "Visible", class: "badge text-bg-success") %>
+<% else %>
+  <%= content_tag(:span, "Hidden", class: "badge text-bg-warning") %>
+<% end %>

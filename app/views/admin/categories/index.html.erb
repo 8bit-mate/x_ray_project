@@ -14,7 +14,7 @@
       <th scope="col"><%= sort_link(@q, :name_en, "Name en", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :name_ru, "Name ru", data: {turbo_stream: true}) %></th>
       <th scope="col"><%= sort_link(@q, :records_count, "Records count", data: {turbo_stream: true}) %></th>
-      <th scope="col">Visiability</th>
+      <th scope="col">Visibility</th>
       <th>Controls</th>
     </tr>
   </thead>
@@ -40,7 +40,7 @@
           <%= category.records_count %>
         </td>
         <td>
-          ...
+          <%= render "visibility_status", obj: category %>
         </td>
         <td>
           <%= link_to "Show", admin_category_path(category) %> |

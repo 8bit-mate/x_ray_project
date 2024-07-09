@@ -7,8 +7,6 @@
   <div class="image-container">
     <% if obj.image.attached? %>
       <%= image_tag obj.image, data: { previews_target: "preview" }, class: "img-upload-preview" %>
-    <% else %>
-      <%= image_tag "", data: { previews_target: "preview" }, class: "img-upload-preview" %>
     <% end %>
   </div>
 </div>
