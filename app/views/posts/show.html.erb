@@ -1,6 +1,9 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @post %>
+<div id="<%= dom_id @post %>">
+  <h2><%= @post.title %></h2>
+  <div>
+    <%= @post.body %>
+  </div>
+</div>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

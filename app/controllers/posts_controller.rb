@@ -3,7 +3,9 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @q = Post.all.includes([:rich_text_translations]).ransack(params[:q])
+    @q.sorts = "created_at desc" if @q.sorts.blank?
+    @pagy, @posts = pagy(@q.result, items: 4, anchor_string: 'data-turbo-stream="true"')
   end
 
   # GET /posts/1 or /posts/1.json
@@ -21,7 +23,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new
 
-    create_or_update_post
+    update_post
 
     respond_to do |format|
       if @post.save
@@ -36,7 +38,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    create_or_update_post
+    update_post
 
     respond_to do |format|
       if @post.save
@@ -61,7 +63,7 @@ class PostsController < ApplicationController
 
   private
 
-  def create_or_update_post
+  def update_post
     @post.title_en = post_params[:title_en]
     @post.title_ru = post_params[:title_ru]
 
@@ -76,6 +78,11 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title_en, :title_ru, :body_en, :body_ru)
+    params.require(:post).permit(
+      :title_en,
+      :title_ru,
+      :body_en,
+      :body_ru
+    )
   end
 end
