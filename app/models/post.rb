@@ -19,7 +19,7 @@ class Post < ApplicationRecord
     if auth_object == :admin
       super
     else
-      %w[id created_at updated_at title_en title_ru body]
+      %w[id created_at updated_at title body]
     end
   end
 end

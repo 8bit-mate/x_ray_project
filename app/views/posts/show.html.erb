@@ -1,9 +1,5 @@
-<div id="<%= dom_id @post %>">
-  <h2><%= @post.title %></h2>
-  <div>
-    <%= @post.body %>
-  </div>
-</div>
+<%= render "post", post: @post, post_title: @post.title %>
+
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

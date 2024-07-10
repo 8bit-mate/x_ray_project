@@ -1,6 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Blog</h1>
+
+<div class="filter-form">
+  <%= search_form_for(@q) do |f| %>
+    <%= f.label :s, t("Order:") %>
+
+    <%= f.select :s, options_for_select(
+        [
+          [t("Oldest"),"created_at asc"],
+          [t("Title, A-Z"),"title asc"],
+          [t("Title, Z-A"),"title desc"]
+        ],
+        params.dig(:q,:s)
+      ),
+      { include_blank: "Newest" },
+      { onchange: "this.form.submit();", class: "form-select form-select-sm" }
+    %>
+  <% end %>
+</div>
 
 <div id="posts">
   <% @posts.each do |post| %>
