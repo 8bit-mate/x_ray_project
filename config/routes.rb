@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope :blog do
-    resources :posts
+    resources :posts, only: %i[index show]
   end
 
   scope :music do
@@ -38,6 +38,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :posts do
+      member do
+        post :publish
+      end
+    end
+
     resources :artists do
       collection do
         get :fetch

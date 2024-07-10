@@ -1,14 +1,18 @@
 <h1>Blog</h1>
 
-<div class="filter-form">
-  <%= search_form_for(@q) do |f| %>
-    <%= f.label :s, t("Order:") %>
+<%= link_to "New post", new_admin_post_path, class: "btn btn-primary btn-sm" %>
 
+<div class="filter-form">
+  <%= search_form_for([:admin, @q]) do |f| %>
+    <%= f.label :s, t("Order:") %>
     <%= f.select :s, options_for_select(
         [
           [t("Oldest"),"created_at asc"],
-          [t("Title, A-Z"),"title asc"],
-          [t("Title, Z-A"),"title desc"]
+          [t("Title EN, A-Z"),"title_en asc"],
+          [t("Title EN, Z-A"),"title_en desc"],
+          [t("Title RU, A-Z"),"title_ru asc"],
+          [t("Title RU, Z-A"),"title_ru desc"]
+
         ],
         params.dig(:q,:s)
       ),

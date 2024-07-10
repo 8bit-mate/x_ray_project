@@ -1,0 +1,21 @@
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <%= post.title %>
+      </h3>
+    </div>
+    <div class="card-body">
+      <%= post.body %>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= content_tag(:span, "Draft", class: "badge text-bg-warning") unless post.published %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Edit", edit_admin_post_path(post), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Show", admin_post_path(post), class: "btn btn-secondary btn-sm" %>
+        <%= button_to "Publish", publish_admin_post_path(post), method: :post, class: "btn btn-success btn-sm" unless post.published %>
+      </li>
+    </ul>
+  </div>

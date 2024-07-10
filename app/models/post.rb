@@ -11,8 +11,18 @@ class Post < ApplicationRecord
   validates :title_ru, presence: true
   validates :body, presence: true
 
+  scope :published, -> { where(published: true) }
+
   def should_generate_new_friendly_id?
     title_en_changed? || slug.blank?
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    if auth_object == :admin
+      super
+    else
+      %w[rich_text_body rich_text_body_en rich_text_body_ru rich_text_translations]
+    end
   end
 
   def self.ransackable_attributes(auth_object = nil)

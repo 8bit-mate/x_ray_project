@@ -1,0 +1,28 @@
+<div id="<%= dom_id post %>" class="post">
+  <div>
+    <ul class="nav nav-tabs" id="tabs-<%= dom_id post %>" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link <%= nav_link_status(:en) %>" id="english-tab-<%= dom_id post %>" data-bs-toggle="tab" data-bs-target="#english-<%= dom_id post %>" type="button" role="tab" aria-controls="english" aria-selected="false">
+          English
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link <%= nav_link_status(:ru) %>" id="russian-tab-<%= dom_id post %>" data-bs-toggle="tab" data-bs-target="#russian-<%= dom_id post %>" type="button" role="tab" aria-controls="russian" aria-selected="false">
+          Russian
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="blog-content-<%= dom_id post %>">
+      <div class="tab-pane fade <%= tab_status(:en) %>" id="english-<%= dom_id post %>" role="tabpanel" aria-labelledby="english-tab-<%= dom_id post %>">
+        <% I18n.with_locale(:en) do %>
+          <%= render "post_card", post: post %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade <%= tab_status(:ru) %>" id="russian-<%= dom_id post %>" role="tabpanel" aria-labelledby="russian-tab-<%= dom_id post %>">
+        <% I18n.with_locale(:ru) do %>
+          <%= render "post_card", post: post %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
