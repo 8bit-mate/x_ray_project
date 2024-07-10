@@ -41,7 +41,7 @@
         </div>
 
         <% I18n.with_locale(:en) do %>
-          <%= form.rich_text_area :body_en, value: post.body %>
+          <%= form.rich_text_area :body_en, value: post.body, class: "form-control customized-min-height" %>
         <% end %>
       </div>
       <div class="tab-pane fade" id="russian" role="tabpanel" aria-labelledby="russian-tab">
@@ -52,7 +52,7 @@
         </div>
 
         <% I18n.with_locale(:ru) do %>
-          <%= form.rich_text_area :body_ru, value: post.body %>
+          <%= form.rich_text_area :body_ru, value: post.body, class: "form-control customized-min-height" %>
         <% end %>
       </div>
     </div>
